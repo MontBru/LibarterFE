@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SubmitButton from "../components/SubmitButton";
+import { dbAdress } from "../constants";
 
 
 const InputComponent = ({field, value, setValue, rows}) => {
@@ -28,12 +29,23 @@ const InputComponent = ({field, value, setValue, rows}) => {
 
 
 const Home = () => {
-    const [title, setTitle] = useState("");
+    const [name, setName] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const book={name,author,description}
+        console.log(book)
+        fetch(dbAdress+"book/add",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(book)
+            }
         
+        ).then(()=>{
+            console.log("book is added")
+        })
     }
 
     return ( 
@@ -48,7 +60,7 @@ const Home = () => {
                         value="Add photos"
                         className='w-full h-24 bg-customColors-darkBrown text-white font-bold text-xl mb-4 rounded-md'
                     />
-                    <InputComponent field={"Title"} value={title} setValue={setTitle}/>
+                    <InputComponent field={"Title"} value={name} setValue={setName}/>
                     <InputComponent field={"Author"} value={author} setValue={setAuthor}/>
                     <InputComponent field={"Description"} value={description} setValue={setDescription} rows={5}/>
                     <SubmitButton value={"Create advertisement"}/>
