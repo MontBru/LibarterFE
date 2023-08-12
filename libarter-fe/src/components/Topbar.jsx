@@ -1,0 +1,20 @@
+import HomeButton from './HomeButton';
+import { useLocation } from 'react-router-dom';
+import { routes } from '../constants';
+
+const Topbar = ({onMenuClick}) => {
+    const location = useLocation();
+
+    if(location.pathname === routes.register || location.pathname === routes.forgotPassword)
+    {
+        return null;
+    }
+
+    return ( 
+        <header className=' h-16 bg-customColors-darkBrown text-white p-4 flex justify-between items-center shadow-md shadow-slate-500'>
+            <HomeButton onMenuClick={onMenuClick}/>
+        </header>
+    );
+}
+ 
+export default Topbar;

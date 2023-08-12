@@ -46,23 +46,23 @@ const Register = () => {
                     Sign In
                 </div>
                 <form onSubmit={handleSubmit}>
-                <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
-                <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
-                <div className="mb-4">
-                    <SubmitButton value="Register" />
-                </div>
-                {isError && (
-                    <div className="text-red-500">
-                        Invalid credentials. Please try again.
+                    <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
+                    <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
+                    <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
+                    <div className="mb-4">
+                        <SubmitButton value="Register" />
                     </div>
-                )}
-                <div className="container flex justify-end">
-                    <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
-                        Forgot password?
-                    </Link>
-                </div>
-            </form>
+                    {isError && (
+                        <div className="text-red-500">
+                            Invalid credentials. Please try again.
+                        </div>
+                    )}
+                    <div className="container flex justify-end">
+                        <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
+                            Forgot password?
+                        </Link>
+                    </div>
+                </form>
             </CenteredBox>
         </div>
      );

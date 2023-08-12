@@ -63,7 +63,7 @@ const Home = () => {
                     <InputComponent field={"Title"} value={name} setValue={setName}/>
                     <InputComponent field={"Author"} value={author} setValue={setAuthor}/>
                     <InputComponent field={"Description"} value={description} setValue={setDescription} rows={5}/>
-                    <SubmitButton value={"Create advertisement"}/>
+                    <SubmitButton value={"Create offer"}/>
                 </form>
             </div>
         </div>
