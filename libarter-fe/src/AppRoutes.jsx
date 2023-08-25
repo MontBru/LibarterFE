@@ -6,11 +6,13 @@ import ForgotPassword from './pages/ForgotPassword';
 import MyOffers from './pages/My Offers';
 import Search from './pages/Search';
 import About from './pages/About';
+import Login from './pages/Login';
 
 const AppRoutes = () => {
     return ( 
         <Routes>
             <Route path={routes.register} element={<Register/>}/>
+            <Route path={routes.login} element={<Login/>}/>
             <Route path={routes.forgotPassword} element={<ForgotPassword/>}/>
             <Route path={routes.home} element={<Home/>}/>
             <Route path={routes.about} element={<About/>}/>

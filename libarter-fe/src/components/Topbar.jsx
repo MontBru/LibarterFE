@@ -5,7 +5,9 @@ import { routes } from '../constants';
 const Topbar = ({onMenuClick}) => {
     const location = useLocation();
 
-    if(location.pathname === routes.register || location.pathname === routes.forgotPassword)
+    if(location.pathname === routes.register || 
+       location.pathname === routes.forgotPassword ||
+       location.pathname === routes.login)
     {
         return null;
     }

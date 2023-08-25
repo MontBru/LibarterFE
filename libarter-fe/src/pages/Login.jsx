@@ -6,27 +6,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import { dbAdress } from "../constants";
 
-const Register = () => {
+const Login = () => {
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const user={username,email,password}
-        console.log(user)
-        fetch(dbAdress+"auth/register",{
+        const loginDTO = {username, password}
+        fetch(dbAdress+"auth/login",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(user)
+            body:JSON.stringify(loginDTO)
             }
         
-        ).then(()=>{
-            console.log("user is registered")
+        ).then((response)=>{
+            if(response.ok)
+            {
+                navigate(routes.home);
+            }
+            else{
+                setIsError(true);
+            }
         })
-        navigate(routes.login);
     };
 
     
@@ -35,14 +38,13 @@ const Register = () => {
         <div className=' bg-customColors-lightBrown w-screen h-screen'>
             <CenteredBox>
                 <div className="text-2xl font-bold mb-4 text-customColors-darkBrown">
-                    Register
+                    Log In
                 </div>
                 <form onSubmit={handleSubmit}>
                     <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                    <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                     <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                     <div className="mb-4">
-                        <SubmitButton value="Register" />
+                        <SubmitButton value="Log in" />
                     </div>
                     {isError && (
                         <div className="text-red-500">
@@ -50,8 +52,8 @@ const Register = () => {
                         </div>
                     )}
                     <div className="container flex justify-center">
-                        <Link to={routes.login} className="text-customColors-lightBrown">
-                            Log in instead
+                        <Link to = {routes.register} className="text-customColors-lightBrown">
+                            Don't have an account?
                         </Link>
                     </div>
                 </form>
@@ -60,4 +62,4 @@ const Register = () => {
      );
 }
  
-export default Register;
+export default Login;

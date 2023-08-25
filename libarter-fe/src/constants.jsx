@@ -1,5 +1,6 @@
 export const routes = {
     register: '/',
+    login:'/login',
     forgotPassword: '/forgot-password',
     home: '/home',
     search: '/search',
