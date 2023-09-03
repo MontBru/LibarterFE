@@ -3,10 +3,11 @@ import { routes } from './constants';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import ForgotPassword from './pages/ForgotPassword';
-import MyOffers from './pages/My Offers';
+import MyOffers from './pages/MyOffers';
 import Search from './pages/Search';
 import About from './pages/About';
 import Login from './pages/Login';
+import UpdateOffer from './pages/UpdateOffer';
 
 const AppRoutes = () => {
     return ( 
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Route path={routes.about} element={<About/>}/>
             <Route path={routes.myOffers} element={<MyOffers/>}/>
             <Route path={routes.search} element={<Search/>}/>
+            <Route path={routes.updateOffer} element={<UpdateOffer/>}/>
         </Routes>
     );
 }

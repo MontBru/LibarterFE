@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { dbAdress } from "../constants";
+import { routes } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const MyOffers = () => {
     const uid=702;
     const myOffersList = [{name:"HP", author: "JKR", description: "engaging"},
                             {name:"HP2", author:"JKR", description:"sequel"}];
+    const navigate = useNavigate();
     //const myOffersList = [{name:"Hello"}];
 
     // fetch(dbAdress+`user/getAllBooksByUID/${uid}`,{
@@ -48,7 +51,8 @@ const MyOffers = () => {
                         {myOffersList.map((book, index) =>{
                             return(
                                 <li key={index} className="flex justify-center itmes-center">
-                                    <div className=" max-w-xs m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md">
+                                    <button className=" max-w-xs m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"
+                                    onClick={()=>navigate(routes.updateOffer, {state: book})}>
                                         <img className="object-cover h-64 w-64"/>
                                         <div className="flex flex-row justify-center m-3">
                                             <div className="font-bold text-white pr-2">
@@ -62,7 +66,7 @@ const MyOffers = () => {
                                             </div>
                                         </div>
                                           
-                                    </div>
+                                    </button>
                                 </li>
                             );
                         }
