@@ -14,8 +14,11 @@ function App() {
   return (
     <Router>
       <Navbar show={show} onMenuClick={onMenuClick}/>
-      <Topbar onMenuClick={onMenuClick}/>
-      <AppRoutes/>
+      <div className="flex flex-col h-screen">
+        <Topbar onMenuClick={onMenuClick}/>
+        <AppRoutes/>
+      </div>
+      
     </Router>
       
   );

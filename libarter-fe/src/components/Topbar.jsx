@@ -13,7 +13,7 @@ const Topbar = ({onMenuClick}) => {
     }
 
     return ( 
-        <header className=' h-16 bg-customColors-darkBrown text-white p-4 flex justify-between items-center shadow-md shadow-slate-500'>
+        <header className='sticky top-0 z-50 h-16 bg-customColors-darkBrown text-white p-4 flex justify-between items-center shadow-md shadow-slate-500'>
             <HomeButton onMenuClick={onMenuClick}/>
         </header>
     );

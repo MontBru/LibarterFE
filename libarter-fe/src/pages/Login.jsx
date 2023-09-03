@@ -21,9 +21,11 @@ const Login = () => {
             body:JSON.stringify(loginDTO)
             }
         
-        ).then((response)=>{
+        ).then(async (response)=> {
             if(response.ok)
             {
+                const data = await response.json();
+                console.log(data)
                 navigate(routes.home);
             }
             else{
@@ -35,7 +37,7 @@ const Login = () => {
     
 
     return ( 
-        <div className=' bg-customColors-lightBrown w-screen h-screen'>
+        <div className=' bg-customColors-lightBrown w-screen h-full overflow-y-scroll'>
             <CenteredBox>
                 <div className="text-2xl font-bold mb-4 text-customColors-darkBrown">
                     Log In

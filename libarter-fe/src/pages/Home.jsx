@@ -49,8 +49,8 @@ const Home = () => {
     }
 
     return ( 
-        <div className=' bg-customColors-white w-screen h-screen'>
-            <div className='px-5 py-5'>
+        <div className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
+            <div className='flex flex-col px-5 py-5 h-full'>
                 <div className="text-2xl font-bold mb-4 text-customColors-darkBrown">
                     Add a new Book
                 </div>
@@ -64,6 +64,9 @@ const Home = () => {
                     <InputComponent field={"Author"} value={author} setValue={setAuthor}/>
                     <InputComponent field={"Description"} value={description} setValue={setDescription} rows={5}/>
                     <SubmitButton value={"Create offer"}/>
+                    <div className="h-3">
+
+                    </div>
                 </form>
             </div>
         </div>
