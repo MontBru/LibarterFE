@@ -2,6 +2,8 @@ import { useState } from "react";
 import { dbAdress } from "../constants";
 import { routes } from "../constants";
 import { useNavigate } from "react-router-dom";
+import BookCard from "../components/BookCard";
+import DisplayAllOffers from "../components/DisplayAllOffers";
 
 const MyOffers = () => {
     const uid=702;
@@ -33,7 +35,7 @@ const MyOffers = () => {
     // })
 
     return ( 
-        <div className='h-screen w-screen bg-customColors-white'>
+        <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
             <div className="flex h-full flex-col">
                 <div className="bg-white rounded-b-md shadow-lg">
                     <div className="text-2xl font-bold mb-4 text-customColors-darkBrown m-4 flex justify-center">
@@ -41,38 +43,10 @@ const MyOffers = () => {
                     </div>
                 </div>
                 
-                {
-                    myOffersList.length === 0?
-                    <div className='flex h-full justify-center items-center'>
-                        You have no offers
-                    </div>
-                    :
-                    <ul>
-                        {myOffersList.map((book, index) =>{
-                            return(
-                                <li key={index} className="flex justify-center itmes-center">
-                                    <button className=" max-w-xs m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"
-                                    onClick={()=>navigate(routes.updateOffer, {state: book})}>
-                                        <img className="object-cover h-64 w-64"/>
-                                        <div className="flex flex-row justify-center m-3">
-                                            <div className="font-bold text-white pr-2">
-                                                {book.name}
-                                            </div>
-                                            <div className=' font-extralight text-white pr-2'>
-                                                by
-                                            </div>
-                                            <div className="font-bold text-white pr-2">
-                                                {book.author}
-                                            </div>
-                                        </div>
-                                          
-                                    </button>
-                                </li>
-                            );
-                        }
-                        )}
-                    </ul>
-                }
+                <DisplayAllOffers 
+                    offers={myOffersList} 
+                    handleClick={(index)=>{navigate(routes.updateOffer, {state: myOffersList[index]})}}
+                />
             </div>
             
             

@@ -49,7 +49,7 @@ const Navbar = ({show, onMenuClick}) => {
     if(show === true)
     {
         return (
-            <div className="relative">
+            <div className="relative z-50">
                 <div className="fixed inset-0 bg-black opacity-50"/>
                 <div ref={navbarRef} className={`fixed left-0 top-0 h-full w-[15rem] bg-customColors-darkBrown text-white p-4`}>
                     <HomeButton onMenuClick={onMenuClick}/>
