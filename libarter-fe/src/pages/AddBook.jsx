@@ -4,7 +4,7 @@ import { dbAdress } from "../constants";
 import BookInputComponent from "../components/BookInputComponent.jsx";
 
 
-const Home = () => {
+const AddBook = () => {
     const [name, setName] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
@@ -49,4 +49,4 @@ const Home = () => {
      );
 }
  
-export default Home;
+export default AddBook;

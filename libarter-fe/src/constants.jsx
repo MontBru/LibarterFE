@@ -2,7 +2,7 @@ export const routes = {
     register: '/',
     login:'/login',
     forgotPassword: '/forgot-password',
-    home: '/home',
+    addBook: '/add-book',
     search: '/search',
     about: '/about',
     myOffers: '/my-offers',

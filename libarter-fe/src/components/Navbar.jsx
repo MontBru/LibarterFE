@@ -55,7 +55,7 @@ const Navbar = ({show, onMenuClick}) => {
                     <HomeButton onMenuClick={onMenuClick}/>
                     <div className='flex flex-col mt-6'>
                         <NavButton route={routes.search} text={"Search for Books"} icon={faSearch}/>
-                        <NavButton route={routes.home} text={"Add Offer"} icon={faPlus}/>
+                        <NavButton route={routes.addBook} text={"Add Offer"} icon={faPlus}/>
                         <NavButton route={routes.myOffers} text={"My offers"} icon={faBook}/>
                         <NavButton route={routes.about} text={"About"} icon={faInfoCircle}/>
                     </div>

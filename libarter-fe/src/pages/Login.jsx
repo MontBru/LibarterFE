@@ -26,7 +26,7 @@ const Login = () => {
             {
                 const data = await response.json();
                 console.log(data)
-                navigate(routes.home);
+                navigate(routes.addBook);
             }
             else{
                 setIsError(true);
