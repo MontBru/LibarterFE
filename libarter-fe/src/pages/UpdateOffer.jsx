@@ -3,22 +3,38 @@ import { useState } from "react";
 import BookInputComponent from "../components/BookInputComponent.jsx";
 import SubmitButton from "../components/SubmitButton";
 import { routes } from "../constants.jsx";
+import { dbAdress } from "../constants.jsx";
 
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
-    const [name, setName] = useState(state.name);
-    const [author, setAuthor] = useState(state.author);
-    const [description, setDescription] = useState(state.description);
+
+    const [name, setName] = useState(state?.name || '');
+    const [author, setAuthor] = useState(state?.author || '');
+    const [description, setDescription] = useState(state?.description || '');
+
     const navigate = useNavigate();
 
-    const handleSubmit = () =>{
-        console.log(name)
-        console.log(author)
-        console.log(description)
+    const handleSubmit = (e) =>{
+        e.preventDefault();
 
-        //change the book
+        if(state === null){
+            return null;
+        }
 
-        navigate(routes.myOffers)
+        fetch(dbAdress + `user/book/updateById/${state.id}`, {
+            method: "PUT",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({name: name, author:author, description:description, id:state.id})
+          })
+          .then((response) => {
+              if (response.ok === false) {
+                console.error("Couldn't load your offers");
+              } 
+                console.log("navigating to my offers")
+                navigate(routes.myOffers)
+            });  
+            
+        
     }
 
     return ( 

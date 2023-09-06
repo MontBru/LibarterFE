@@ -1,59 +1,53 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { dbAdress } from "../constants";
 import { routes } from "../constants";
 import { useNavigate } from "react-router-dom";
-import BookCard from "../components/BookCard";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 
 const MyOffers = () => {
-    const uid=702;
-    const myOffersList = [{name:"HP", author: "JKR", description: "engaging"},
-                            {name:"HP2", author:"JKR", description:"sequel"}];
-    const navigate = useNavigate();
-    //const myOffersList = [{name:"Hello"}];
+  const uid = 702;
+  const navigate = useNavigate();
+  const [myOffersList, setMyOffersList] = useState([]);
+  const [loading, setLoading] = useState(true); 
+  
+  useEffect(() => {
+    fetch(dbAdress + `user/getAllBooksByUID/${uid}`, {
+      method: "GET",
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          const data = await response.json();
+          setMyOffersList(data);
+        } else {
+          console.error("Couldn't load your offers");
+        }
+        setLoading(false); // Update loading state
+      });
+  }, [uid]);
 
-    // fetch(dbAdress+`user/getAllBooksByUID/${uid}`,{
-    //     method:"GET"
-    //     }
-    
-    // ).then((response)=>{
-    //     if(response.ok)
-    //     {
-    //         return ( 
-    //             <div>
-                    
-    //             </div>
-    //         );
-    //     }
-    //     else{
-    //         return (
-    //             <div>
-    //                 couldn't load your offers
-    //             </div>
-    //         )
-    //     } 
-    // })
-
-    return ( 
-        <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
-            <div className="flex h-full flex-col">
-                <div className="bg-white rounded-b-md shadow-lg">
-                    <div className="text-2xl font-bold mb-4 text-customColors-darkBrown m-4 flex justify-center">
-                    My Offers
-                    </div>
-                </div>
-                
-                <DisplayAllOffers 
-                    offers={myOffersList} 
-                    handleClick={(index)=>{navigate(routes.updateOffer, {state: myOffersList[index]})}}
-                />
-            </div>
-            
-            
+  return (
+    <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
+      <div className="flex h-full flex-col">
+        <div className="bg-white rounded-b-md shadow-lg">
+          <div className="text-2xl font-bold mb-4 text-customColors-darkBrown m-4 flex justify-center">
+            My Offers
+          </div>
         </div>
-    );
 
+        {/* Conditional rendering based on loading state */}
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <DisplayAllOffers
+            offers={myOffersList}
+            handleClick={(index) => {
+              navigate(routes.updateOffer, { state: myOffersList[index] });
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 
-}
- 
 export default MyOffers;
