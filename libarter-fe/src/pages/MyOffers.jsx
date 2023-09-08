@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 
 const MyOffers = () => {
-  const uid = 702;
+  const uid = localStorage.getItem("UID");
   const navigate = useNavigate();
   const [myOffersList, setMyOffersList] = useState([]);
   const [loading, setLoading] = useState(true); 
@@ -28,7 +28,7 @@ const MyOffers = () => {
   return (
     <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
       <div className="flex h-full flex-col">
-        <div className="bg-white rounded-b-md shadow-lg">
+        <div className="sticky top-0 bg-white rounded-b-md shadow-lg">
           <div className="text-2xl font-bold mb-4 text-customColors-darkBrown m-4 flex justify-center">
             My Offers
           </div>

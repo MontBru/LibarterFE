@@ -25,7 +25,12 @@ const Login = () => {
             if(response.ok)
             {
                 const data = await response.json();
-                console.log(data)
+
+                localStorage.removeItem("JWT")
+                localStorage.removeItem("UID")
+
+                localStorage.setItem("JWT", data.jwt)
+                localStorage.setItem("UID", data.uid)
                 navigate(routes.search);
             }
             else{

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
-const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchBar = ({searchTerm, setSearchTerm}) => {
+    const [searchTermVar, setSearchTermVar] = useState(searchTerm);
 
   const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchTermVar(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchTerm)
+    setSearchTerm(searchTermVar);
   };
 
   return (
@@ -20,10 +21,10 @@ const SearchBar = () => {
             <form onSubmit={handleSubmit} className="search-bar flex justify-center h-12">
                 <div className='flex flex-row'>
                     <input
-                        className=' text-customColors-lightBrown border-none outline-none'
+                        className=' text-customColors-lightBrown border-none outline-none font-bold'
                         type="text"
                         placeholder="Search book..."
-                        value={searchTerm}
+                        value={searchTermVar}
                         onChange={handleInputChange}
                     />
                     <button type="submit" className='w-12'>
