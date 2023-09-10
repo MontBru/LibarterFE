@@ -10,12 +10,13 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phoneNumber, setPhoneNum] = useState('');
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const user={username,email,password}
+        const user={username,email,password, phoneNumber}
         console.log(user)
         fetch(dbAdress+"auth/register",{
             method:"POST",
@@ -23,10 +24,18 @@ const Register = () => {
             body:JSON.stringify(user)
             }
         
-        ).then(()=>{
-            console.log("user is registered")
+        ).then((response)=>{
+            if(response.ok)
+            {
+                console.log("user is registered")
+                navigate(routes.login);
+            }
+            else
+            {
+                setIsError(true)
+            }
         })
-        navigate(routes.login);
+        
     };
 
     
@@ -40,6 +49,7 @@ const Register = () => {
                 <form onSubmit={handleSubmit}>
                     <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
                     <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
+                    <FormInputComponent field="Phone Number" type="tel" value={phoneNumber} setValue={setPhoneNum} isError={isError} setIsError={setIsError}/>
                     <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                     <div className="mb-4">
                         <SubmitButton value="Register" />
