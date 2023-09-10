@@ -3,38 +3,36 @@ import DisplayAllOffers from "../components/DisplayAllOffers"
 import { useEffect } from "react";
 import { useState } from "react";
 import { dbAdress } from "../constants";
+import PageSelector from "../components/PageSelector";
 
 const Search = () => {
-    // const myOffersList = [{name:"HP", author: "JKR", description: "engaging"},
-    // {name:"HP2", author:"JKR", description:"sequel"},
-    // {name:"HP2", author:"JKR", description:"sequel"},
-    // {name:"HP2", author:"JKR", description:"sequel"},
-    // {name:"HP2", author:"JKR", description:"sequel"},
-    // {name:"HP2", author:"JKR", description:"sequel"}];
     const [myOffersList, setMyOffersList] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
+    const [pageNum, setPageNum] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         fetch(dbAdress + `user/book/getBooksBySearch`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({searchTerm: searchTerm, pageNum: 0})
+        body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1})
         })
           .then(async (response) => {
             if (response.ok) {
               const data = await response.json();
-              setMyOffersList(data);
+              setMyOffersList(data.books);
+              setTotalPages(data.totalPageCount)
             } else {
               console.error("Couldn't load your offers");
             }
           });
-      }, [searchTerm]);
+      }, [searchTerm, pageNum]);
 
     return ( 
         <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
             <div className="flex h-full flex-col">
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                <PageSelector currentPage={pageNum} totalPages={totalPages} onPageChange={(newPage)=>{setPageNum(newPage)}}/>
                 <DisplayAllOffers 
                     offers={myOffersList}
                     handleClick={()=>{}}    
