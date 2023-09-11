@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const PageSelector = ({ currentPage, totalPages, onPageChange }) => {
-  const [inputPage, setInputPage] = useState(currentPage);
-
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      setInputPage(newPage);
       onPageChange(newPage);
     }
   };

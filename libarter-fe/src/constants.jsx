@@ -6,7 +6,8 @@ export const routes = {
     search: '/search',
     about: '/about',
     myOffers: '/my-offers',
-    updateOffer: '/update-offer'
+    updateOffer: '/update-offer',
+    offerPage: '/offer-page'
 };
 
 export const dbAdress="http://localhost:8080/";

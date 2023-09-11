@@ -8,6 +8,7 @@ import Search from './pages/Search';
 import About from './pages/About';
 import Login from './pages/Login';
 import UpdateOffer from './pages/UpdateOffer';
+import OfferPage from './pages/OfferPage';
 
 const AppRoutes = () => {
     return ( 
@@ -20,6 +21,7 @@ const AppRoutes = () => {
             <Route path={routes.myOffers} element={<MyOffers/>}/>
             <Route path={routes.search} element={<Search/>}/>
             <Route path={routes.updateOffer} element={<UpdateOffer/>}/>
+            <Route path={routes.offerPage} element={<OfferPage/>}/>
         </Routes>
     );
 }

@@ -4,12 +4,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { dbAdress } from "../constants";
 import PageSelector from "../components/PageSelector";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../constants";
 
 const Search = () => {
     const [myOffersList, setMyOffersList] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNum, setPageNum] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(dbAdress + `user/book/getBooksBySearch`, {
@@ -35,7 +38,9 @@ const Search = () => {
                 <PageSelector currentPage={pageNum} totalPages={totalPages} onPageChange={(newPage)=>{setPageNum(newPage)}}/>
                 <DisplayAllOffers 
                     offers={myOffersList}
-                    handleClick={()=>{}}    
+                    handleClick={(index)=>{
+                        navigate(routes.offerPage, {state: myOffersList[index]})
+                    }}    
                 />
             </div>
             
