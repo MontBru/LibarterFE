@@ -2,7 +2,7 @@ const BookCard = ( {book, handleClick} ) => {
     return ( 
         <button className=" max-w-xs m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"
         onClick={()=>handleClick()}>
-            <img className="object-cover h-64 w-64"/>
+            <img className="object-cover h-64 w-64" alt="Couldn't load image"/>
             <div className="flex flex-row justify-center m-3">
                 <div className="font-bold text-white pr-2">
                     {book.name}
@@ -13,6 +13,9 @@ const BookCard = ( {book, handleClick} ) => {
                 <div className="font-bold text-white pr-2">
                     {book.author}
                 </div>
+            </div>
+            <div className="font-bold text-white mb-3">
+                {book.price} BGN
             </div>
               
         </button>

@@ -4,6 +4,7 @@ import BookInputComponent from "../components/BookInputComponent.jsx";
 import SubmitButton from "../components/SubmitButton";
 import { routes } from "../constants.jsx";
 import { dbAdress } from "../constants.jsx";
+import FormInputComponent from "../components/FormInputComponent.jsx"
 
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
@@ -11,6 +12,8 @@ const UpdateOffer = (  ) => {
     const [name, setName] = useState(state?.name || '');
     const [author, setAuthor] = useState(state?.author || '');
     const [description, setDescription] = useState(state?.description || '');
+    const [price, setPrice] = useState(state?.price || 0)
+    const [error, setError] = useState(false)
 
     const navigate = useNavigate();
 
@@ -21,17 +24,25 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
+        if(isNaN(parseFloat(price)))
+        {
+            setError(true)
+            return null;
+        }
+
         fetch(dbAdress + `user/book/updateById/${state.id}`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({name: name, author:author, description:description, id:state.id})
+            body: JSON.stringify({name: name, author:author, description:description, price, id:state.id})
           })
           .then((response) => {
-              if (response.ok === false) {
-                console.error("Couldn't load your offers");
-              } 
-                console.log("navigating to my offers")
+              if (response.ok) {
                 navigate(routes.myOffers)
+              }
+              else{
+                setError(true) 
+              }
+                
             });  
             
         
@@ -45,9 +56,10 @@ const UpdateOffer = (  ) => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <image/>
-                    <BookInputComponent field={"Title"} value={name} setValue={setName}/>
-                    <BookInputComponent field={"Author"} value={author} setValue={setAuthor}/>
-                    <BookInputComponent field={"Description"} value={description} setValue={setDescription} rows={5}/>
+                    <FormInputComponent field={"Title"} type={"text"} value={name} setValue={setName} isError={error} setIsError={setError}/>
+                    <FormInputComponent field={"Author"} type={"text"} value={author} setValue={setAuthor} isError={error} setIsError={setError}/>
+                    <FormInputComponent field={"Price"} type={"text"} value={price} setValue={setPrice} isError={error} setIsError={setError}/>
+                    <FormInputComponent field={"Description"} type={"text"} value={description} setValue={setDescription} isError={error} setIsError={setError}/>
                     <SubmitButton value={"Update offer"}/>
                     <div className="h-3"/>
                 </form>
