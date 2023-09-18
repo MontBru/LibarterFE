@@ -1,3 +1,4 @@
+import React from 'react';
 import CenteredBox from "../components/CenteredBox";
 import { useState } from "react";
 import { routes } from "../constants";

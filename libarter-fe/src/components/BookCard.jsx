@@ -1,3 +1,5 @@
+import React from 'react';
+
 const BookCard = ( {book, handleClick} ) => {
     return ( 
         <button className=" max-w-xs m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"

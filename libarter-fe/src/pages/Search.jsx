@@ -1,3 +1,4 @@
+import React from 'react';
 import SearchBar from "../components/SearchBar";
 import DisplayAllOffers from "../components/DisplayAllOffers"
 import { useEffect } from "react";

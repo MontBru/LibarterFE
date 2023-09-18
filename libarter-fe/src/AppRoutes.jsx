@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { routes } from './constants';
 import Register from './pages/Register';

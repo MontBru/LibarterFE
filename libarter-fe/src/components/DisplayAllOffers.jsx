@@ -1,3 +1,4 @@
+import React from 'react';
 import BookCard from "./BookCard";
 
 const DisplayAllOffers = ({ offers, handleClick }) => {

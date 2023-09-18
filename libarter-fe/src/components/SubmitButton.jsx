@@ -1,3 +1,5 @@
+import React from 'react';
+
 const SubmitButton = ({value}) => {
     return ( <input
         type="submit"
