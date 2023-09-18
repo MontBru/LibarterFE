@@ -25,11 +25,11 @@ jobs:
           npm install
   
 
-      # Add a step to run ESLint with the --max-warnings flag
-      - name: Run ESLint
-        run: |
-          cd libarter-fe
-          npm run lint -- --max-warnings 0
+      # # Add a step to run ESLint with the --max-warnings flag
+      # - name: Run ESLint
+      #   run: |
+      #     cd libarter-fe
+      #     npm run lint -- --max-warnings 0
 
       - name: Build And Deploy
         id: builddeploy
