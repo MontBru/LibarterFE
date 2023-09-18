@@ -21,7 +21,7 @@ jobs:
 
       - name: Print Current Directory
         run: |
-          echo "Current Directory: $(pwd)"
+          ls
 
       - name: Install Dependencies
         run: npm install --ignore-scripts
