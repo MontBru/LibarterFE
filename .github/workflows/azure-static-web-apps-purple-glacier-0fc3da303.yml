@@ -22,9 +22,10 @@ jobs:
       - name: Print Current Directory
         run: |
           cd libarter-fe
+          pwd
 
       - name: Install Dependencies
-        run: npm install --ignore-scripts
+        run: npm install
 
       # Add a step to run ESLint with the --max-warnings flag
       - name: Run ESLint
