@@ -19,17 +19,17 @@ jobs:
         with:
           submodules: true
 
-      - name: Print Current Directory
+      - name: Install Dependencies
         run: |
           cd libarter-fe
-          pwd
-
-      - name: Install Dependencies
-        run: npm install
+          npm install
+  
 
       # Add a step to run ESLint with the --max-warnings flag
       - name: Run ESLint
-        run: npm run lint -- --max-warnings 0
+        run: |
+          cd libarter-fe
+          npm run lint -- --max-warnings 0
 
       - name: Build And Deploy
         id: builddeploy
