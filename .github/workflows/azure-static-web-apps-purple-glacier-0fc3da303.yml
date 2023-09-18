@@ -20,7 +20,8 @@ jobs:
           submodules: true
 
       - name: Print Current Directory
-        run: echo "Current Directory: $(pwd)"
+        run: |
+          echo "Current Directory: $(pwd)"
 
       - name: Install Dependencies
         run: npm install --ignore-scripts
