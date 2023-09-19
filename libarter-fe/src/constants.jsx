@@ -12,4 +12,4 @@ export const routes = {
     offerPage: '/offer-page'
 };
 
-export const dbAdress="http://localhost:8080/";
+export const dbAdress="libarterbe.azurewebsites.net/";
