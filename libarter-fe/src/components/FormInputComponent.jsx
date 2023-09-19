@@ -1,10 +1,8 @@
 import React from 'react';
-import { routes } from "../constants";
-import { Link } from "react-router-dom";
 
 const FormInputComponent = ({field, type, value, setValue, isError, setIsError}) => {
     return (
-    <div className="mb-4">
+    <div className="mb-2">
         <label htmlFor="email" className="block mb-1 text-customColors-darkBrown">
             {field}
         </label>
@@ -21,13 +19,6 @@ const FormInputComponent = ({field, type, value, setValue, isError, setIsError})
                 setIsError(false); // Reset the error state on input change
             }}
         />
-        {type === "password"?
-         <div className="container flex justify-end">
-            <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
-                Forgot password?
-            </Link>
-        </div> : 
-        null}
     </div> );
 }
  

@@ -51,6 +51,11 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
                     <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
+                    <div className="container flex justify-end mb-4">
+                        <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
+                            Forgot password?
+                        </Link>
+                    </div>
                     <div className="mb-4">
                         <SubmitButton value="Log in" />
                     </div>
