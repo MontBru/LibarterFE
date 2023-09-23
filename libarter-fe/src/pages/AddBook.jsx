@@ -5,6 +5,7 @@ import { dbAdress } from "../constants";import { useNavigate } from "react-route
 import { routes } from "../constants";
 import FormInputComponent from "../components/FormInputComponent";
 import CenteredBox from "../components/CenteredBox"
+import PhotoInput from '../components/PhotoInput';
 
 const AddBook = () => {
     const uid = localStorage.getItem("UID");
@@ -48,11 +49,7 @@ const AddBook = () => {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="relative flex justify-center items-center">
-                            <button
-                                type="button"
-                                className=" w-52 bg-customColors-darkBrown text-white font-bold text-xl mb-4 rounded-md py-2 px-4 flex justify-center items-center text-center">
-                                Add Photos
-                            </button>
+                            <PhotoInput/>
                             <input
                                 type="file"
                                 accept="image/*"
