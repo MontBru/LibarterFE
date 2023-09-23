@@ -28,22 +28,33 @@ const PhotoInput = () => {
 
   const renderPhotoInputs = () => {
     return fileInputs.map((ind) => (
-      <div key={ind} className="">
+      <div key={ind} className="p-2 flex justify-center items-center">
           {photos[ind] ? (
-            <img src={photos[ind]} alt={`Uploaded ${ind}`} />
+            <img 
+            src={photos[ind]} 
+            alt={`Uploaded ${ind}`} 
+            className='w-36 h-36 shadow-mf rounded-md'
+            />
           ) : (
-            <div className=" bg-customColors-darkBrown text-white font-bold h-36 w-36 shadow-md rounded-md flex justify-center items-center text-3xl">+</div>
+            <div
+              className="bg-customColors-darkBrown text-white font-bold h-36 w-36 shadow-md rounded-md flex flex-col justify-center items-center text-3xl relative"
+            >
+              <label htmlFor={`photo-input-${ind}`} className="cursor-pointer">
+                +
+                <input
+                  type="file"
+                  id={`photo-input-${ind}`}
+                  accept="image/*"
+                  onChange={(e) => {
+                    console.log("changed");
+                    handleFileInputChange(ind, e);
+                  }}
+                  className="opacity-0 absolute inset-0 w-36 h-36"
+                />
+              </label>
+            </div>
           )}
-          <input
-            type="file"
-            id={`photo-input-${ind}`}
-            accept="image/*"
-            onChange={(e) => {
-                console.log("changed")
-                handleFileInputChange(ind, e)
-            }}
-            className='opacity-0 w-5 h-5'
-          />
+          
       </div>
     ));
     // return (
@@ -57,8 +68,6 @@ const PhotoInput = () => {
     //       }}
     //     />
     //   </div>
-        
-      
     // );
   };
 

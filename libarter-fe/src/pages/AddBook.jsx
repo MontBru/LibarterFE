@@ -48,18 +48,8 @@ const AddBook = () => {
                         Add a new Book
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="relative flex justify-center items-center">
-                            <PhotoInput/>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                id="photoInput"
-                                onChange={(event) => {
-                                setPhoto(event.target.files[0]);
-                                }}
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            />
-                        </div>
+                        <PhotoInput/>
+                        
 
                         <FormInputComponent field={"Title"} type={"text"} value={name} setValue={setName} isError={error} setIsError={setError}/>
                         <FormInputComponent field={"Author"} type={"text"} value={author} setValue={setAuthor} isError={error} setIsError={setError}/>
@@ -68,7 +58,7 @@ const AddBook = () => {
                         <SubmitButton value={"Create offer"}/>
                         <div className="h-3"/>
                     </form>
-            </div>
+                </div>
             </CenteredBox>
             
         </div>
