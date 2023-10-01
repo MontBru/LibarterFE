@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 
 const MyOffers = () => {
-  const uid = localStorage.getItem("UID");
+  const uid = sessionStorage.getItem("UID");
   const navigate = useNavigate();
   const [myOffersList, setMyOffersList] = useState([]);
   const [loading, setLoading] = useState(true); 

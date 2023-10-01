@@ -2,8 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 
-const PhotoInput = () => {
-  const [photos, setPhotos] = useState([]);
+const PhotoInput = ({photos, setPhotos}) => {
 
   const handleFileInputChange = ( event) => {
     const selectedFile = event.target.files[0];
@@ -37,7 +36,7 @@ const PhotoInput = () => {
             <img
               src={photos[ind]}
               alt={`Uploaded ${ind}`}
-              className="w-64 h-64 shadow-md rounded-md cursor-pointer"
+              className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
               onClick={() => handleImageClick(ind)}
             />
             <button

@@ -27,11 +27,11 @@ const Login = () => {
             {
                 const data = await response.json();
 
-                localStorage.removeItem("JWT")
-                localStorage.removeItem("UID")
+                sessionStorage.removeItem("JWT")
+                sessionStorage.removeItem("UID")
 
-                localStorage.setItem("JWT", data.jwt)
-                localStorage.setItem("UID", data.uid)
+                sessionStorage.setItem("JWT", data.jwt)
+                sessionStorage.setItem("UID", data.uid)
                 navigate(routes.search);
             }
             else{

@@ -25,11 +25,17 @@ const Register = () => {
             body:JSON.stringify(user)
             }
         
-        ).then((response)=>{
+        ).then(async (response)=>{
             if(response.ok)
             {
-                console.log("user is registered")
-                navigate(routes.login);
+                const data = await response.json();
+
+                sessionStorage.removeItem("JWT")
+                sessionStorage.removeItem("UID")
+
+                sessionStorage.setItem("JWT", data.jwt)
+                sessionStorage.setItem("UID", data.uid)
+                navigate(routes.search);
             }
             else
             {
