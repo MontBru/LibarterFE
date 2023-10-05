@@ -9,6 +9,7 @@ const OfferPage = () => {
     const state = useLocation();
 
     const book = state.state;
+    console.log(book)
     const [seller, setSeller] = useState(null);
 
     useEffect(
@@ -36,7 +37,7 @@ const OfferPage = () => {
     
 
     return ( 
-        <div className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
+        <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
             <CenteredBox>
                 <div className='flex flex-col h-full'>
                     <div className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
@@ -105,7 +106,7 @@ const OfferPage = () => {
                     </div>
                 </div>
             </CenteredBox>
-        </div>
+        </main>
      );
 }
  

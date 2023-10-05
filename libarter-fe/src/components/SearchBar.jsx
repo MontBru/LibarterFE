@@ -2,8 +2,9 @@ import React from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import DropdownButton from './DropdownButton';
 
-const SearchBar = ({searchTerm, setSearchTerm}) => {
+const SearchBar = ({searchTerm, setSearchTerm, setSearchType}) => {
     const [searchTermVar, setSearchTermVar] = useState(searchTerm);
 
   const handleInputChange = (e) => {
@@ -27,9 +28,10 @@ const SearchBar = ({searchTerm, setSearchTerm}) => {
                         value={searchTermVar}
                         onChange={handleInputChange}
                     />
-                    <button type="submit" className='w-12'>
-                        <FontAwesomeIcon icon = {faSearch} className='flex justify-center ml-3 mr-7 text-customColors-darkBrown'/>
+                    <button type="submit" className='w-12 flex justify-center items-center'>
+                        <FontAwesomeIcon icon = {faSearch} className='flex justify-center text-customColors-darkBrown'/>
                     </button>
+                    <DropdownButton setSearchType={setSearchType}/>
                 </div>
                 
             </form>

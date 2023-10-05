@@ -17,12 +17,12 @@ const ChangeBook = ({handleSubmit,
     tags, setTags,
     description, setDescription}) => {
     return ( 
-        <div className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
+        <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
             <CenteredBox>
                 <div className='flex flex-col h-full'>
-                    <div className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
                         Add a new Book
-                    </div>
+                    </h1>
                     <form onSubmit={handleSubmit}>
                         <PhotoInput photos={photos} setPhotos={setPhotos}/>
                         
@@ -47,7 +47,7 @@ const ChangeBook = ({handleSubmit,
                 </div>
             </CenteredBox>
             
-        </div>
+        </main>
      );
 }
  

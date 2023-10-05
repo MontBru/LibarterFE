@@ -20,6 +20,15 @@ const UpdateOffer = (  ) => {
     const [acceptsTrade, setAcceptsTrade] = useState(state?.acceptsTrade )
     const [tags, setTags] = useState(state?.tags)
 
+    if(tags === null)
+    {
+      setTags([]);
+    }
+    if(photos === null)
+    {
+      setPhotos([]);
+    }
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) =>{
@@ -35,7 +44,7 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
-        const book={name,author,description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags}
+        const book={name,author,description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags}
         
         fetch(dbAdress + `user/book/updateById/${state.id}`, {
             method: "PUT",

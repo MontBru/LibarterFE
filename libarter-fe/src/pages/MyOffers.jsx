@@ -26,15 +26,11 @@ const MyOffers = () => {
   }, [uid]);
 
   return (
-    <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
-      <div className="flex h-full flex-col">
-        <div className="sticky top-0 bg-white rounded-b-md shadow-lg">
-          <div className="text-2xl font-bold mb-4 text-customColors-darkBrown m-4 flex justify-center">
-            My Offers
-          </div>
-        </div>
+    <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+        <h1 className="text-2xl sticky p-3 top-0 bg-white rounded-b-md shadow-lg font-bold text-customColors-darkBrown m-4 mt-0 flex justify-center">
+          My Offers
+        </h1>
 
-        {/* Conditional rendering based on loading state */}
         {loading ? (
           <div>Loading...</div>
         ) : (
@@ -45,8 +41,7 @@ const MyOffers = () => {
             }}
           />
         )}
-      </div>
-    </div>
+    </main>
   );
 };
 

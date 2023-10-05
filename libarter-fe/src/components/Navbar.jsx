@@ -50,19 +50,19 @@ const Navbar = ({show, onMenuClick}) => {
     if(show === true)
     {
         return (
-            <div className="relative z-50">
+            <nav className="relative z-50">
                 <div className="fixed inset-0 bg-black opacity-50"/>
                 <div ref={navbarRef} className={`fixed left-0 top-0 h-full w-[15rem] bg-customColors-darkBrown text-white p-4`}>
                     <HomeButton onMenuClick={onMenuClick}/>
-                    <div className='flex flex-col mt-6'>
-                        <NavButton route={routes.search} text={"Search for Books"} icon={faSearch}/>
-                        <NavButton route={routes.addBook} text={"Add Offer"} icon={faPlus}/>
-                        <NavButton route={routes.myOffers} text={"My offers"} icon={faBook}/>
-                        <NavButton route={routes.about} text={"About"} icon={faInfoCircle}/>
-                    </div>
+                    <ul className='flex flex-col mt-6'>
+                        <li><NavButton route={routes.search} text={"Search for Books"} icon={faSearch}/></li>
+                        <li><NavButton route={routes.addBook} text={"Add Offer"} icon={faPlus}/></li>
+                        <li><NavButton route={routes.myOffers} text={"My offers"} icon={faBook}/></li>
+                        <li><NavButton route={routes.about} text={"About"} icon={faInfoCircle}/></li>
+                    </ul>
                     
                 </div>
-            </div>
+            </nav>
         );
     }
     

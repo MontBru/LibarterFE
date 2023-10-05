@@ -30,27 +30,31 @@ const PhotoInput = ({photos, setPhotos}) => {
   };
 
   const renderPhotoInputs = () => {
-    return photos.map((value,ind) => (
-      <div key={ind} className="p-2">
-          <div className="relative">
-            <img
-              src={photos[ind]}
-              alt={`Uploaded ${ind}`}
-              className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
-              onClick={() => handleImageClick(ind)}
-            />
-            <button
-              type="button"
-              className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md opacity-90"
-              onClick={() => handleRemoveImage(ind)}
-            >
-              <FontAwesomeIcon icon={faTrash}/>
-            </button>
-          </div>
-      </div>
-    ));
+    
+      return photos.map((value,ind) => (
+        <div key={ind} className="p-2">
+            <div className="relative">
+              <img
+                src={photos[ind]}
+                alt={`Uploaded ${ind}`}
+                className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
+                onClick={() => handleImageClick(ind)}
+              />
+              <button
+                type="button"
+                className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md opacity-90"
+                onClick={() => handleRemoveImage(ind)}
+              >
+                <FontAwesomeIcon icon={faTrash}/>
+              </button>
+            </div>
+        </div>
+      ));
+    
   };
 
+  if(photos!== null)
+  {
   return (
   <div className='grid grid-cols-1
          custom-1:grid-cols-2 
@@ -87,6 +91,9 @@ const PhotoInput = ({photos, setPhotos}) => {
     }
   </div>
     );
+  }else{
+    return null;
+  }
 };
 
 export default PhotoInput;
