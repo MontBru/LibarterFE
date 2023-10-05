@@ -34,72 +34,81 @@ const OfferPage = () => {
             
         },[book]
     )
+
+    const displayBookNameAndAuthor = ()=>
+    {
+        return (
+            <div className="flex flex-row my-7">
+                {
+                    book.new === true?
+                    <h3 className="font-bold text-customColors-darkBrown mr-3">
+                        NEW
+                    </h3>:
+                    null
+                }
+                <h3 className="mr-3 font-bold text-customColors-darkBrown">
+                    {book.name}
+                </h3>
+                <h4 className="mr-3 font-thin text-customColors-darkBrown">
+                    by
+                </h4>
+                <h3 className="font-bold text-customColors-darkBrown">
+                    {book.author}
+                </h3>
+            </div>
+
+        );
+    }
     
 
     return ( 
         <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
             <CenteredBox>
-                <div className='flex flex-col h-full'>
-                    <div className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
+                <div className='flex flex-col'>
+
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
                         {book.name}
-                    </div>
+                    </h1>
                         
-                    <div className='flex flex-col px-5 py-5 h-full'>
+                    <div className='p-3 h-full'>
                         <image/>
 
                         <div className='flex flex-row'>
-                            <div className=' text-customColors-darkBrown font-bold text-xl mr-2'>
+                            <h3 className=' text-customColors-darkBrown font-bold text-xl mr-2'>
                                 {book.price} BGN
-                            </div>
+                            </h3>
                             {
                                 book.acceptsTrade === true?
-                                <div className="text-customColors-darkBrown mb-3 text-xl">
+                                <h3 className="text-customColors-darkBrown mb-3 text-xl">
                                     / ACCEPTS TRADES
-                                </div>:
+                                </h3>:
                                 null
                             }
                         </div>
                         
 
                         
-                        <div className="flex flex-row my-7">
-                            {
-                                book.new === true?
-                                <div className="font-bold text-customColors-darkBrown mr-3">
-                                    NEW
-                                </div>:
-                                null
-                            }
-                            <div className="mr-3 font-bold text-customColors-darkBrown">
-                                {book.name}
-                            </div>
-                            <div className="mr-3 font-thin text-customColors-darkBrown">
-                                by
-                            </div>
-                            <div className="font-bold text-customColors-darkBrown">
-                                {book.author}
-                            </div>
-                        </div>
+                        <displayBookNameAndAuthor/>
 
                         <TagList tags={book.tags}/>
 
-                        <div className=' text-customColors-darkBrown mt-3'>
+                        <p className=' text-customColors-darkBrown mt-3'>
                             {book.description}
-                        </div>
+                        </p>
 
                         <div className="border-t border-gray-300 mb-4 mt-8"/>
 
-                        <div className='text-2xl mb-4'>
+                        <h2 className='text-2xl mb-4'>
                             Contact Info
-                        </div>
+                        </h2>
 
                         {
                             seller !== null?
-                            <div>
-                                <div className="mb-2">Username: {seller.username}</div>
-                                <div className="mb-2">Email: {seller.email}</div>
-                                <div className="mb-2">Phone Number: {seller.phoneNumber}</div>
-                            </div>:
+                            <ul>
+                                <li className="mb-2">Username: {seller.username}</li>
+                                <li className="mb-2">Email: {seller.email}</li>
+                                <li className="mb-2">Phone Number: {seller.phoneNumber}</li>
+                            </ul>:
                             null
                         }
 

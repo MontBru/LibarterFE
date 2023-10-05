@@ -15,14 +15,18 @@ const TagList = ({tags, setTags, removable}) => {
       {
         tags !== null?
         <div className="mt-2">
-        {tags.map((tag, index) => (
+        <ul>
+          <li>
+          {tags.map((tag, index) => (
           <Tag
             key={index}
             text={tag}
             removable={removable}
             onDelete={() => handleDeleteTag(index)}
           />
-        ))}
+          ))}
+          </li>
+        </ul>
       </div>:
       null
       }

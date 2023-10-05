@@ -32,23 +32,21 @@ const PhotoInput = ({photos, setPhotos}) => {
   const renderPhotoInputs = () => {
     
       return photos.map((value,ind) => (
-        <div key={ind} className="p-2">
-            <div className="relative">
-              <img
-                src={photos[ind]}
-                alt={`Uploaded ${ind}`}
-                className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
-                onClick={() => handleImageClick(ind)}
-              />
-              <button
-                type="button"
-                className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md opacity-90"
-                onClick={() => handleRemoveImage(ind)}
-              >
-                <FontAwesomeIcon icon={faTrash}/>
-              </button>
-            </div>
-        </div>
+        <li key={ind} className="p-2 relative">
+          <img
+            src={photos[ind]}
+            alt={`Uploaded ${ind}`}
+            className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
+            onClick={() => handleImageClick(ind)}
+          />
+          <button
+            type="button"
+            className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md opacity-90"
+            onClick={() => handleRemoveImage(ind)}
+          >
+            <FontAwesomeIcon icon={faTrash}/>
+          </button>
+        </li>
       ));
     
   };
@@ -62,8 +60,9 @@ const PhotoInput = ({photos, setPhotos}) => {
          custom-3:grid-cols-4 
          custom-4:grid-cols-5 py-4'>
 
-    {renderPhotoInputs()}
-    
+    <ul>
+      {renderPhotoInputs()}
+    </ul>
     
     {photos.length < 5?
       (

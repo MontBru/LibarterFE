@@ -73,21 +73,17 @@ const Search = () => {
       }, [searchTerm, pageNum, searchType]);
 
     return ( 
-        <div className='h-full w-full bg-customColors-white overflow-y-scroll'>
-            <div className="flex h-full flex-col">
-                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchType={setSearchType}/>
-                
-                <PageSelector currentPage={pageNum} totalPages={totalPages} onPageChange={(newPage)=>{setPageNum(newPage)}}/>
-                <DisplayAllOffers 
-                    offers={myOffersList}
-                    handleClick={(index)=>{
-                        navigate(routes.offerPage, {state: myOffersList[index]})
-                    }}    
-                />
-            </div>
-            
-            
-        </div>
+        <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchType={setSearchType}/>
+          
+          <PageSelector currentPage={pageNum} totalPages={totalPages} onPageChange={(newPage)=>{setPageNum(newPage)}}/>
+          <DisplayAllOffers 
+              offers={myOffersList}
+              handleClick={(index)=>{
+                  navigate(routes.offerPage, {state: myOffersList[index]})
+              }}    
+          />
+        </main>
      );
 }
  

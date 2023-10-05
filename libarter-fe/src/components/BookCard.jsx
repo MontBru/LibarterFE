@@ -8,33 +8,33 @@ const BookCard = ( {book, handleClick} ) => {
             <img className=" top-0 object-cover h-64 w-64" alt="Couldn't load image"/>
             {
                 book.new === true?
-                <div className="font-bold text-white mb-3">
+                <h3 className="font-bold text-white mb-3">
                     NEW
-                </div>:
+                </h3>:
                 null
             }
             <div className="flex flex-row justify-center m-3">
-                <div className="font-bold text-white pr-2">
+                <h3 className="font-bold text-white pr-2">
                     {book.name}
-                </div>
-                <div className=' font-extralight text-white pr-2'>
+                </h3>
+                <h4 className=' font-extralight text-white pr-2'>
                     by
-                </div>
-                <div className="font-bold text-white pr-2">
+                </h4>
+                <h3 className="font-bold text-white pr-2">
                     {book.author}
-                </div>
+                </h3>
             </div>
-            <div className="font-bold text-white mb-3">
+            <h3 className="font-bold text-white mb-3">
                 {book.price} BGN
-            </div>
+            </h3>
               
             
             
             {
                 book.acceptsTrade === true?
-                <div className="font-bold text-white mb-3">
+                <h3 className="font-bold text-white mb-3">
                     ACCEPTS TRADES
-                </div>:
+                </h3>:
                 null
             }
             

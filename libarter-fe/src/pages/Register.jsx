@@ -48,11 +48,11 @@ const Register = () => {
     
 
     return ( 
-        <div className=' bg-customColors-lightBrown w-screen h-screen'>
+        <main className=' bg-customColors-lightBrown w-screen h-screen'>
             <CenteredBox>
-                <div className="text-2xl font-bold mb-4 text-customColors-darkBrown">
+                <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
                     Register
-                </div>
+                </h1>
                 <form onSubmit={handleSubmit}>
                     <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
                     <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
@@ -73,7 +73,7 @@ const Register = () => {
                     </div>
                 </form>
             </CenteredBox>
-        </div>
+        </main>
      );
 }
  

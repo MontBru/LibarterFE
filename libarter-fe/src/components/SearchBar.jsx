@@ -17,25 +17,23 @@ const SearchBar = ({searchTerm, setSearchTerm, setSearchType}) => {
   };
 
   return (
-    <div className='sticky w-screen flex justify-center h-14 top-0'>
-        <div className="bg-white rounded-b-md shadow-lg max-w-96 px-9">
-            <form onSubmit={handleSubmit} className="search-bar flex justify-center h-12">
-                <div className='flex flex-row'>
-                    <input
-                        className=' text-customColors-lightBrown border-none outline-none font-bold'
-                        type="text"
-                        placeholder="Search book..."
-                        value={searchTermVar}
-                        onChange={handleInputChange}
-                    />
-                    <button type="submit" className='w-12 flex justify-center items-center'>
-                        <FontAwesomeIcon icon = {faSearch} className='flex justify-center text-customColors-darkBrown'/>
-                    </button>
-                    <DropdownButton setSearchType={setSearchType}/>
-                </div>
-                
-            </form>
-        </div>
+    <div className='sticky w-screen flex justify-center h-14 top-0 bg-white rounded-b-md shadow-lg max-w-96 px-9'>
+      <form onSubmit={handleSubmit} className="search-bar flex justify-center h-12">
+          <div className='flex flex-row'>
+              <input
+                  className=' text-customColors-lightBrown border-none outline-none font-bold'
+                  type="text"
+                  placeholder="Search book..."
+                  value={searchTermVar}
+                  onChange={handleInputChange}
+              />
+              <button type="submit" className='w-12 flex justify-center items-center'>
+                  <FontAwesomeIcon icon = {faSearch} className='flex justify-center text-customColors-darkBrown'/>
+              </button>
+              <DropdownButton setSearchType={setSearchType}/>
+          </div>
+          
+      </form>
     </div>
     
   );
