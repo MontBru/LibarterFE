@@ -15,68 +15,61 @@ const Search = () => {
     const [pageNum, setPageNum] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [searchType, setSearchType] = useState(1);
+
+    const [maxPrice, setMaxPrice] = useState(100);
+    const [priceRange, setPriceRange] = useState([0, maxPrice]);
+    
     const navigate = useNavigate();
 
     useEffect(() => {
+      console.log("new db call")
+      let endpoint="";
       if(searchType==1)
       {
-        fetch(dbAdress + `user/book/getBooksBySearch`, {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1})
-        })
-          .then(async (response) => {
-            if (response.ok) {
-              const data = await response.json();
-              setMyOffersList(data.books);
-              setTotalPages(data.totalPageCount)
-            } else {
-              console.error("Couldn't load your offers");
-            }
-          });
+        endpoint = "user/book/getBooksBySearch"
       }
       else if(searchType==2)
       {
-        fetch(dbAdress + `user/book/getBooksByAuthorSearch`, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1})
-          })
-            .then(async (response) => {
-              if (response.ok) {
-                const data = await response.json();
-                setMyOffersList(data.books);
-                setTotalPages(data.totalPageCount)
-              } else {
-                console.error("Couldn't load your offers");
-              }
-            });
+        endpoint = "user/book/getBooksByAuthorSearch"
       }
       else 
       {
-        console.log("search by tags")
-        fetch(dbAdress + `user/book/getBooksByTagSearch`, {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1})
-        })
-          .then(async (response) => {
-            if (response.ok) {
-              const data = await response.json();
-              setMyOffersList(data.books);
-              setTotalPages(data.totalPageCount)
-            } else {
-              console.error("Couldn't load your offers");
-            }
-          });
+        endpoint = "user/book/getBooksByTagSearch"
       }
-      }, [searchTerm, pageNum, searchType]);
+      fetch(dbAdress + endpoint, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1, minPrice:priceRange[0], maxPrice:priceRange[1]})
+      })
+        .then(async (response) => {
+          if (response.ok) {
+            const data = await response.json();
+            setMyOffersList(data.books);
+            setTotalPages(data.totalPageCount)
+          } else {
+            console.error("Couldn't load your offers");
+          }
+        });
+      }, [searchTerm, pageNum, searchType, priceRange]);
 
     return ( 
         <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchType={setSearchType}/>
+          <SearchBar 
+          searchTerm={searchTerm} 
+          setSearchTerm={setSearchTerm} 
+          setSearchType={setSearchType}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          maxPrice={maxPrice}
+          />
           
-          <PageSelector currentPage={pageNum} totalPages={totalPages} onPageChange={(newPage)=>{setPageNum(newPage)}}/>
+          <PageSelector 
+          currentPage={pageNum} 
+          totalPages={totalPages} 
+          onPageChange={(newPage)=>{
+            setPageNum(newPage)
+          }}
+          />
           <DisplayAllOffers 
               offers={myOffersList}
               handleClick={(index)=>{

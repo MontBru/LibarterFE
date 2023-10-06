@@ -45,31 +45,34 @@ const Login = () => {
     return ( 
         <main className=' bg-customColors-lightBrown w-screen h-full overflow-y-scroll'>
             <CenteredBox>
-                <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
-                    Log In
-                </h1>
-                <form onSubmit={handleSubmit}>
-                    <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                    <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
-                    <div className="container flex justify-end mb-4">
-                        <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
-                            Forgot password?
-                        </Link>
-                    </div>
-                    <div className="mb-4">
-                        <SubmitButton value="Log in" />
-                    </div>
-                    {isError && (
-                        <div className="text-red-500">
-                            Invalid credentials. Please try again.
+                <div>
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
+                        Log In
+                    </h1>
+                    <form onSubmit={handleSubmit}>
+                        <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
+                        <div className="container flex justify-end mb-4">
+                            <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
+                                Forgot password?
+                            </Link>
                         </div>
-                    )}
-                    <div className="container flex justify-center">
-                        <Link to = {routes.register} className="text-customColors-lightBrown">
-                            Don't have an account?
-                        </Link>
-                    </div>
-                </form>
+                        <div className="mb-4">
+                            <SubmitButton value="Log in" />
+                        </div>
+                        {isError && (
+                            <div className="text-red-500">
+                                Invalid credentials. Please try again.
+                            </div>
+                        )}
+                        <div className="container flex justify-center">
+                            <Link to = {routes.register} className="text-customColors-lightBrown">
+                                Don't have an account?
+                            </Link>
+                        </div>
+                    </form>
+                </div>
+                
             </CenteredBox>
         </main>
      );
