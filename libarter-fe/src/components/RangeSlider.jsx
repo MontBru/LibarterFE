@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 
 function RangeSlider({ min, max, values, onChange }) {
+  let step=1;
+  if(max<1000)
+    step=1;
+  else if(max<1000000)
+    step=1000;
+  else 
+    step = 1000000;
+
 
   const handleMinChange = (e) => {
     let newValue = parseInt(e.target.value, 10);
@@ -18,12 +26,22 @@ function RangeSlider({ min, max, values, onChange }) {
     onChange([values[0], newValue]);
   };
 
+  const displayedValue = (val) =>
+  {
+    if(val<1000)
+      return `${val}`;
+    if(val<1000000)
+      return `${val/1000}K`
+    else
+      return `${val/1000000}M`
+  }
+
   return (
     <div className="flex items-center space-x-4">
         <div
                 className='px-2 rounded-md border border-gray-400'
             >
-            {values[0]}
+            {displayedValue(values[0])}
         </div>
         <div>
             <div className='w-full -mb-5 h-2 rounded-md bg-gray-300'/>
@@ -32,7 +50,7 @@ function RangeSlider({ min, max, values, onChange }) {
                     type="range"
                     min={min}
                     max={max}
-                    step={1}
+                    step={step}
                     value={values[0]}
                     onChange={handleMinChange}
                     className="w-full h-1 bg-transparent appearance-none"
@@ -42,7 +60,7 @@ function RangeSlider({ min, max, values, onChange }) {
                 type="range"
                 min={min}
                 max={max}
-                step={1}
+                step={step}
                 value={values[1]}
                 onChange={handleMaxChange}
                 className="w-full h-1 bg-transparent appearance-none"
@@ -52,7 +70,7 @@ function RangeSlider({ min, max, values, onChange }) {
         <div
                 className='px-2 rounded-md border border-gray-400'
             >
-            {values[1]}
+            {displayedValue(values[1])}
         </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import DropdownButton from './DropdownButton';
 import SortButton from './SortButton';
 
-const SearchBar = ({searchTerm, setSearchTerm, setSearchType, priceRange, setPriceRange, maxPrice}) => {
+const SearchBar = ({searchTerm, setSearchTerm, setSearchType, priceRange, setPriceRange}) => {
     const [searchTermVar, setSearchTermVar] = useState(searchTerm);
 
   const handleInputChange = (e) => {
@@ -36,7 +36,6 @@ const SearchBar = ({searchTerm, setSearchTerm, setSearchType, priceRange, setPri
                 <SortButton
                 priceRange={priceRange}
                 setPriceRange={setPriceRange}
-                maxPrice={maxPrice}
                 />
             </div>
             

@@ -3,7 +3,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Popup from "./Popup";
 
-const SortButton = ({priceRange, setPriceRange, maxPrice}) => {
+const SortButton = ({priceRange, setPriceRange}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [priceRangeTmp, setPriceRangeTmp] = useState(priceRange)
     return ( 
@@ -21,7 +21,6 @@ const SortButton = ({priceRange, setPriceRange, maxPrice}) => {
             }}
             priceRange={priceRangeTmp}
             setPriceRange={setPriceRangeTmp}
-            maxPrice={maxPrice}
             />
         </div>
      );

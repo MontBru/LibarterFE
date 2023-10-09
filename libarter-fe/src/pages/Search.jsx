@@ -16,13 +16,11 @@ const Search = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [searchType, setSearchType] = useState(1);
 
-    const [maxPrice, setMaxPrice] = useState(100);
-    const [priceRange, setPriceRange] = useState([0, maxPrice]);
+    const [priceRange, setPriceRange] = useState([0, 10000000]);
     
     const navigate = useNavigate();
 
     useEffect(() => {
-      console.log("new db call")
       let endpoint="";
       if(searchType==1)
       {
@@ -60,7 +58,6 @@ const Search = () => {
           setSearchType={setSearchType}
           priceRange={priceRange}
           setPriceRange={setPriceRange}
-          maxPrice={maxPrice}
           />
           
           <PageSelector 
