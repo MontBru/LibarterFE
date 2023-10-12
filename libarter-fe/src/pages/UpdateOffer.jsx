@@ -10,15 +10,19 @@ import ChangeBook from '../components/ChangeBook';
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
 
-    const [name, setName] = useState(state?.name);
-    const [author, setAuthor] = useState(state?.author);
-    const [description, setDescription] = useState(state?.description);
-    const [price, setPrice] = useState(state?.price)
+    const [name, setName] = useState(state?.name !== null?state?.name:'');
+    const [author, setAuthor] = useState(state?.author !== null?state?.author:'');
+    const [description, setDescription] = useState(state?.description !== null?state?.description:'');
+    const [price, setPrice] = useState(state?.price !== null?state?.price:0)
     const [error, setError] = useState(false)
-    const [photos, setPhotos] = useState(state?.photos)
-    const [isNew, setIsNew] = useState(state?.new)
-    const [acceptsTrade, setAcceptsTrade] = useState(state?.acceptsTrade )
+    const [photos, setPhotos] = useState(state?.photos !== null?state?.photos:[])
+    const [isNew, setIsNew] = useState(state?.new !== null?state?.new:false)
+    const [acceptsTrade, setAcceptsTrade] = useState(state?.acceptsTrade !== null?state?.acceptsTrade:false)
     const [tags, setTags] = useState(state?.tags)
+    const [isbn, setIsbn] = useState(state?.isbn !== null?state?.isbn:'')
+    const [publisher, setPublisher] = useState(state?.publisher !== null?state?.publisher:'');
+    const [language, setLanguage] = useState(state?.language !== null?state?.language:'');
+    const [yearPublished, setYearPublished] = useState(state?.yearPublished !== null?state?.yearPublished:'');
 
     if(tags === null)
     {
@@ -44,7 +48,7 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
-        const book={name,author,description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags}
+        const book={name,author,description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
         
         fetch(dbAdress + `user/book/updateById/${state.id}`, {
             method: "PUT",
@@ -85,6 +89,14 @@ const UpdateOffer = (  ) => {
         setTags={setTags}
         description={description}
         setDescription={setDescription}
+        isbn={isbn}
+        setIsbn={setIsbn}
+        publisher={publisher}
+        setPublisher={setPublisher}
+        language={language}
+        setLanguage={setLanguage}
+        yearPublished={yearPublished}
+        setYearPublished={setYearPublished}
         />
     );
 }

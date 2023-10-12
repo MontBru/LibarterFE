@@ -60,32 +60,35 @@ const PhotoInput = ({photos, setPhotos}) => {
          custom-3:grid-cols-4 
          custom-4:grid-cols-5 py-4'>
 
-    <ul>
+    <ul className='flex justify-center'>
       {renderPhotoInputs()}
     </ul>
     
     {photos.length < 5?
       (
-        <div
-          className="bg-customColors-darkBrown text-white 
-          font-bold h-64 w-64 shadow-md 
-          rounded-md flex justify-center 
-          items-center text-3xl relative
-          m-2"
-        >
-          <label htmlFor={`photo-input`} className='cursor-pointer'>
-            +
-            <input
-              type="file"
-              id={`photo-input`}
-              accept="image/*"
-              onChange={(e) => {
-                handleFileInputChange(e);
-              }}
-              className="opacity-0 absolute inset-0 w-64 h-64"
-            />
-          </label>
+
+        <div className='w-full flex justify-center'>
+          <div
+            className="bg-customColors-darkBrown text-white 
+            font-bold h-64 w-64 shadow-md flex justify-center
+            rounded-md items-center text-3xl 
+            relative m-2" 
+          >
+            <label htmlFor={`photo-input`} className='cursor-pointer'>
+              +
+              <input
+                type="file"
+                id={`photo-input`}
+                accept="image/*"
+                onChange={(e) => {
+                  handleFileInputChange(e);
+                }}
+                className="opacity-0 absolute inset-0 w-64 h-64"
+              />
+            </label>
+          </div>
         </div>
+        
       ):null
     }
   </div>

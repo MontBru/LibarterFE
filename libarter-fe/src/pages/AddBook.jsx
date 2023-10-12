@@ -22,6 +22,10 @@ const AddBook = () => {
     const [isNew, setIsNew] = useState(false);
     const [acceptsTrade, setAcceptsTrade] = useState(false);
     const [tags, setTags] = useState([]);
+    const [isbn, setIsbn] = useState('');
+    const [publisher, setPublisher] = useState('');
+    const [language, setLanguage] = useState('');
+    const [yearPublished, setYearPublished] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -32,7 +36,7 @@ const AddBook = () => {
         }
 
         e.preventDefault()
-        const book={name,author,description, price, userId: uid, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags}
+        const book={name,author,description, price, userId: uid, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
         fetch(dbAdress+"user/book/add",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -72,6 +76,14 @@ const AddBook = () => {
         setTags={setTags}
         description={description}
         setDescription={setDescription}
+        isbn={isbn}
+        setIsbn={setIsbn}
+        publisher={publisher}
+        setPublisher={setPublisher}
+        language={language}
+        setLanguage={setLanguage}
+        yearPublished={yearPublished}
+        setYearPublished={setYearPublished}
         />
      );
 }

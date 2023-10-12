@@ -1,0 +1,82 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
+const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
+    const [isbnTmp, setIsbnTmp] = useState(isbn);
+    const [imageData, setImageData] = useState(null);
+
+    const handleImageCapture = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                setImageData(event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleIsbnChange = (e) => {
+        setIsbnTmp(e.target.value);
+        setError(false);
+    };
+
+    return (
+        <div className="flex items-center space-x-4">
+
+            <div className='flex flex-col'>
+                <div className='ext-customColors-darkBrown'> 
+                    Capture ISBN or type it in (ISBN is the barcode behind the book):
+                </div>
+                {/* Image Capture */}
+                <div className='flex flex-row my-3'>
+                    <div>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageCapture}
+                            className="hidden"
+                            id="imageInput"
+                        />
+                        <label htmlFor="imageInput" className="cursor-pointer">
+                            {imageData ? (
+                                <img src={imageData} alt="Captured ISBN" className="w-20 h-20" />
+                            ) : (
+                                <div className=" w-20 h-20 bg-gray-200 rounded-full text-center flex items-center justify-center">
+                                    <div className="flex text-gray-500">Capture ISBN</div>
+                                </div>
+                            )}
+                        </label>
+                    </div>
+
+                    {/* ISBN Input */}
+                    <div className=' h-20 ml-2 flex items-center justify-center'>
+                        <input
+                            type="text"
+                            placeholder="Enter ISBN"
+                            value={isbnTmp}
+                            onChange={handleIsbnChange}
+                            className={`w-48 h-10 px-2 py-1 border-2 border-gray-300 text-customColors-darkBrown focus:border-customColors-lightBrown focus:outline-none rounded-md ${error ? 'border-red-500' : ''}`}
+                        />
+                    </div>
+                    <div className='h-20 flex items-center ml-2 text-xl'>
+                        <button
+                        type='button'
+                        className=' text-green-500'
+                        onClick={()=>{
+                            setPressed(true)
+                            setIsbn(isbnTmp)
+                            }}>
+                            <FontAwesomeIcon icon={faCheck}/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    );
+};
+
+export default ISBNInput;
