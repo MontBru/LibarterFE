@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { dbAdress } from '../constants';
 
 const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
     const [isbnTmp, setIsbnTmp] = useState(isbn);
@@ -10,10 +11,28 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (event) => {
+            reader.onload = async (event) => {
                 setImageData(event.target.result);
+
+                fetch(dbAdress + `user/barcode/readBarcode`, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(event.target.result)
+                  })
+                  .then(async (response) => {
+                    if (response.ok) {
+                        const data = await response.json();
+                        setIsbnTmp(data);
+                    }
+                    else{
+                        console.error("error")
+                    }
+                    
+                });  
             };
             reader.readAsDataURL(file);
+
+
         }
     };
 
