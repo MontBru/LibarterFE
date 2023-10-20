@@ -6,10 +6,12 @@ import { routes } from "../constants.jsx";
 import { dbAdress } from "../constants.jsx";
 import FormInputComponent from "../components/FormInputComponent.jsx"
 import ChangeBook from '../components/ChangeBook';
+import RequestOfferSelector from '../components/RequestOfferSelector';
 
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
 
+    const [isRequest, setIsRequest] = useState(state?.isRequest!==null?state?.isRequest:false);
     const [name, setName] = useState(state?.name !== null?state?.name:'');
     const [author, setAuthor] = useState(state?.author !== null?state?.author:'');
     const [description, setDescription] = useState(state?.description !== null?state?.description:'');
@@ -48,7 +50,7 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
-        const book={name,author,description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
+        const book={isRequest, name, author, description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
         
         fetch(dbAdress + `user/book/updateById/${state.id}`, {
             method: "PUT",
@@ -69,7 +71,10 @@ const UpdateOffer = (  ) => {
     }
 
     return ( 
+      <div>
+        <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
         <ChangeBook
+        isRequest={isRequest}
         handleSubmit={handleSubmit}
         photos={photos}
         setPhotos={setPhotos}
@@ -98,6 +103,8 @@ const UpdateOffer = (  ) => {
         yearPublished={yearPublished}
         setYearPublished={setYearPublished}
         />
+      </div>
+        
     );
 }
  

@@ -9,8 +9,12 @@ import ISBNInput from "./ISBNInput";
 import { useEffect } from "react";
 import { dbAdress } from "../constants";
 import { useState } from "react";
-
-const ChangeBook = ({handleSubmit,
+import DisplayAllOffers from "./DisplayAllOffers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+const ChangeBook = ({
+    isRequest,
+    handleSubmit,
     photos, setPhotos,
     name, setName,
     error, setError,
@@ -26,6 +30,7 @@ const ChangeBook = ({handleSubmit,
     yearPublished,setYearPublished}) => {
 
     const [pressed, setPressed] = useState(false)
+    const [suggestedOffers, setSuggestedOffers] = useState([])
 
     useEffect(()=>{
         if(isbn!=="" && pressed==true)
@@ -58,7 +63,7 @@ const ChangeBook = ({handleSubmit,
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
-                        Add a new Book
+                        {isRequest?"Add a request":"Add a new Book"}
                     </h1>
                     <form onSubmit={handleSubmit}>
                         <PhotoInput photos={photos} setPhotos={setPhotos}/>
@@ -82,6 +87,42 @@ const ChangeBook = ({handleSubmit,
 
                         <FormInputComponent field={"Description"} type={"description"} value={description} setValue={setDescription} isError={error} setIsError={setError}/>
 
+                        <div className="flex flex-row items-center gap-4">
+                            <div>{isRequest?"Search for people with similar offers:":"Search for people with similar requests:"}</div>
+                            <button 
+                            type="button"
+                            className=" text-customColors-lightBrown bg-customColors-darkBrown p-3 rounded-md"
+                            onClick={()=>{
+                                const book={isRequest:!isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
+
+                                fetch(dbAdress + `user/book/getBookSuggestions`, {
+                                    method: "POST",
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(book)
+                                  })
+                                  .then(async (response) => {
+                                      if (response.ok) {
+                                        setSuggestedOffers(await response.json())
+                                        console.log(suggestedOffers)
+                                      }
+                                      else{
+                                        setError(true) 
+                                      }
+                                        
+                                    });  
+                            }}>
+                                <FontAwesomeIcon icon={faSearch}/>
+                            </button>
+                        </div>
+                        
+                        <DisplayAllOffers 
+                        center={false}
+                        maxCols={3}
+                        offers={suggestedOffers}
+                        handleClick={(index)=>{
+                            navigate(routes.offerPage, {state: myOffersList[index]})
+                        }}   />
+                        <div className="h-3"/>
                         <SubmitButton value={"Create offer"}/>
                         <div className="h-3"/>
                     </form>

@@ -3,7 +3,7 @@ import TagList from './TagList';
 
 const BookCard = ( {book, handleClick} ) => {
     return ( 
-        <button className=" w-64 m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"
+        <button className="w-64 m-4 bg-customColors-darkBrown shadow-md shadow-gray-500 rounded-b-md"
         onClick={()=>handleClick()}>
             <img className=" top-0 object-cover h-64 w-64" alt="Couldn't load image"/>
             {

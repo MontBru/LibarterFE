@@ -1,8 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
-const PhotoInput = ({photos, setPhotos}) => {
+const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(window.innerWidth);
+      }
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleFileInputChange = ( event) => {
     const selectedFile = event.target.files[0];
@@ -30,8 +46,7 @@ const PhotoInput = ({photos, setPhotos}) => {
   };
 
   const renderPhotoInputs = () => {
-    
-      return photos.map((value,ind) => (
+        return photos.map((value,ind) => (
         <li key={ind} className="p-2 relative">
           <img
             src={photos[ind]}
@@ -48,21 +63,19 @@ const PhotoInput = ({photos, setPhotos}) => {
           </button>
         </li>
       ));
-    
   };
 
   if(photos!== null)
   {
   return (
-  <div className='grid grid-cols-1
-         custom-1:grid-cols-2 
-         custom-2:grid-cols-3 
-         custom-3:grid-cols-4 
-         custom-4:grid-cols-5 py-4'>
+  <div className='grid gap-3 py-4' style={{gridTemplateColumns:`repeat(${parseInt(screenWidth/280)>maxCols?maxCols:parseInt(screenWidth/280)}, minmax(256px, 1fr))`}}>
 
+    {photos.length!==0?
     <ul className='flex justify-center'>
       {renderPhotoInputs()}
-    </ul>
+    </ul>:null
+  }
+    
     
     {photos.length < 5?
       (

@@ -1,25 +1,37 @@
 import React from 'react';
 import BookCard from "./BookCard";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const DisplayAllOffers = ({ offers, handleClick }) => {
+const DisplayAllOffers = ({ offers, handleClick, maxCols=10, center = true }) => {
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(window.innerWidth);
+      }
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div>
+    
+    <span>
       {offers.length === 0 ? (
-        <div className='flex h-full justify-center items-center'>
+        <div className={`flex h-full justify-center items-center`}>
           Nothing here :/
         </div>
       ) : (
-        <ul className="grid grid-cols-1
-         custom-1:grid-cols-2 
-         custom-2:grid-cols-3 
-         custom-3:grid-cols-4 
-         custom-4:grid-cols-5 
-         custom-5:grid-cols-6 
-         custom-6:grid-cols-7 
-         custom-7:grid-cols-8 
-         gap-4">
+        <div className={`flex ${center?"justify-center":""} overflow-x-hidden`}>
+        <ul className="grid gap-3" style={{gridTemplateColumns:`repeat(${parseInt(screenWidth/280)>maxCols?maxCols:parseInt(screenWidth/280)}, minmax(256px, 1fr))`}}>
           {offers.map((book, index) => (
-            <li key={index} className="flex justify-center">
+            <li key={index} className='inline'>
               <BookCard
                 book={book}
                 handleClick={() => handleClick(index)}
@@ -27,8 +39,9 @@ const DisplayAllOffers = ({ offers, handleClick }) => {
             </li>
           ))}
         </ul>
+        </div>
       )}
-    </div>
+    </span>
   );
 };
 

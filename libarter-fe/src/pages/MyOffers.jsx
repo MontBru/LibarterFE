@@ -3,15 +3,17 @@ import { dbAdress } from "../constants";
 import { routes } from "../constants";
 import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
+import RequestOfferSelector from "../components/RequestOfferSelector";
 
 const MyOffers = () => {
+  const [isRequest, setIsRequest] = useState(false);
   const uid = sessionStorage.getItem("UID");
   const navigate = useNavigate();
   const [myOffersList, setMyOffersList] = useState([]);
   const [loading, setLoading] = useState(true); 
   
   useEffect(() => {
-    fetch(dbAdress + `user/getAllBooksByUID/${uid}`, {
+    fetch(dbAdress + `user/getAllBooksByUID/${uid}/${isRequest}`, {
       method: "GET",
     })
       .then(async (response) => {
@@ -23,12 +25,13 @@ const MyOffers = () => {
         }
         setLoading(false); // Update loading state
       });
-  }, [uid]);
+  }, [uid, isRequest]);
 
   return (
     <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+        <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
         <h1 className="text-2xl sticky p-3 top-0 bg-white rounded-b-md shadow-lg font-bold text-customColors-darkBrown m-4 mt-0 flex justify-center">
-          My Offers
+          {isRequest?"My Requests":"My Offers"}
         </h1>
 
         {loading ? (

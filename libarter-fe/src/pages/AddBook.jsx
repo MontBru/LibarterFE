@@ -10,8 +10,10 @@ import Switch from '../components/Switch';
 import TagList from '../components/TagList';
 import TagAdd from '../components/TagAdd';
 import ChangeBook from '../components/ChangeBook';
+import RequestOfferSelector from '../components/RequestOfferSelector';
 
 const AddBook = () => {
+    const [isRequest, setIsRequest] = useState(false);
     const uid = sessionStorage.getItem("UID");
     const [photos,setPhotos] = useState([]); 
     const [name, setName] = useState("");
@@ -36,7 +38,7 @@ const AddBook = () => {
         }
 
         e.preventDefault()
-        const book={name,author,description, price, userId: uid, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
+        const book={isRequest, name,author,description, price, userId: uid, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
         fetch(dbAdress+"user/book/add",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -56,35 +58,41 @@ const AddBook = () => {
     }
 
     return ( 
-        <ChangeBook
-        handleSubmit={handleSubmit}
-        photos={photos}
-        setPhotos={setPhotos}
-        name={name}
-        setName={setName}
-        error={error}
-        setError={setError}
-        author={author} 
-        setAuthor={setAuthor}
-        price={price}
-        setPrice={setPrice}
-        isNew={isNew}
-        setIsNew={setIsNew}
-        acceptsTrade={acceptsTrade} 
-        setAcceptsTrade={setAcceptsTrade}
-        tags={tags}
-        setTags={setTags}
-        description={description}
-        setDescription={setDescription}
-        isbn={isbn}
-        setIsbn={setIsbn}
-        publisher={publisher}
-        setPublisher={setPublisher}
-        language={language}
-        setLanguage={setLanguage}
-        yearPublished={yearPublished}
-        setYearPublished={setYearPublished}
-        />
+        
+        <div>
+            <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
+            <ChangeBook
+            isRequest={isRequest}
+            handleSubmit={handleSubmit}
+            photos={photos}
+            setPhotos={setPhotos}
+            name={name}
+            setName={setName}
+            error={error}
+            setError={setError}
+            author={author} 
+            setAuthor={setAuthor}
+            price={price}
+            setPrice={setPrice}
+            isNew={isNew}
+            setIsNew={setIsNew}
+            acceptsTrade={acceptsTrade} 
+            setAcceptsTrade={setAcceptsTrade}
+            tags={tags}
+            setTags={setTags}
+            description={description}
+            setDescription={setDescription}
+            isbn={isbn}
+            setIsbn={setIsbn}
+            publisher={publisher}
+            setPublisher={setPublisher}
+            language={language}
+            setLanguage={setLanguage}
+            yearPublished={yearPublished}
+            setYearPublished={setYearPublished}
+            />
+        </div>
+        
      );
 }
  

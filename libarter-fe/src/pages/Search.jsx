@@ -8,8 +8,10 @@ import PageSelector from "../components/PageSelector";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import DropdownButton from '../components/DropdownButton';
+import RequestOfferSelector from '../components/RequestOfferSelector';
 
 const Search = () => {
+    const [isRequest, setIsRequest] = useState(false);
     const [myOffersList, setMyOffersList] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNum, setPageNum] = useState(1);
@@ -37,7 +39,7 @@ const Search = () => {
       fetch(dbAdress + endpoint, {
         method: "POST",
         headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({searchTerm: searchTerm, pageNum: pageNum-1, minPrice:priceRange[0], maxPrice:priceRange[1]})
+      body: JSON.stringify({isRequest, searchTerm: searchTerm, pageNum: pageNum-1, minPrice:priceRange[0], maxPrice:priceRange[1]})
       })
         .then(async (response) => {
           if (response.ok) {
@@ -48,10 +50,11 @@ const Search = () => {
             console.error("Couldn't load your offers");
           }
         });
-      }, [searchTerm, pageNum, searchType, priceRange]);
+      }, [searchTerm, pageNum, searchType, priceRange, isRequest]);
 
     return ( 
         <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+           <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
           <SearchBar 
           searchTerm={searchTerm} 
           setSearchTerm={setSearchTerm} 
