@@ -9,75 +9,74 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import DropdownButton from '../components/DropdownButton';
 import RequestOfferSelector from '../components/RequestOfferSelector';
+import axiosInstance from '../axios/axiosInstance';
 
 const Search = () => {
-    const [isRequest, setIsRequest] = useState(false);
-    const [myOffersList, setMyOffersList] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [pageNum, setPageNum] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [searchType, setSearchType] = useState(1);
+  const [isRequest, setIsRequest] = useState(false);
+  const [myOffersList, setMyOffersList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchType, setSearchType] = useState(1);
 
-    const [priceRange, setPriceRange] = useState([0, 10000000]);
-    
-    const navigate = useNavigate();
+  const [priceRange, setPriceRange] = useState([0, 10000000]);
 
-    useEffect(() => {
-      let endpoint="";
-      if(searchType==1)
-      {
-        endpoint = "user/book/getBooksBySearch"
-      }
-      else if(searchType==2)
-      {
-        endpoint = "user/book/getBooksByAuthorSearch"
-      }
-      else 
-      {
-        endpoint = "user/book/getBooksByTagSearch"
-      }
-      fetch(dbAdress + endpoint, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({isRequest, searchTerm: searchTerm, pageNum: pageNum-1, minPrice:priceRange[0], maxPrice:priceRange[1]})
-      })
-        .then(async (response) => {
-          if (response.ok) {
-            const data = await response.json();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let endpoint = "";
+    if (searchType == 1) {
+      endpoint = "user/book/getBooksBySearch"
+    }
+    else if (searchType == 2) {
+      endpoint = "user/book/getBooksByAuthorSearch"
+    }
+    else {
+      endpoint = "user/book/getBooksByTagSearch"
+    }
+
+
+    const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
+    axiosInstance.post(endpoint, loadDTO)
+      .then( async (response) => {
+          if (response.status === 200) {
+            const data = await response.data;
             setMyOffersList(data.books);
             setTotalPages(data.totalPageCount)
           } else {
             console.error("Couldn't load your offers");
           }
-        });
-      }, [searchTerm, pageNum, searchType, priceRange, isRequest]);
+        }
+      )
 
-    return ( 
-        <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
-           <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
-          <SearchBar 
-          searchTerm={searchTerm} 
-          setSearchTerm={setSearchTerm} 
-          setSearchType={setSearchType}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-          />
-          
-          <PageSelector 
-          currentPage={pageNum} 
-          totalPages={totalPages} 
-          onPageChange={(newPage)=>{
-            setPageNum(newPage)
-          }}
-          />
-          <DisplayAllOffers 
-              offers={myOffersList}
-              handleClick={(index)=>{
-                  navigate(routes.offerPage, {state: myOffersList[index]})
-              }}    
-          />
-        </main>
-     );
+  }, [searchTerm, pageNum, searchType, priceRange, isRequest]);
+
+  return (
+    <main className='z-0 flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+      <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
+      <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        setSearchType={setSearchType}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+      />
+
+      <PageSelector
+        currentPage={pageNum}
+        totalPages={totalPages}
+        onPageChange={(newPage) => {
+          setPageNum(newPage)
+        }}
+      />
+      <DisplayAllOffers
+        offers={myOffersList}
+        handleClick={(index) => {
+          navigate(`${routes.offerPage}/${myOffersList[index].id}`)
+        }}
+      />
+    </main>
+  );
 }
- 
+
 export default Search;

@@ -6,6 +6,8 @@ import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import { dbAdress } from "../constants";
+import { logUser } from '../functions/logUser';
+import axiosInstance from '../axios/axiosInstance';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -17,32 +19,23 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        sessionStorage.removeItem("JWT");
         const user={username,email,password, phoneNumber}
-        console.log(user)
-        fetch(dbAdress+"auth/register",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(user)
-            }
-        
-        ).then(async (response)=>{
-            if(response.ok)
-            {
-                const data = await response.json();
 
-                sessionStorage.removeItem("JWT")
-                sessionStorage.removeItem("UID")
-
-                sessionStorage.setItem("JWT", data.jwt)
-                sessionStorage.setItem("UID", data.uid)
-                navigate(routes.search);
-            }
-            else
-            {
-                setIsError(true)
-            }
-        })
-        
+        axiosInstance.post("auth/register", user)
+            .then(async (response)=>{
+                if(response.status === 200)
+                {
+                    const data = await response.data;
+    
+                    logUser(data);
+                    navigate(routes.search);
+                }
+                else
+                {
+                    setIsError(true)
+                }
+            })
     };
 
     

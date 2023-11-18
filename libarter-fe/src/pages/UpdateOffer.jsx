@@ -7,6 +7,7 @@ import { dbAdress } from "../constants.jsx";
 import FormInputComponent from "../components/FormInputComponent.jsx"
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
+import axiosInstance from '../axios/axiosInstance';
 
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
@@ -50,24 +51,18 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
-        const book={isRequest, name, author, description, userId:state.userId , price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
-        
-        fetch(dbAdress + `user/book/updateById/${state.id}`, {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(book)
-          })
-          .then((response) => {
-              if (response.ok) {
-                navigate(routes.myOffers)
-              }
-              else{
-                setError(true) 
-              }
-                
-            });  
+        const book={isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn} 
             
-        
+        axiosInstance.put(`user/book/updateById/${state.id}`, book)
+          .then((response) => {
+            if (response.status === 200) {
+              navigate(routes.myOffers)
+            }
+            else{
+              setError(true) 
+            }
+              
+          }); 
     }
 
     return ( 

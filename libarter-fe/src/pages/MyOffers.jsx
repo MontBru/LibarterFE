@@ -4,37 +4,34 @@ import { routes } from "../constants";
 import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 import RequestOfferSelector from "../components/RequestOfferSelector";
+import axiosInstance from "../axios/axiosInstance";
 
 const MyOffers = () => {
   const [isRequest, setIsRequest] = useState(false);
-  const uid = sessionStorage.getItem("UID");
   const navigate = useNavigate();
   const [myOffersList, setMyOffersList] = useState([]);
-  const [loading, setLoading] = useState(true); 
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetch(dbAdress + `user/getAllBooksByUID/${uid}/${isRequest}`, {
-      method: "GET",
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          const data = await response.json();
-          setMyOffersList(data);
+    axiosInstance.get(`user/getAllBooksByUID/${isRequest}`)
+    .then(async (response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setMyOffersList(await response.data);
         } else {
           console.error("Couldn't load your offers");
         }
-        setLoading(false); // Update loading state
       });
-  }, [uid, isRequest]);
+  }, [isRequest]);
 
   return (
-    <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+    <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll z-0'>
         <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
         <h1 className="text-2xl sticky p-3 top-0 bg-white rounded-b-md shadow-lg font-bold text-customColors-darkBrown m-4 mt-0 flex justify-center">
           {isRequest?"My Requests":"My Offers"}
         </h1>
 
-        {loading ? (
+        {loading === true ? (
           <div>Loading...</div>
         ) : (
           <DisplayAllOffers
@@ -42,6 +39,7 @@ const MyOffers = () => {
             handleClick={(index) => {
               navigate(routes.updateOffer, { state: myOffersList[index] });
             }}
+            canDelete = {true}
           />
         )}
     </main>

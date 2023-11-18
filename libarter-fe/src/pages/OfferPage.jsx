@@ -4,33 +4,32 @@ import CenteredBox from '../components/CenteredBox';
 import TagList from '../components/TagList';
 import { useState } from 'react';
 import { dbAdress } from '../constants';
+import axiosInstance from '../axios/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 const OfferPage = () => {
-    const state = useLocation();
+    const {offerId} = useParams();
 
-    const book = state.state;
+    const [book, setBook] = useState(null);
     const [seller, setSeller] = useState(null);
 
     useEffect(
         ()=>{
-            if(book.userId !== null)
-            {
-                fetch(dbAdress + `user/getUser/${book.userId}`, {
-                    method: "GET"
-                })
-                .then(async (response) => {
-                    if (response.ok) {
-                        const data = await response.json()
-                        setSeller(data);
-                    }
-                    else{
-                        throw console.error();
-                    }
-                        
-                    });  
+            async function fetchData(){
+                const response = await axiosInstance.get(`public/book/getById/${offerId}`)
+                
+                setBook(response.data);
+
+                if(response.data !== null && response.data.userId !== null)
+                {
+                    const sellerResponse = await axiosInstance.get(`public/user/getById/${response.data.userId}`)
+                    setSeller(sellerResponse.data);
                 }
+            }
+
+            fetchData();
             
-        },[book]
+        },[offerId]
     )
 
     const DisplayBookNameAndAuthor = ()=>
@@ -58,6 +57,10 @@ const OfferPage = () => {
         );
     }
     
+    if(book === null)
+    {
+        return <div>Loading</div>
+    }
 
     return ( 
         <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>

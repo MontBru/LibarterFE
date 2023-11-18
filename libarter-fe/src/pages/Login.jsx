@@ -6,6 +6,8 @@ import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import { dbAdress } from "../constants";
+import { logUser } from '../functions/logUser';
+import axiosInstance from "../axios/axiosInstance";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -15,29 +17,21 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        sessionStorage.removeItem("JWT");
         const loginDTO = {username, password}
-        fetch(dbAdress+"auth/login",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(loginDTO)
-            }
-        
-        ).then(async (response)=> {
-            if(response.ok)
-            {
-                const data = await response.json();
+        axiosInstance.post('/auth/login', loginDTO)
+            .then(async (response)=>{
+                if(response.status === 200)
+                {
+                    const data = await response.data;
 
-                sessionStorage.removeItem("JWT")
-                sessionStorage.removeItem("UID")
-
-                sessionStorage.setItem("JWT", data.jwt)
-                sessionStorage.setItem("UID", data.uid)
-                navigate(routes.search);
-            }
-            else{
-                setIsError(true);
-            }
-        })
+                    logUser(data);
+                    navigate(routes.search);
+                }
+                else{
+                    setIsError(true);
+                }
+            })
     };
 
     

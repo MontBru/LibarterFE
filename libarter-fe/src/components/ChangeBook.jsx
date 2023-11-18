@@ -12,6 +12,8 @@ import { useState } from "react";
 import DisplayAllOffers from "./DisplayAllOffers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import axiosInstance from "../axios/axiosInstance";
+
 const ChangeBook = ({
     isRequest,
     handleSubmit,
@@ -35,14 +37,12 @@ const ChangeBook = ({
     useEffect(()=>{
         if(isbn!=="" && pressed==true)
         {
-            fetch(dbAdress + `user/book/getBookByISBN/${isbn}`, {
-                method: "GET"
-            })
-            .then(async (response) => {
+            axiosInstance.get(`user/book/getBookByISBN/${isbn}`)
+                .then(async (response) => {
                 setPressed(false);
-                if (response.ok) {
+                if (response.status === 200) {
                     setError(false)
-                    const data = await response.json()
+                    const data = await response.data;
                     setName(data?.name)
                     setAuthor(data?.author)
                     setDescription(data?.description)
@@ -95,20 +95,15 @@ const ChangeBook = ({
                             onClick={()=>{
                                 const book={isRequest:!isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
 
-                                fetch(dbAdress + `user/book/getBookSuggestions`, {
-                                    method: "POST",
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(book)
-                                  })
-                                  .then(async (response) => {
-                                      if (response.ok) {
-                                        setSuggestedOffers(await response.json())
-                                        console.log(suggestedOffers)
-                                      }
-                                      else{
-                                        setError(true) 
-                                      }
-                                        
+                                axiosInstance.post(`user/book/getBookSuggestions`, book)
+                                    .then(async (response) => {
+                                        if (response.status === 200) {
+                                        setSuggestedOffers(await response.data);
+                                        }
+                                        else{
+                                            setError(true) 
+                                        }
+                                      
                                     });  
                             }}>
                                 <FontAwesomeIcon icon={faSearch}/>

@@ -22,7 +22,7 @@ const AppRoutes = () => {
             <Route path={routes.myOffers} element={<MyOffers/>}/>
             <Route path={routes.search} element={<Search/>}/>
             <Route path={routes.updateOffer} element={<UpdateOffer/>}/>
-            <Route path={routes.offerPage} element={<OfferPage/>}/>
+            <Route path={`${routes.offerPage}/:offerId`} element={<OfferPage/>}/>
         </Routes>
     );
 }

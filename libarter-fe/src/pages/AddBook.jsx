@@ -11,10 +11,9 @@ import TagList from '../components/TagList';
 import TagAdd from '../components/TagAdd';
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
-
+import axiosInstance from '../axios/axiosInstance';
 const AddBook = () => {
     const [isRequest, setIsRequest] = useState(false);
-    const uid = sessionStorage.getItem("UID");
     const [photos,setPhotos] = useState([]); 
     const [name, setName] = useState("");
     const [author, setAuthor] = useState("");
@@ -38,23 +37,18 @@ const AddBook = () => {
         }
 
         e.preventDefault()
-        const book={isRequest, name,author,description, price, userId: uid, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
-        fetch(dbAdress+"user/book/add",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(book)
-            }
-        
-        ).then((response)=>{
-            if(response.ok)
-            {
-                navigate(routes.myOffers)
-            }
-            else
-            {
-                setError(true);
-            }
-        })
+        const book={isRequest, name,author,description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
+        axiosInstance.post("user/book/add", book)
+            .then((response)=>{
+                if(response.status === 200)
+                {
+                    navigate(routes.myOffers)
+                }
+                else
+                {
+                    setError(true);
+                }
+            })
     }
 
     return ( 
