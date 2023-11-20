@@ -26,13 +26,13 @@ const Search = () => {
   useEffect(() => {
     let endpoint = "";
     if (searchType == 1) {
-      endpoint = "user/book/getBooksBySearch"
+      endpoint = "public/book/getBooksBySearch"
     }
     else if (searchType == 2) {
-      endpoint = "user/book/getBooksByAuthorSearch"
+      endpoint = "public/book/getBooksByAuthorSearch"
     }
     else {
-      endpoint = "user/book/getBooksByTagSearch"
+      endpoint = "public/book/getBooksByTagSearch"
     }
 
 
