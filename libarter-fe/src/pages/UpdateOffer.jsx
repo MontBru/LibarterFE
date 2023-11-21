@@ -12,29 +12,39 @@ import axiosInstance from '../axios/axiosInstance';
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
 
-    const [isRequest, setIsRequest] = useState(state?.isRequest!==null?state?.isRequest:false);
-    const [name, setName] = useState(state?.name !== null?state?.name:'');
-    const [author, setAuthor] = useState(state?.author !== null?state?.author:'');
-    const [description, setDescription] = useState(state?.description !== null?state?.description:'');
-    const [price, setPrice] = useState(state?.price !== null?state?.price:0)
+    // const [isRequest, setIsRequest] = useState(state?.isRequest!==null?state?.isRequest:false);
+    // const [name, setName] = useState(state?.name !== null?state?.name:'');
+    // const [author, setAuthor] = useState(state?.author !== null?state?.author:'');
+    // const [description, setDescription] = useState(state?.description !== null?state?.description:'');
+    // const [price, setPrice] = useState(state?.price !== null?state?.price:0)
     const [error, setError] = useState(false)
-    const [photos, setPhotos] = useState(state?.photos !== null?state?.photos:[])
-    const [isNew, setIsNew] = useState(state?.new !== null?state?.new:false)
-    const [acceptsTrade, setAcceptsTrade] = useState(state?.acceptsTrade !== null?state?.acceptsTrade:false)
-    const [tags, setTags] = useState(state?.tags)
-    const [isbn, setIsbn] = useState(state?.isbn !== null?state?.isbn:'')
-    const [publisher, setPublisher] = useState(state?.publisher !== null?state?.publisher:'');
-    const [language, setLanguage] = useState(state?.language !== null?state?.language:'');
-    const [yearPublished, setYearPublished] = useState(state?.yearPublished !== null?state?.yearPublished:'');
+    // const [photos, setPhotos] = useState(state?.photos !== null?state?.photos:[])
+    // const [isNew, setIsNew] = useState(state?.new !== null?state?.new:false)
+    // const [acceptsTrade, setAcceptsTrade] = useState(state?.acceptsTrade !== null?state?.acceptsTrade:false)
+    // const [tags, setTags] = useState(state?.tags)
+    // const [isbn, setIsbn] = useState(state?.isbn !== null?state?.isbn:'')
+    // const [publisher, setPublisher] = useState(state?.publisher !== null?state?.publisher:'');
+    // const [language, setLanguage] = useState(state?.language !== null?state?.language:'');
+    // const [yearPublished, setYearPublished] = useState(state?.yearPublished !== null?state?.yearPublished:'');
 
-    if(tags === null)
-    {
-      setTags([]);
-    }
-    if(photos === null)
-    {
-      setPhotos([]);
-    }
+
+    const [book, setBook] = useState(
+      {
+        isRequest: state?.isRequest!==null?state?.isRequest:false,
+        photos: state?.photos !== null?state?.photos:[],
+        name: state?.name !== null?state?.name:'',
+        author: state?.author !== null?state?.author:'',
+        description: state?.description !== null?state?.description:'',
+        price: state?.price !== null?state?.price:0,
+        isNew: state?.new !== null?state?.new:false,
+        acceptsTrade: state?.acceptsTrade !== null?state?.acceptsTrade:false,
+        tags: state?.tags !== null? state?.tags: [], 
+        isbn: state?.isbn !== null?state?.isbn:'', 
+        publisher: state?.publisher !== null?state?.publisher:'', 
+        language: state?.language !== null?state?.language:'', 
+        yearPublished: state?.yearPublished !== null?state?.yearPublished:''
+      }
+    );
 
     const navigate = useNavigate();
 
@@ -51,7 +61,7 @@ const UpdateOffer = (  ) => {
             return null;
         }
 
-        const book={isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn} 
+        //const book={isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn} 
             
         axiosInstance.put(`user/book/updateById/${state.id}`, book)
           .then((response) => {
@@ -67,36 +77,20 @@ const UpdateOffer = (  ) => {
 
     return ( 
       <div>
-        <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
+        <RequestOfferSelector
+            isRequest={book.isRequest}
+            setIsRequest={(newIsRequest)=>{
+                let bookCopy = {...book};
+                bookCopy.isRequest = newIsRequest;
+                setBook(bookCopy);
+            }}
+        />
         <ChangeBook
-        isRequest={isRequest}
-        handleSubmit={handleSubmit}
-        photos={photos}
-        setPhotos={setPhotos}
-        name={name}
-        setName={setName}
-        error={error}
-        setError={setError}
-        author={author} 
-        setAuthor={setAuthor}
-        price={price}
-        setPrice={setPrice}
-        isNew={isNew}
-        setIsNew={setIsNew}
-        acceptsTrade={acceptsTrade} 
-        setAcceptsTrade={setAcceptsTrade}
-        tags={tags}
-        setTags={setTags}
-        description={description}
-        setDescription={setDescription}
-        isbn={isbn}
-        setIsbn={setIsbn}
-        publisher={publisher}
-        setPublisher={setPublisher}
-        language={language}
-        setLanguage={setLanguage}
-        yearPublished={yearPublished}
-        setYearPublished={setYearPublished}
+          handleSubmit={handleSubmit}
+          error={error}
+          setError={setError}
+          book={book}
+          setBook={setBook}
         />
       </div>
         

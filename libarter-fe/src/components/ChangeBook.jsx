@@ -15,39 +15,32 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../axios/axiosInstance";
 
 const ChangeBook = ({
-    isRequest,
+    book,
+    setBook,
     handleSubmit,
-    photos, setPhotos,
-    name, setName,
     error, setError,
-    author, setAuthor,
-    price, setPrice,
-    isNew, setIsNew,
-    acceptsTrade, setAcceptsTrade,
-    tags, setTags,
-    description, setDescription,
-    isbn, setIsbn,
-    publisher, setPublisher,
-    language, setLanguage,
-    yearPublished,setYearPublished}) => {
+}) => {
 
     const [pressed, setPressed] = useState(false)
     const [suggestedOffers, setSuggestedOffers] = useState([])
 
     useEffect(()=>{
-        if(isbn!=="" && pressed==true)
+        if(book.isbn!=="" && pressed==true)
         {
-            axiosInstance.get(`user/book/getBookByISBN/${isbn}`)
+            axiosInstance.get(`user/book/getBookByISBN/${book.isbn}`)
                 .then(async (response) => {
                 setPressed(false);
                 if (response.status === 200) {
                     setError(false)
                     const data = await response.data;
-                    setName(data?.name)
-                    setAuthor(data?.author)
-                    setDescription(data?.description)
-                    setPublisher(data?.publisher)
-                    setYearPublished(data?.yearPublished)
+
+                    let bookCopy = {...book};
+                    bookCopy.name = data?.name;
+                    bookCopy.author = data?.author;
+                    bookCopy.description = data?.description;
+                    bookCopy.publisher = data?.publisher;
+                    bookCopy.yearPublished = data?.yearPublished;
+                    setBook(bookCopy);
                 }
                 else{
                     setError(true);
@@ -58,43 +51,59 @@ const ChangeBook = ({
          
     },[pressed]);
     
+    const setVal = (key, val) => {
+        let bookCopy = {...book};
+        bookCopy[key] = val;
+        setBook(bookCopy);
+    } 
+
     return ( 
         <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
-                        {isRequest?"Add a request":"Add a new Book"}
+                        {book.isRequest?"Add a request":"Add a new Book"}
                     </h1>
                     <form onSubmit={handleSubmit}>
-                        <PhotoInput photos={photos} setPhotos={setPhotos}/>
+                        <PhotoInput 
+                            photos={book.photos} 
+                            setPhotos={(newPhotos)=>{
+                                setVal("photos", newPhotos);
+                        }}/>
                         
-                        <ISBNInput setPressed={setPressed} isbn={isbn} setIsbn={setIsbn} error={error} setError={setError}/>
+                        <ISBNInput 
+                            setPressed={setPressed} 
+                            isbn={book.isbn} 
+                            setIsbn={(newIsbn)=>{
+                                setVal("isbn", newIsbn);
+                            }} 
+                            error={error} 
+                            setError={setError}
+                        />
 
-                        <FormInputComponent field={"Title"} type={"text"} value={name} setValue={setName} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Author"} type={"text"} value={author} setValue={setAuthor} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Price"} type={"text"} value={price} setValue={setPrice} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Publisher"} type={"text"} value={publisher} setValue={setPublisher} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Language"} type={"text"} value={language} setValue={setLanguage} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Year Published"} type={"text"} value={yearPublished} setValue={setYearPublished} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Title"} type={"text"} value={book.name} setValue={(newName)=>{setVal("name", newName)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Author"} type={"text"} value={book.author} setValue={(newAuthor)=>{setVal("author", newAuthor)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Price"} type={"text"} value={book.price} setValue={(newPrice)=>{setVal("price", newPrice)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Publisher"} type={"text"} value={book.publisher} setValue={(newPublisher)=>{setVal("publisher", newPublisher)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Language"} type={"text"} value={book.language} setValue={(newLanguage)=>{setVal("language", newLanguage)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Year Published"} type={"text"} value={book.yearPublished} setValue={(newYearPublished)=>{setVal("yearPublished", newYearPublished)}} isError={error} setIsError={setError}/>
 
-                        <Switch isChecked={isNew} setIsChecked={setIsNew} label={"Is the book new"}/>
+                        <Switch isChecked={book.isNew} setIsChecked={(isNew)=>{setVal("isNew", isNew)}} label={"Is the book new"}/>
 
-                        <Switch isChecked={acceptsTrade} setIsChecked={setAcceptsTrade} label={"Do you accept barters"}/>
+                        <Switch isChecked={book.acceptsTrade} setIsChecked={(newAccTrade)=>{setVal("acceptsTrade", newAccTrade)}} label={"Do you accept barters"}/>
 
-                        <TagAdd tags={tags} setTags={setTags}/>
+                        <TagAdd tags={book.tags} setTags={(newTags)=>{setVal("tags", newTags)}}/>
 
-                        <TagList tags={tags} setTags={setTags} removable={true}/>
+                        <TagList tags={book.tags} setTags={(newTags)=>{setVal("tags", newTags)}} removable={true}/>
 
-                        <FormInputComponent field={"Description"} type={"description"} value={description} setValue={setDescription} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={"Description"} type={"description"} value={book.description} setValue={(newDescr)=>{setVal("description", newDescr)}} isError={error} setIsError={setError}/>
 
                         <div className="flex flex-row items-center gap-4">
-                            <div>{isRequest?"Search for people with similar offers:":"Search for people with similar requests:"}</div>
+                            <div>{book.isRequest?"Search for people with similar offers:":"Search for people with similar requests:"}</div>
                             <button 
                             type="button"
                             className=" text-customColors-lightBrown bg-customColors-darkBrown p-3 rounded-md"
                             onClick={()=>{
-                                const book={isRequest:!isRequest, name, author, description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
-
                                 axiosInstance.post(`user/book/getBookSuggestions`, book)
                                     .then(async (response) => {
                                         if (response.status === 200) {

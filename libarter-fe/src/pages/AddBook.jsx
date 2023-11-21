@@ -3,30 +3,16 @@ import { useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import { dbAdress } from "../constants";import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
-import FormInputComponent from "../components/FormInputComponent";
-import CenteredBox from "../components/CenteredBox"
-import PhotoInput from '../components/PhotoInput';
-import Switch from '../components/Switch';
-import TagList from '../components/TagList';
-import TagAdd from '../components/TagAdd';
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
 import axiosInstance from '../axios/axiosInstance';
+
+
 const AddBook = () => {
-    const [isRequest, setIsRequest] = useState(false);
-    const [photos,setPhotos] = useState([]); 
-    const [name, setName] = useState("");
-    const [author, setAuthor] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
     const [error, setError] = useState(false);
-    const [isNew, setIsNew] = useState(false);
-    const [acceptsTrade, setAcceptsTrade] = useState(false);
-    const [tags, setTags] = useState([]);
-    const [isbn, setIsbn] = useState('');
-    const [publisher, setPublisher] = useState('');
-    const [language, setLanguage] = useState('');
-    const [yearPublished, setYearPublished] = useState('');
+
+    const [book, setBook] = useState({isRequest:false, photos: [], name:"", author:"", description:"", price: 0, isNew: false, acceptsTrade: false, tags:[], isbn: "", publisher: "", language: "", yearPublished: ""});
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -37,7 +23,7 @@ const AddBook = () => {
         }
 
         e.preventDefault()
-        const book={isRequest, name,author,description, price, photos:photos, isNew:isNew, acceptsTrade:acceptsTrade, tags, publisher, yearPublished, language, isbn}
+        
         axiosInstance.post("user/book/add", book)
             .then((response)=>{
                 if(response.status === 200)
@@ -54,36 +40,20 @@ const AddBook = () => {
     return ( 
         
         <div>
-            <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
+            <RequestOfferSelector
+                isRequest={book.isRequest}
+                setIsRequest={(newIsRequest)=>{
+                    let bookCopy = {...book};
+                    bookCopy.isRequest = newIsRequest;
+                    setBook(bookCopy);
+                }}
+            />
             <ChangeBook
-            isRequest={isRequest}
             handleSubmit={handleSubmit}
-            photos={photos}
-            setPhotos={setPhotos}
-            name={name}
-            setName={setName}
             error={error}
             setError={setError}
-            author={author} 
-            setAuthor={setAuthor}
-            price={price}
-            setPrice={setPrice}
-            isNew={isNew}
-            setIsNew={setIsNew}
-            acceptsTrade={acceptsTrade} 
-            setAcceptsTrade={setAcceptsTrade}
-            tags={tags}
-            setTags={setTags}
-            description={description}
-            setDescription={setDescription}
-            isbn={isbn}
-            setIsbn={setIsbn}
-            publisher={publisher}
-            setPublisher={setPublisher}
-            language={language}
-            setLanguage={setLanguage}
-            yearPublished={yearPublished}
-            setYearPublished={setYearPublished}
+            book={book}
+            setBook={setBook}
             />
         </div>
         
