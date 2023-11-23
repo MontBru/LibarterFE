@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { dbAdress } from '../constants';
-import axiosInstance from '../axios/axiosInstance';
+import readBarcode from '../service/readBarcode';
 
 const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
     const [isbnTmp, setIsbnTmp] = useState(isbn);
@@ -15,19 +14,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
             reader.onload = async (event) => {
                 setImageData(event.target.result);
                 const image = event.target.result;
-                axiosInstance.post(`user/barcode/readBarcode`, {
-                    image
-                })
-                .then(async (response) => {
-                    if (response.status === 200) {
-                        const data = await response.data;
-                        setIsbnTmp(data);
-                    }
-                    else{
-                        console.error("error")
-                    }
-                    
-                });  
+                setIsbnTmp(await readBarcode(image));
             };
             reader.readAsDataURL(file);
 

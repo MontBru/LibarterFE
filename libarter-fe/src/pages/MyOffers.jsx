@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { dbAdress } from "../constants";
 import { routes } from "../constants";
 import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 import RequestOfferSelector from "../components/RequestOfferSelector";
-import axiosInstance from "../axios/axiosInstance";
+import getAllBooksOfLoggedUser from "../service/getAllBooksOfLoggedUser";
 
 const MyOffers = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -13,15 +12,12 @@ const MyOffers = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axiosInstance.get(`user/getAllBooksByUID/${isRequest}`)
-    .then(async (response) => {
-        if (response.status === 200) {
-          setLoading(false);
-          setMyOffersList(await response.data);
-        } else {
-          console.error("Couldn't load your offers");
-        }
-      });
+    const handleGetAll = async () => {
+      const data = await getAllBooksOfLoggedUser(isRequest);
+      setLoading(false);
+      setMyOffersList(data);
+    }
+    handleGetAll();
   }, [isRequest]);
 
   return (

@@ -3,13 +3,11 @@ import SearchBar from "../components/SearchBar";
 import DisplayAllOffers from "../components/DisplayAllOffers"
 import { useEffect } from "react";
 import { useState } from "react";
-import { dbAdress } from "../constants";
 import PageSelector from "../components/PageSelector";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
-import DropdownButton from '../components/DropdownButton';
 import RequestOfferSelector from '../components/RequestOfferSelector';
-import axiosInstance from '../axios/axiosInstance';
+import getBooksBySearch from '../service/getBooksBySearch';
 
 const Search = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -37,17 +35,16 @@ const Search = () => {
 
 
     const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
-    axiosInstance.post(endpoint, loadDTO)
-      .then( async (response) => {
-          if (response.status === 200) {
-            const data = await response.data;
-            setMyOffersList(data.books);
-            setTotalPages(data.totalPageCount)
-          } else {
-            console.error("Couldn't load your offers");
-          }
-        }
-      )
+    
+    const fetchData = async () => {
+      const data = await getBooksBySearch(endpoint, loadDTO);
+      if(data === null)
+        data = [];
+        setMyOffersList(data.books);
+        setTotalPages(data.totalPageCount);
+    }
+
+    fetchData();
 
   }, [searchTerm, pageNum, searchType, priceRange, isRequest]);
 

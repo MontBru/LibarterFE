@@ -5,9 +5,7 @@ import { routes } from "../constants";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
-import { dbAdress } from "../constants";
-import { logUser } from '../functions/logUser';
-import axiosInstance from "../axios/axiosInstance";
+import login from '../service/login';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -19,19 +17,15 @@ const Login = () => {
         e.preventDefault()
         sessionStorage.removeItem("JWT");
         const loginDTO = {username, password}
-        axiosInstance.post('/auth/login', loginDTO)
-            .then(async (response)=>{
-                if(response.status === 200)
-                {
-                    const data = await response.data;
+        const handleLogin = async () => {
+            const result = await login(loginDTO);
+            if(result)
+                navigate(routes.search);
+            else
+                setIsError(true);
+        }
 
-                    logUser(data);
-                    navigate(routes.search);
-                }
-                else{
-                    setIsError(true);
-                }
-            })
+        handleLogin();
     };
 
     

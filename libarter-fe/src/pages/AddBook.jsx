@@ -5,7 +5,7 @@ import { dbAdress } from "../constants";import { useNavigate } from "react-route
 import { routes } from "../constants";
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
-import axiosInstance from '../axios/axiosInstance';
+import addBook from '../service/addBook';
 
 
 const AddBook = () => {
@@ -16,7 +16,7 @@ const AddBook = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        if(isNaN(parseFloat(price)))
+        if(isNaN(parseFloat(book.price)))
         {
             setError(true)
             return null;
@@ -24,17 +24,15 @@ const AddBook = () => {
 
         e.preventDefault()
         
-        axiosInstance.post("user/book/add", book)
-            .then((response)=>{
-                if(response.status === 200)
-                {
-                    navigate(routes.myOffers)
-                }
-                else
-                {
-                    setError(true);
-                }
-            })
+        const handleAddBook = async () => {
+            const data = await addBook(book);
+            if(data)
+                navigate(routes.myOffers);
+            else 
+                setError(true);
+        }
+        
+        handleAddBook();
     }
 
     return ( 

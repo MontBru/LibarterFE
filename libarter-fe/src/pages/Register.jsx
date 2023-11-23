@@ -5,9 +5,7 @@ import { routes } from "../constants";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
-import { dbAdress } from "../constants";
-import { logUser } from '../functions/logUser';
-import axiosInstance from '../axios/axiosInstance';
+import register from '../service/register';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -20,22 +18,17 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         sessionStorage.removeItem("JWT");
-        const user={username,email,password, phoneNumber}
 
-        axiosInstance.post("auth/register", user)
-            .then(async (response)=>{
-                if(response.status === 200)
-                {
-                    const data = await response.data;
-    
-                    logUser(data);
+        const handleRegister = async () => {
+            const user={username,email,password, phoneNumber};
+            const registeredSuccesfully = await register(user);
+                if(registeredSuccesfully)
                     navigate(routes.search);
-                }
                 else
-                {
-                    setIsError(true)
-                }
-            })
+                    setIsError(true);
+        }
+
+        handleRegister();
     };
 
     

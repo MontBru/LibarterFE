@@ -7,12 +7,12 @@ import TagList from "./TagList";
 import SubmitButton from "./SubmitButton";
 import ISBNInput from "./ISBNInput";
 import { useEffect } from "react";
-import { dbAdress } from "../constants";
 import { useState } from "react";
 import DisplayAllOffers from "./DisplayAllOffers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import axiosInstance from "../axios/axiosInstance";
+import getBookByISBN from "../service/getBookByISBN";
+import getBookSuggestions from "../service/getBookSuggestions";
 
 const ChangeBook = ({
     book,
@@ -27,12 +27,11 @@ const ChangeBook = ({
     useEffect(()=>{
         if(book.isbn!=="" && pressed==true)
         {
-            axiosInstance.get(`user/book/getBookByISBN/${book.isbn}`)
-                .then(async (response) => {
+            const getData = async ()=>{
+                const data = await getBookByISBN(book.isbn);
                 setPressed(false);
-                if (response.status === 200) {
+                if (data !== null) {
                     setError(false)
-                    const data = await response.data;
 
                     let bookCopy = {...book};
                     bookCopy.name = data?.name;
@@ -44,9 +43,9 @@ const ChangeBook = ({
                 }
                 else{
                     setError(true);
-                    console.log("book with this isbn wasn't found")
-                }        
-            }); 
+                }   
+            }
+            getData();
         }
          
     },[pressed]);
@@ -104,16 +103,13 @@ const ChangeBook = ({
                             type="button"
                             className=" text-customColors-lightBrown bg-customColors-darkBrown p-3 rounded-md"
                             onClick={()=>{
-                                axiosInstance.post(`user/book/getBookSuggestions`, book)
-                                    .then(async (response) => {
-                                        if (response.status === 200) {
-                                        setSuggestedOffers(await response.data);
-                                        }
-                                        else{
-                                            setError(true) 
-                                        }
-                                      
-                                    });  
+                                const getSuggestions = async () => {
+                                    const data = await getBookSuggestions(book);
+                                    if(data === null)
+                                        setError(true);
+                                    else
+                                        setSuggestedOffers(data);                                
+                                }
                             }}>
                                 <FontAwesomeIcon icon={faSearch}/>
                             </button>
