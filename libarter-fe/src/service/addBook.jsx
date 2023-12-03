@@ -1,11 +1,14 @@
 import axiosInstance from "../axios/axiosInstance";
 
 const addBook = async (book) => {
-    const response = await axiosInstance.post("user/book/add", book);
-    if(response.status === 200)
+    try{
+        const response = await axiosInstance.post("user/book/add", book);
         return true;
-    else
+    }
+    catch{
         return false;
+    }
+        
 }
  
 export default addBook;

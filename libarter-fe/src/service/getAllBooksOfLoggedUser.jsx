@@ -1,11 +1,14 @@
 import axiosInstance from "../axios/axiosInstance";
 
 const getAllBooksOfLoggedUser = async (isRequest) => {
-    const response = await axiosInstance.get(`user/getAllBooksByUID/${isRequest}`)
-    if(response.status === 200)
+    try{
+        const response = await axiosInstance.get(`user/getAllBooksByUID/${isRequest}`)
         return await response.data;
-    else 
+    }
+    catch{
         return [];
+    }
+       
 }
  
 export default getAllBooksOfLoggedUser;

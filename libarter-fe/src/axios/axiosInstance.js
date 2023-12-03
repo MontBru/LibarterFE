@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
     baseURL: dbAdress
 })
 
-axiosInstance.interceptors.request.use(
+export const jwtInterceptor = axiosInstance.interceptors.request.use(
     (config) => {
         const jwt = sessionStorage.getItem('JWT');
         if(jwt)
@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
       return response;
     },
     (error) => {
-      if (error.response.status === 401) {
+      if (error.response!==undefined && error.response.status === 401) {
         window.location.href = '/login';
       }
       return Promise.reject(error);

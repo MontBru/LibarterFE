@@ -1,11 +1,13 @@
 import axiosInstance from "../axios/axiosInstance";
 
 const getUserById = async (uid) => {
-    const response = await axiosInstance.get(`public/user/getById/${uid}`)
-    if(response.status === 200)
+    try{
+        const response = await axiosInstance.get(`public/user/getById/${uid}`)
         return await response.data;
-    else 
+    }
+    catch{
         return null;
+    }
 }
  
 export default getUserById;

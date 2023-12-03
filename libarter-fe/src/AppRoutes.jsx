@@ -10,6 +10,8 @@ import About from './pages/About';
 import Login from './pages/Login';
 import UpdateOffer from './pages/UpdateOffer';
 import OfferPage from './pages/OfferPage';
+import ResetPassword from './pages/ResetPassword';
+import CheckEmail from './pages/CheckEmail';
 
 const AppRoutes = () => {
     return ( 
@@ -22,7 +24,9 @@ const AppRoutes = () => {
             <Route path={routes.myOffers} element={<MyOffers/>}/>
             <Route path={routes.search} element={<Search/>}/>
             <Route path={routes.updateOffer} element={<UpdateOffer/>}/>
+            <Route path={routes.checkEmail} element={<CheckEmail/>}/>
             <Route path={`${routes.offerPage}/:offerId`} element={<OfferPage/>}/>
+            <Route path={`${routes.resetPassword}/:token`} element={<ResetPassword/>}/>
         </Routes>
     );
 }

@@ -6,9 +6,13 @@ import { routes } from '../constants';
 const Topbar = ({onMenuClick}) => {
     const location = useLocation();
 
+    const resetPasswordPattern = /^\/reset-password\/[^\/]*$/;
+
     if(location.pathname === routes.register || 
        location.pathname === routes.forgotPassword ||
-       location.pathname === routes.login)
+       location.pathname === routes.login ||
+       location.pathname === routes.checkEmail ||
+       resetPasswordPattern.test(location.pathname))
     {
         return null;
     }

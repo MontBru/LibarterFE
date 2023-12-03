@@ -16,9 +16,9 @@ module.exports = {
       },
       colors:{
         customColors:{
-          white: '#F1EFE2',
-          lightBrown: '#97633D',
-          darkBrown: '#382619',
+          white: '#3A4750',
+          lightBrown: '#00ADB5',
+          darkBrown: '#303841',
         }
       }
     },

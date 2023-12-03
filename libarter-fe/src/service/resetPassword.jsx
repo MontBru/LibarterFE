@@ -1,18 +1,15 @@
 import axiosInstance from "../axios/axiosInstance";
-import { logUser } from "../functions/logUser";
 import { jwtInterceptor } from "../axios/axiosInstance";
 
-const register = async (registerDTO) => {
+const resetPassword = async ({newPassword, token}) => {
     axiosInstance.interceptors.request.eject(jwtInterceptor);
-    
+
     try{
-        const response = await axiosInstance.post("auth/register", registerDTO);
+        const response = await axiosInstance.post("auth/resetPassword", {newPassword, token});
+    
         axiosInstance.interceptors.request.use(jwtInterceptor);
 
-        const data = await response.data;
-        logUser(data);
         return true;
-
     }
     catch{
         axiosInstance.interceptors.request.use(jwtInterceptor);
@@ -20,4 +17,4 @@ const register = async (registerDTO) => {
     }
 }
  
-export default register;
+export default resetPassword;

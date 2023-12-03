@@ -27,7 +27,11 @@ const Navbar = ({show, onMenuClick}) => {
         document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [show, onMenuClick]);
-    if(location.pathname === routes.register || location.pathname === routes.forgotPassword)
+
+    const resetPasswordPattern = /^\/reset-password\/[^\/]*$/;
+
+
+    if(location.pathname === routes.checkEmail || location.pathname === routes.register || location.pathname === routes.forgotPassword || resetPasswordPattern.test(location.pathname))
     {
         return null;
     }

@@ -1,11 +1,14 @@
 import axiosInstance from "../axios/axiosInstance";
 
 const getBookSuggestions = async (book) => {
-    const response = await axiosInstance.post(`user/book/getBookSuggestions`, book)
-    if(response.status !== 200)
+    try{
+        const response = await axiosInstance.post(`user/book/getBookSuggestions`, book)
         return await response.data;
-    else 
+    }
+    catch{
         return null;
+    }
+        
 }
  
 export default getBookSuggestions;

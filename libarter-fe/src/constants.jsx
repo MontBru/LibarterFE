@@ -9,7 +9,9 @@ export const routes = {
     about: '/about',
     myOffers: '/my-offers',
     updateOffer: '/update-offer',
-    offerPage: '/offer-page'
+    offerPage: '/offer-page',
+    resetPassword: '/reset-password',
+    checkEmail: '/check-email'
 };
 
 //export const dbAdress="https://libarterbe.azurewebsites.net/";
