@@ -13,6 +13,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import getBookByISBN from "../service/getBookByISBN";
 import getBookSuggestions from "../service/getBookSuggestions";
+import CheckAuthorization from "../service/checkAuthorization";
+import redirectToLoginIfUnauth from "../functions/redirectToLoginIfUnauth";
+import Background from "./Background";
 
 const ChangeBook = ({
     book,
@@ -23,6 +26,10 @@ const ChangeBook = ({
 
     const [pressed, setPressed] = useState(false)
     const [suggestedOffers, setSuggestedOffers] = useState([])
+
+    useEffect(()=>{
+        redirectToLoginIfUnauth();
+    },[])
 
     useEffect(()=>{
         if(book.isbn!=="" && pressed==true)
@@ -57,7 +64,7 @@ const ChangeBook = ({
     } 
 
     return ( 
-        <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
+        <Background >
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
@@ -128,8 +135,7 @@ const ChangeBook = ({
                     </form>
                 </div>
             </CenteredBox>
-            
-        </main>
+        </Background>
      );
 }
  

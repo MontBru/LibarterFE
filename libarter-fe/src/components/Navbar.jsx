@@ -5,7 +5,7 @@ import { routes } from "../constants";
 import { Link } from 'react-router-dom';
 import HomeButton from "./HomeButton";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faPlus, faBook, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus, faBook, faInfoCircle, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({show, onMenuClick}) => {
     const location = useLocation();
@@ -62,7 +62,7 @@ const Navbar = ({show, onMenuClick}) => {
                         <li><NavButton route={routes.search} text={"Search for Books"} icon={faSearch}/></li>
                         <li><NavButton route={routes.addBook} text={"Add Offer"} icon={faPlus}/></li>
                         <li><NavButton route={routes.myOffers} text={"My offers"} icon={faBook}/></li>
-                        <li><NavButton route={routes.about} text={"About"} icon={faInfoCircle}/></li>
+                        <li><NavButton route={routes.conversations} text={"Chat"} icon={faMessage}/></li>
                     </ul>
                     
                 </div>

@@ -7,7 +7,7 @@ import PageSelector from "../components/PageSelector";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import RequestOfferSelector from '../components/RequestOfferSelector';
-import getBooksBySearch from '../service/getBooksBySearch';
+import getBooksBySearch from '../service/public/getBooksBySearch';
 
 const Search = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -37,11 +37,11 @@ const Search = () => {
     const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
     
     const fetchData = async () => {
-      const data = await getBooksBySearch(endpoint, loadDTO);
+      let data = await getBooksBySearch(endpoint, loadDTO);
       if(data === null)
-        data = [];
-        setMyOffersList(data.books);
-        setTotalPages(data.totalPageCount);
+        data = {books:[], totalPageCount: 1};
+      setMyOffersList(data.books);
+      setTotalPages(data.totalPageCount);
     }
 
     fetchData();
@@ -59,17 +59,18 @@ const Search = () => {
         setPriceRange={setPriceRange}
       />
 
+      <DisplayAllOffers
+        offers={myOffersList}
+        handleClick={(index) => {
+          navigate(`${routes.offerPage}/${myOffersList[index].id}`)
+        }}
+      />
+
       <PageSelector
         currentPage={pageNum}
         totalPages={totalPages}
         onPageChange={(newPage) => {
           setPageNum(newPage)
-        }}
-      />
-      <DisplayAllOffers
-        offers={myOffersList}
-        handleClick={(index) => {
-          navigate(`${routes.offerPage}/${myOffersList[index].id}`)
         }}
       />
     </main>

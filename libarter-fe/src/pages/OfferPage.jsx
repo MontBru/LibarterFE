@@ -5,6 +5,9 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import getBookById from '../service/getBookById';
 import getUserById from '../service/getUserById';
+import Background from '../components/Background';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 
 const OfferPage = () => {
     const {offerId} = useParams();
@@ -61,7 +64,7 @@ const OfferPage = () => {
     }
 
     return ( 
-        <main className='bg-customColors-white w-screen h-screen overflow-y-scroll'>
+        <Background>
             <CenteredBox>
                 <div className='flex flex-col'>
 
@@ -71,6 +74,13 @@ const OfferPage = () => {
                         
                     <div className='p-3 h-full'>
                         <image/>
+
+                        <div className='w-full flex justify-end'>
+                            <button className='w-14 h-14 bg-customColors-lightBrown rounded-full flex justify-center items-center'>
+                                <FontAwesomeIcon icon={faMessage} className='text-white text-2xl'/>
+                            </button>
+                        </div>
+                        
 
                         <div className='flex flex-row'>
                             <h3 className=' text-customColors-darkBrown font-bold text-xl mr-2'>
@@ -132,7 +142,7 @@ const OfferPage = () => {
                     </div>
                 </div>
             </CenteredBox>
-        </main>
+        </Background>
      );
 }
  

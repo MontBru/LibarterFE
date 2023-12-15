@@ -5,7 +5,7 @@ import { routes } from "../constants";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
-import register from '../service/register';
+import register from '../service/public/register';
 
 const Register = () => {
     const [username, setUsername] = useState('');

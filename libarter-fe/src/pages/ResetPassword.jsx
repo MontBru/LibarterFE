@@ -3,7 +3,7 @@ import CenteredBox from '../components/CenteredBox';
 import FormInputComponent from "../components/FormInputComponent";
 import { useState } from 'react';
 import SubmitButton from '../components/SubmitButton';
-import resetPassword from '../service/resetPassword';
+import resetPassword from '../service/public/resetPassword';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '../constants';
 

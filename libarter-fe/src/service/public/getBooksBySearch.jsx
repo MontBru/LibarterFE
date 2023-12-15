@@ -1,9 +1,8 @@
-import axiosInstance from "../axios/axiosInstance";
-
+import { publicAxiosInstance } from "../../axios/axiosInstance";
 
 const getBooksBySearch = async (endpoint, loadDTO) => {
     try{
-        const response = await axiosInstance.post(endpoint, loadDTO);
+        const response = await publicAxiosInstance.post(endpoint, loadDTO);
         return await response.data;
     }
     catch{
