@@ -37,15 +37,7 @@ const AddBook = () => {
 
     return ( 
         
-        <div>
-            <RequestOfferSelector
-                isRequest={book.isRequest}
-                setIsRequest={(newIsRequest)=>{
-                    let bookCopy = {...book};
-                    bookCopy.isRequest = newIsRequest;
-                    setBook(bookCopy);
-                }}
-            />
+        <>            
             <ChangeBook
             handleSubmit={handleSubmit}
             error={error}
@@ -53,7 +45,7 @@ const AddBook = () => {
             book={book}
             setBook={setBook}
             />
-        </div>
+        </>
         
      );
 }

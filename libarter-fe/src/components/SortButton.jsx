@@ -10,8 +10,8 @@ const SortButton = ({priceRange, setPriceRange}) => {
         <div>
             <button type="button" 
             onClick={()=>{setIsOpen(true)}}
-            className='inline-flex items-center justify-center w-full px-4 h-full text-lg text-customColors-darkBrown'>
-                <FontAwesomeIcon icon = {faFilter} className='flex justify-center text-customColors-darkBrown'/>
+            className='inline-flex items-center justify-center w-full px-4 h-full text-lg rounded-full text-customColors-secondary hover:text-customColors-accent hover:bg-customColors-complementary'>
+                <FontAwesomeIcon icon = {faFilter} className='flex justify-center '/>
             </button>
             <FilterPopup 
             isOpen={isOpen} 

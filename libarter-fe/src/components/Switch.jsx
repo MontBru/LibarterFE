@@ -1,7 +1,7 @@
 const Switch = ({isChecked, setIsChecked, label}) => {
     return ( 
         <div className="flex items-center justify-between py-2">
-            <label className="mr-2 text-customColors-darkBrown">{label}</label>
+            <label className="mr-2 text-customColors-secondary">{label}</label>
             <button
                 type="button"
                 onClick={()=>{setIsChecked(!isChecked)}}
@@ -10,7 +10,7 @@ const Switch = ({isChecked, setIsChecked, label}) => {
                 }`}
             >
                 <div
-                className={`absolute -inset-y-0.5 -left-0.5 bg-customColors-white w-7 h-7 rounded-full shadow-md transform duration-300 ease-in-out ${
+                className={`absolute -inset-y-0.5 -left-0.5 bg-customColors-primary w-7 h-7 rounded-full shadow-md transform duration-300 ease-in-out ${
                     isChecked ? 'translate-x-6' : ''
                 }`}
                 />

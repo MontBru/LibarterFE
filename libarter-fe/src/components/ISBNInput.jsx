@@ -31,7 +31,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
         <div className="flex items-center space-x-4">
 
             <div className='flex flex-col'>
-                <div className='ext-customColors-darkBrown'> 
+                <div className='text-customColors-primary'> 
                     Capture ISBN or type it in (ISBN is the barcode behind the book):
                 </div>
                 {/* Image Capture */}
@@ -48,8 +48,8 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
                             {imageData ? (
                                 <img src={imageData} alt="Captured ISBN" className="w-20 h-20" />
                             ) : (
-                                <div className=" w-20 h-20 bg-gray-200 rounded-full text-center flex items-center justify-center">
-                                    <div className="flex text-gray-500">Capture ISBN</div>
+                                <div className=" w-20 h-20 bg-customColors-secondary rounded-full text-center flex items-center justify-center">
+                                    <div className="flex text-customColors-accent">Capture ISBN</div>
                                 </div>
                             )}
                         </label>
@@ -62,7 +62,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
                             placeholder="Enter ISBN"
                             value={isbnTmp}
                             onChange={handleIsbnChange}
-                            className={`w-48 h-10 px-2 py-1 border-2 border-gray-300 text-customColors-darkBrown focus:border-customColors-lightBrown focus:outline-none rounded-md ${error ? 'border-red-500' : ''}`}
+                            className={`w-48 h-10 px-2 py-1 border-2 border-gray-300 text-customColors-secondary focus:border-customColors-complementary focus:outline-none rounded-md ${error ? 'border-red-500' : ''}`}
                         />
                     </div>
                     <div className='h-20 flex items-center ml-2 text-xl'>

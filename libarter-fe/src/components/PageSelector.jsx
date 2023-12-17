@@ -12,15 +12,15 @@ const PageSelector = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className=" bg-customColors-lightBrown text-white px-2 py-1 rounded shadow-md"
+        className=" bg-customColors-accent text-customColors-primary px-2 py-1 rounded shadow-md shadow-customColors-primary"
       >
         {"<"}
       </button>
-      <span className="text-gray-500">Page {currentPage} of {totalPages}</span>
+      <span className="text-customColors-accent">Page {currentPage} of {totalPages}</span>
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className=" bg-customColors-lightBrown text-white px-2 py-1 rounded shadow-md"
+        className=" bg-customColors-accent text-customColors-primary px-2 py-1 rounded shadow-md shadow-customColors-primary"
       >
         {">"}
       </button>

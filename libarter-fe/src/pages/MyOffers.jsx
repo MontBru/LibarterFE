@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DisplayAllOffers from "../components/DisplayAllOffers";
 import RequestOfferSelector from "../components/RequestOfferSelector";
 import getAllBooksOfLoggedUser from "../service/getAllBooksOfLoggedUser";
+import Background from "../components/Background";
 
 const MyOffers = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -21,11 +22,22 @@ const MyOffers = () => {
   }, [isRequest]);
 
   return (
-    <main className='flex flex-col h-full w-full bg-customColors-white overflow-y-scroll z-0'>
-        <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
-        <h1 className="text-2xl sticky p-3 top-0 bg-white rounded-b-md shadow-lg font-bold text-customColors-darkBrown m-4 mt-0 flex justify-center">
+    // <main className='flex flex-col h-full w-full bg-customColors-complementary overflow-y-scroll z-0'>
+      <Background> 
+
+        <img src="myOffersWide.png" alt="" 
+        className="h-2/5 w-full object-cover border-b-4 border-white hidden md:block shadow-lg shadow-customColors-primary"
+        />
+
+        <img src="myOffers.png" alt="" 
+          className="h-2/5 w-full object-cover border-b-4 border-white md:hidden shadow-lg shadow-customColors-primary"
+        />
+      
+        <h1 className="text-2xl z-40 sticky p-3 top-0 bg-white rounded-b-md shadow-lg shadow-customColors-primary font-bold text-customColors-secondary m-4 mt-0 flex justify-center">
           {isRequest?"My Requests":"My Offers"}
         </h1>
+
+        <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest}/>
 
         {loading === true ? (
           <div>Loading...</div>
@@ -37,8 +49,11 @@ const MyOffers = () => {
             }}
             canDelete = {true}
           />
-        )}
-    </main>
+        )}{/* </main> */}
+        </Background>
+        
+    
+    
   );
 };
 

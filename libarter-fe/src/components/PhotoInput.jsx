@@ -51,12 +51,12 @@ const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
           <img
             src={photos[ind]}
             alt={`Uploaded ${ind}`}
-            className=" w-64 h-64 shadow-md rounded-md cursor-pointer"
+            className=" w-64 h-64 shadow-md shadow-customColors-primary rounded-md cursor-pointer"
             onClick={() => handleImageClick(ind)}
           />
           <button
             type="button"
-            className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md opacity-90"
+            className="absolute top-0 right-0 p-2 text-red-500 text-2xl rounded-md shadow-md shadow-customColors-primary opacity-90"
             onClick={() => handleRemoveImage(ind)}
           >
             <FontAwesomeIcon icon={faTrash}/>
@@ -82,8 +82,8 @@ const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
 
         <div className='w-full flex justify-center'>
           <div
-            className="bg-customColors-darkBrown text-white 
-            font-bold h-64 w-64 shadow-md flex justify-center
+            className="bg-customColors-secondary text-white 
+            font-bold h-64 w-64 shadow-md shadow-customColors-primary flex justify-center
             rounded-md items-center text-3xl 
             relative m-2" 
           >

@@ -56,15 +56,7 @@ const UpdateOffer = (  ) => {
     }
 
     return ( 
-      <div>
-        <RequestOfferSelector
-            isRequest={book.isRequest}
-            setIsRequest={(newIsRequest)=>{
-                let bookCopy = {...book};
-                bookCopy.isRequest = newIsRequest;
-                setBook(bookCopy);
-            }}
-        />
+      <>
         <ChangeBook
           handleSubmit={handleSubmit}
           error={error}
@@ -72,7 +64,7 @@ const UpdateOffer = (  ) => {
           book={book}
           setBook={setBook}
         />
-      </div>
+      </>
         
     );
 }

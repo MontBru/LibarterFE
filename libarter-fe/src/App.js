@@ -32,7 +32,7 @@ function App() {
             You should log in to use this feature
           </div>
           <button 
-          className="w-full bg-customColors-darkBrown text-white py-2 px-4 rounded-md cursor-pointer"
+          className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
           onClick={()=>{
             window.location.href = routes.login;
           }}

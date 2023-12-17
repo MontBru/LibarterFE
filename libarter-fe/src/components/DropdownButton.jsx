@@ -10,7 +10,7 @@ const DropdownButton = ({setSearchType}) => {
     return (
         <button
             onClick={() => handleClick()}
-            className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            className="block w-full px-4 py-2 text-sm text-customColors-primary hover:bg-customColors-complementary hover:text-customColors-accent"
             role="menuitem"
         >
             {name}
@@ -27,12 +27,12 @@ const DropdownButton = ({setSearchType}) => {
       <button
         onClick={toggleDropdown}
         type="button"
-        className="inline-flex items-center justify-center w-full px-4 h-full text-lg text-customColors-darkBrown"
+        className="inline-flex items-center justify-center w-full px-4 h-full text-lg text-customColors-secondary rounded-full hover:bg-customColors-complementary hover:text-customColors-accent"
       >
         <FontAwesomeIcon icon = {faMagnifyingGlassPlus}/>
       </button>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg shadow-customColors-primary bg-white ring-1 ring-black ring-opacity-5">
           <div
             className="py-1"
             role="menu"

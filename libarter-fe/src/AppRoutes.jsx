@@ -30,7 +30,7 @@ const AppRoutes = () => {
             <Route path={`${routes.resetPassword}/:token`} element={<ResetPassword/>}/>
             <Route path={routes.profilePage} element={<ProfilePage/>}/>
             <Route path={routes.conversations} element={<ConversationsPage/>}/>
-            <Route path={routes.messages} element={<MessagesPage/>}/>
+            <Route path={`${routes.messages}/:convId`} element={<MessagesPage/>}/>
         </Routes>
     );
 }

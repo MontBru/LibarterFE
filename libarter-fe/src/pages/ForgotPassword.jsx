@@ -26,10 +26,10 @@ const ForgotPassword = () => {
     }
 
     return ( 
-        <main className=' bg-customColors-lightBrown w-screen h-full overflow-y-scroll'>
+        <main className=' bg-customColors-accent w-screen h-full overflow-y-scroll'>
             <CenteredBox>
                 <div>
-                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
                         Forgot Password
                     </h1>
                     <form onSubmit={handleSubmit}>
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
                             <button
                             type='button'
                             onClick={handleSubmit}
-                            className="w-full bg-customColors-darkBrown text-white py-2 px-4 rounded-md cursor-pointer"
+                            className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
                             >
                                 Send Email
                                 

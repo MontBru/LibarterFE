@@ -31,17 +31,17 @@ const Login = () => {
     
 
     return ( 
-        <main className=' bg-customColors-lightBrown w-screen h-full overflow-y-scroll'>
+        <main className=' bg-customColors-accent w-screen h-full overflow-y-scroll'>
             <CenteredBox>
                 <div>
-                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
                         Log In
                     </h1>
                     <form onSubmit={handleSubmit}>
                         <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
                         <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                         <div className="container flex justify-end mb-4">
-                            <Link to={routes.forgotPassword} className="text-customColors-lightBrown">
+                            <Link to={routes.forgotPassword} className="text-customColors-primary">
                                 Forgot password?
                             </Link>
                         </div>
@@ -54,7 +54,7 @@ const Login = () => {
                             </div>
                         )}
                         <div className="container flex justify-center">
-                            <Link to = {routes.register} className="text-customColors-lightBrown">
+                            <Link to = {routes.register} className="text-customColors-primary">
                                 Don't have an account?
                             </Link>
                         </div>

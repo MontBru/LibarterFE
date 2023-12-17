@@ -37,9 +37,9 @@ const ProfilePage = () => {
                 <div>
                     <div className="flex justify-center p-6">
                         <img 
-                        src="/user.svg" 
+                        src="/user.png" 
                         alt="user default image" 
-                        className="w-60"
+                        className=" w-5/6 max-w-xl"
                         />
                     </div>
                     
@@ -49,7 +49,7 @@ const ProfilePage = () => {
 
                     <div className="flex justify-center p-6">
                         <button 
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                        className="bg-red-600 text-red-300 hover:bg-red-300 hover:text-red-600 font-bold py-2 px-4 rounded"
                         onClick={()=>{logout()}}
                         >
                             Logout

@@ -21,6 +21,9 @@ const ConversationsPage = () => {
 
     return ( 
         <Background>
+            <img src="Chat.png" alt="" 
+                className="w-full h-2/5 object-contain bg-customColors-chatImageBg shadow-lg shadow-customColors-primary"
+            />
             <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={"You are client"} notThingText={"You own the offer"}/>
             <DisplayAllConversations conversations={conversations}/>
         </Background>

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import RequestOfferSelector from '../components/RequestOfferSelector';
 import getBooksBySearch from '../service/public/getBooksBySearch';
+import Background from '../components/Background';
 
 const Search = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -49,15 +50,34 @@ const Search = () => {
   }, [searchTerm, pageNum, searchType, priceRange, isRequest]);
 
   return (
-    <main className='z-0 flex flex-col h-full w-full bg-customColors-white overflow-y-scroll'>
+    <Background>
+
+    
+    {/* <main className='z-0 flex flex-col h-full w-full bg-customColors-complementary overflow-y-scroll'> */}
+    
+      <div className="relative h-2/5 w-full shadow-lg shadow-customColors-primary border-b-4 border-white mb-16">
+        <div
+          className="absolute inset-0 bg-no-repeat bg-center bg-cover overflow-hidden"
+          style={{
+            backgroundImage: `url(WelcomeToLibarter.png)`,
+            backgroundPosition: '20% 38%',
+          }}
+        />
+        <div className="absolute bottom-0 w-full">
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            setSearchType={setSearchType}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+          />
+        </div>
+      </div>
+
       <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        setSearchType={setSearchType}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-      />
+      
+
+      
 
       <DisplayAllOffers
         offers={myOffersList}
@@ -73,7 +93,8 @@ const Search = () => {
           setPageNum(newPage)
         }}
       />
-    </main>
+    {/* </main> */}
+    </Background>
   );
 }
 

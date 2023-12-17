@@ -14,9 +14,9 @@ function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
   return (
     <Popup children={
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-customColors-darkBrown">Apply filters</h2>
+        <h2 className="text-xl font-semibold mb-4 text-customColors-secondary">Apply filters</h2>
 
-        <h3 className='mb-2 text-customColors-darkBrown'>
+        <h3 className='mb-2 text-customColors-secondary'>
           Select price range
         </h3>
         <ul className='flex flex-row mb-2'>

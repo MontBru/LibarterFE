@@ -18,13 +18,13 @@ const TagAdd = ({tags, setTags}) => {
             <input
             type="text"
             placeholder="Add a tag"
-            className="w-full h-11 border-2 border-gray-300 text-customColors-darkBrown focus:border-customColors-lightBrown focus:outline-none rounded-md rounded-r-none px-3"
+            className="w-full h-11 border-2 border-gray-300 text-customColors-secondary focus:border-customColors-accent focus:outline-none rounded-md rounded-r-none px-3"
             value={tagInput}
             onChange={handleTagInputChange}
             />
             <button
             onClick={handleAddTag}
-            className="w-11 h-11 bg-customColors-darkBrown text-white rounded-r-md font-bold text-2xl"
+            className="w-11 h-11 bg-customColors-secondary text-white rounded-r-md font-bold text-2xl"
             type='button'
             >
             +

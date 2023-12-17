@@ -34,10 +34,10 @@ const Register = () => {
     
 
     return ( 
-        <main className=' bg-customColors-lightBrown w-screen h-screen'>
+        <main className=' bg-customColors-accent w-screen h-screen'>
             <CenteredBox>
                 <div className='flex flex-col'>
-                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown">
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
                         Register
                     </h1>
                     <form onSubmit={handleSubmit}>
@@ -54,7 +54,7 @@ const Register = () => {
                             </div>
                         )}
                         <div className="container flex justify-center">
-                            <Link to={routes.login} className="text-customColors-lightBrown">
+                            <Link to={routes.login} className="text-customColors-accent">
                                 Log in instead
                             </Link>
                         </div>

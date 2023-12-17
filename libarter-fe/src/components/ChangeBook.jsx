@@ -16,6 +16,7 @@ import getBookSuggestions from "../service/getBookSuggestions";
 import CheckAuthorization from "../service/checkAuthorization";
 import redirectToLoginIfUnauth from "../functions/redirectToLoginIfUnauth";
 import Background from "./Background";
+import RequestOfferSelector from "./RequestOfferSelector";
 
 const ChangeBook = ({
     book,
@@ -67,7 +68,7 @@ const ChangeBook = ({
         <Background >
             <CenteredBox>
                 <div className='flex flex-col'>
-                    <h1 className="text-2xl font-bold mb-4 text-customColors-darkBrown flex justify-center">
+                    <h1 className="text-2xl font-bold mb-4 text-customColors-secondary flex justify-center">
                         {book.isRequest?"Add a request":"Add a new Book"}
                     </h1>
                     <form onSubmit={handleSubmit}>
@@ -76,6 +77,15 @@ const ChangeBook = ({
                             setPhotos={(newPhotos)=>{
                                 setVal("photos", newPhotos);
                         }}/>
+
+                        <RequestOfferSelector
+                            isRequest={book.isRequest}
+                            setIsRequest={(newIsRequest)=>{
+                                let bookCopy = {...book};
+                                bookCopy.isRequest = newIsRequest;
+                                setBook(bookCopy);
+                            }}
+                        />
                         
                         <ISBNInput 
                             setPressed={setPressed} 
@@ -108,7 +118,7 @@ const ChangeBook = ({
                             <div>{book.isRequest?"Search for people with similar offers:":"Search for people with similar requests:"}</div>
                             <button 
                             type="button"
-                            className=" text-customColors-lightBrown bg-customColors-darkBrown p-3 rounded-md"
+                            className=" text-customColors-accent bg-customColors-secondary p-3 rounded-md"
                             onClick={()=>{
                                 const getSuggestions = async () => {
                                     const data = await getBookSuggestions(book);
