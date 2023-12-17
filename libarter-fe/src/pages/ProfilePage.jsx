@@ -29,6 +29,7 @@ const ProfilePage = () => {
     
     return ( 
         <Background>
+            <div className="min-h-screen">
             {user === 1 ? (
                 <div className="p-12 text-white text-xl overflow-scroll">Loading...</div>
             ) : user === null ? (
@@ -59,6 +60,7 @@ const ProfilePage = () => {
 
                 </div>
             )}
+            </div>
         </Background>
      );
 }

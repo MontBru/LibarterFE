@@ -21,10 +21,18 @@ const ConversationsPage = () => {
 
     return ( 
         <Background>
-            <img src="Chat.png" alt="" 
-                className="w-full h-2/5 object-contain bg-customColors-chatImageBg shadow-lg shadow-customColors-primary"
-            />
-            <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={"You are client"} notThingText={"You own the offer"}/>
+
+            <div className="md:flex md:flex-row md:justify-between">
+                <img src="Chat.png" alt="" 
+                    className="w-full h-2/5 object-contain bg-customColors-chatImageBg shadow-lg shadow-customColors-primary"
+                />
+                <div className=" bg-customColors-chatImageBg flex justify-center w-full">
+                    <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={"You are client"} notThingText={"You own the offer"}/>
+                </div>
+                
+            </div>
+            
+
             <DisplayAllConversations conversations={conversations}/>
         </Background>
             
