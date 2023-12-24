@@ -53,8 +53,9 @@ const Register = () => {
                                 Invalid credentials. Please try again.
                             </div>
                         )}
+                        
                         <div className="container flex justify-center">
-                            <Link to={routes.login} className="text-customColors-accent">
+                            <Link to={routes.login} className="text-customColors-primary">
                                 Log in instead
                             </Link>
                         </div>
