@@ -23,7 +23,6 @@ const ResetPassword = () => {
 
         const asyncHandleSubmit = async () => {
             const res = await resetPassword({newPassword, token});
-            console.log(res);
             if (res === false)
                 setIsError(true);
             else

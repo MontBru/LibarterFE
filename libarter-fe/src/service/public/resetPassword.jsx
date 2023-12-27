@@ -3,7 +3,7 @@ import { publicAxiosInstance } from "../../axios/axiosInstance";
 const resetPassword = async ({newPassword, token}) => {
 
     try{
-        const response = await axiosInstance.post("auth/resetPassword", {newPassword, token});
+        const response = await publicAxiosInstance.post("auth/resetPassword", {newPassword, token});
         return true;
     }
     catch{

@@ -37,11 +37,11 @@ const Search = () => {
 
 
     const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
-    
+
     const fetchData = async () => {
       let data = await getBooksBySearch(endpoint, loadDTO);
-      if(data === null)
-        data = {books:[], totalPageCount: 1};
+      if (data === null)
+        data = { books: [], totalPageCount: 1 };
       setMyOffersList(data.books);
       setTotalPages(data.totalPageCount);
     }
@@ -53,17 +53,28 @@ const Search = () => {
   return (
     <Background>
 
-    
-    {/* <main className='z-0 flex flex-col h-full w-full bg-customColors-complementary overflow-y-scroll'> */}
-    
-      <div className="relative h-3/5 w-full shadow-lg shadow-customColors-primary border-b-4 border-white mb-16">
-        <div
-          className="absolute inset-0 bg-no-repeat bg-center bg-cover overflow-hidden"
-          style={{
-            backgroundImage: `url(WelcomeToLibarter.png)`,
-            backgroundPosition: '20% 38%',
-          }}
-        />
+
+      <div className="lg:flex relative mb-10 border-b-4 border-white shadow-lg shadow-customColors-primary">
+        {/* Left column */}
+        <div className="lg:w-1/2 lg:static">
+          <div className=" lg:h-full w-full shadow-lg shadow-customColors-primary lg:shadow-none border-b-4 border-white lg:border-none">
+            <img
+              src="WelcomeToLibarter.png"
+              alt=""
+              className=' w-full object-cover'
+              style={{maxHeight: '50vh'}}
+            />
+
+          </div>
+        </div>
+
+        {/* Right column (or below on smaller screens) */}
+        <div className="lg:w-1/2 lg:mt-0">
+          <div className="h-full pt-10 pb-6 flex justify-center">
+            <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
+          </div>
+        </div>
+
         <div className="absolute bottom-0 w-full">
           <SearchBar
             searchTerm={searchTerm}
@@ -75,10 +86,7 @@ const Search = () => {
         </div>
       </div>
 
-      <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
-      
 
-      
 
       <DisplayAllOffers
         offers={myOffersList}
@@ -94,7 +102,6 @@ const Search = () => {
           setPageNum(newPage)
         }}
       />
-    {/* </main> */}
     </Background>
   );
 }
