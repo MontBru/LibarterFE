@@ -1,12 +1,15 @@
 import React from 'react';
 
-const FormInputComponent = ({field, type, value, setValue, isError, setIsError}) => {
+const FormInputComponent = ({field, type, value, setValue, isError, setIsError, showLabel = true}) => {
    
     return (
     <div className="mb-2">
+        {
+        showLabel &&
         <label htmlFor="email" className="block mb-1 text-customColors-secondary">
             {field}
         </label>
+        }
         {type==="description"?
             <textarea 
                 rows={"5"}
