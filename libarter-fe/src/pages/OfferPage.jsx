@@ -3,8 +3,8 @@ import CenteredBox from '../components/CenteredBox';
 import TagList from '../components/TagList';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import getBookById from '../service/getBookById';
-import getUserById from '../service/getUserById';
+import getBookById from '../service/public/getBookById';
+import getUserById from '../service/public/getUserById';
 import Background from '../components/Background';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
@@ -69,7 +69,10 @@ const OfferPage = () => {
 
     const handleMessage = async () => {
         const conversationId = await addConversation(offerId);
-        navigate(`${routes.messages}/${conversationId}`);
+        if(conversationId === -1)
+            console.error("error");
+        else
+            navigate(`${routes.messages}/${conversationId}`);
     }
 
     const textColor = 'text-customColors-primary';

@@ -1,4 +1,8 @@
-const timeToReadableTime = ({time, broad=false}) => {
+const timeToReadableTime = ({time}) => {
+
+
+    if(time === undefined)
+        return "No messages yet"
 
     const areDatesEqual = (date1, date2) => {
         if (
@@ -13,7 +17,7 @@ const timeToReadableTime = ({time, broad=false}) => {
 
     const date = new Date(time);
     const now = new Date();
-    const options = { 
+    let options = { 
     year: "numeric",
     month: "numeric", 
     day: "numeric", 
@@ -21,25 +25,28 @@ const timeToReadableTime = ({time, broad=false}) => {
     minute: "numeric"
     };
 
-    if(broad)
+
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    if (
+        areDatesEqual(now, date)
+    )
     {
-        const yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-        if (
-            areDatesEqual(now, date)
-        )
-        {
-            options = {
-                hour: "numeric", 
-                minute: "numeric"
-                };
-        }
-        else if(areDatesEqual(date, yesterday))
-        {
-            return "Yesterday";
-        }
+
+        let displayDate = date.toLocaleDateString("en-UK", options);
+
+        return displayDate.split(' ')[1];
+    }
+    else if(areDatesEqual(date, yesterday))
+    {
+        let displayDate = date.toLocaleDateString("en-UK", options);
+
+        displayDate = displayDate.split(' ')[1];
+
+        return "Yesterday " + displayDate;
     }
 
+    console.log(options)
     return date.toLocaleDateString("en-UK", options);
 }
  

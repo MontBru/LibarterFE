@@ -4,8 +4,6 @@ const DisplayAllConversations = ({conversations}) => {
     if(conversations == null)
         conversations = []
 
-    console.log(conversations)
-
     return ( 
         <ul className="min-h-screen">
             {

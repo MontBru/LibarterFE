@@ -4,7 +4,7 @@ import timeToReadableTime from "../functions/timeToReadableTime";
 
 const ConversationButton = ({ image, bookName, clientName, id, lastMessage }) => {
     const navigate = useNavigate()
-    console.log(lastMessage)
+
 
     return (
         <button className="flex flex-row border-y w-full border-customColors-primary bg-customColors-primary shadow-md shadow-customColors-primary"
@@ -21,7 +21,7 @@ const ConversationButton = ({ image, bookName, clientName, id, lastMessage }) =>
             <div className="flex flex-col h-24 justify-center overflow-hidden px-3  line-clamp-1 w-full text-left text-customColors-complementary ">
                 <div className="flex justify-between">
                     <h3 className="max-w-full overflow-hidden overflow-ellipsis font-bold">{clientName}</h3>
-                    <h4 className="flex-shrink-0 overflow-hidden">{timeToReadableTime({ time: lastMessage.time, broad: true })}</h4>
+                    <h4 className="flex-shrink-0 overflow-hidden">{timeToReadableTime({ time: lastMessage?.time, broad: true })}</h4>
                 </div>
 
                 <h2 className="line-clamp-1 text-customColors-accent font-bold">{bookName}</h2>

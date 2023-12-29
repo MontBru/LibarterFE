@@ -1,12 +1,13 @@
+import Message from "./Message";
+
 const DisplayAllMessages = ({messages}) => {
+
     return (
-        <ul>
+        <ul className="p-3 flex flex-col-reverse">
             {
                 messages.map(message => {
                     return (
-                        <li className="bg-customColors-complementary">
-                            {message.body}
-                        </li>
+                        <Message key={message.id} message={message}/>
                     )
                 })
             }

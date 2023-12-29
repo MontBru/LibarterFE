@@ -34,7 +34,7 @@ const Register = () => {
     
 
     return ( 
-        <main className=' bg-customColors-accent w-screen h-screen'>
+        <main className=' bg-customColors-accent w-screen h-screen overflow-y-scrollaxiosInstance'>
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
