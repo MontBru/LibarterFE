@@ -19,6 +19,7 @@ import Background from "./Background";
 import RequestOfferSelector from "./RequestOfferSelector";
 
 const ChangeBook = ({
+    type,
     book,
     setBook,
     handleSubmit,
@@ -69,7 +70,7 @@ const ChangeBook = ({
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary flex justify-center">
-                        {book.isRequest?"Add a request":"Add a new Book"}
+                        {book.isRequest?`${type} a Request`:`${type} a Book`}
                     </h1>
                     <form onSubmit={handleSubmit}>
                         <PhotoInput 

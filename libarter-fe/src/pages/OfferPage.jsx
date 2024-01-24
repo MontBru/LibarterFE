@@ -87,10 +87,22 @@ const OfferPage = () => {
                     </h1>
 
                     <div className='relative w-full flex justify-center mb-4'>
-                        <img
-                        className='w-64 h-64'
-                        src={image}
-                        alt="Couldn't load image"/>
+                        <ul className='flex flex-wrap overflow-clip gap-3 mb-4'>
+                            {
+                                book.photos.map((photo, i)=>{
+                                    return (
+                                        <li key={i}>
+                                            <img
+                                            className='w-64 h-64 shadow-md shadow-customColors-primary'
+                                            src={photo}
+                                            alt="Couldn't load image"
+                                            />
+                                        </li>    
+                                    );
+                                })
+                            }
+                        </ul>
+                        
 
                         <button className='absolute -bottom-3 -right-3 w-14 h-14 bg-customColors-primary rounded-full flex justify-center items-center'
                             onClick={()=>{

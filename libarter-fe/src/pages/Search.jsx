@@ -52,25 +52,25 @@ const Search = () => {
 
   return (
     <Background>
+      <div className=' bg-gradient-to-b from-customColors-primary to-customColors-complementary'>
 
+      
 
       <div className="lg:flex relative mb-10 border-b-4 border-white shadow-lg shadow-customColors-primary">
-        {/* Left column */}
         <div className="lg:w-1/2 lg:static">
-          <div className=" lg:h-full w-full shadow-lg shadow-customColors-primary lg:shadow-none border-b-4 border-white lg:border-none">
+          <div className=" lg:h-full w-full bg-customColors-homeImageBg shadow-lg shadow-customColors-primary lg:shadow-none border-b-4 border-white lg:border-none">
             <img
               src="WelcomeToLibarter.png"
               alt=""
-              className=' w-full object-cover'
+              className=' w-full object-contain'
               style={{maxHeight: '50vh'}}
             />
 
           </div>
         </div>
 
-        {/* Right column (or below on smaller screens) */}
         <div className="lg:w-1/2 lg:mt-0">
-          <div className="h-full pt-10 pb-6 flex justify-center">
+          <div className="h-full pt-10 pb-6 flex justify-center bg-customColors-homeImageBg">
             <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
           </div>
         </div>
@@ -87,7 +87,6 @@ const Search = () => {
       </div>
 
 
-
       <DisplayAllOffers
         offers={myOffersList}
         handleClick={(index) => {
@@ -102,6 +101,7 @@ const Search = () => {
           setPageNum(newPage)
         }}
       />
+      </div>
     </Background>
   );
 }

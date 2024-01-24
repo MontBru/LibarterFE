@@ -39,6 +39,7 @@ const AddBook = () => {
         
         <>            
             <ChangeBook
+            type={"Add"}
             handleSubmit={handleSubmit}
             error={error}
             setError={setError}

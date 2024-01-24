@@ -22,9 +22,9 @@ const ConversationsPage = () => {
     return ( 
         <Background>
 
-            <div className="md:flex md:flex-row md:justify-between">
+            <div className="md:flex md:flex-row md:justify-between shadow-lg shadow-customColors-primary">
                 <img src="Chat.png" alt="" 
-                    className="w-full h-2/5 object-contain bg-customColors-chatImageBg shadow-lg shadow-customColors-primary"
+                    className="w-full h-2/5 object-contain bg-customColors-chatImageBg"
                 />
                 <div className=" bg-customColors-chatImageBg flex justify-center w-full">
                     <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={"You are client"} notThingText={"You own the offer"}/>

@@ -49,18 +49,11 @@ const DisplayAllOffers = ({ offers, handleClick, maxCols = 10, center = true, ca
           <ul className="grid gap-3" style={{ gridTemplateColumns: `repeat(${parseInt(screenWidth / 280) > maxCols ? maxCols : parseInt(screenWidth / 280)}, minmax(256px, 1fr))` }}>
             {offerState.map((book, index) => (
               <li key={index} className='inline'>
-                {
-                  canDelete?
-                  <BookCard
-                    book={book}
-                    handleClick={() => handleClick(index)}
-                    handleDelete={() => handleDelete(index)}
-                  />:
-                  <BookCard
-                    book={book}
-                    handleClick={() => handleClick(index)}
-                  />
-                }
+                <BookCard
+                  book={book}
+                  handleClick={() => handleClick(index)}
+                  handleDelete={canDelete?() => handleDelete(index):null}
+                />
               </li>
             ))}
           </ul>

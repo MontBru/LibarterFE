@@ -20,7 +20,8 @@ module.exports = {
           accent: '#FFFBE9',
           secondary: '#CEAB93',
           complementary: '#E3CAA5',
-          chatImageBg: '#5b332b'
+          chatImageBg: '#5b332b',
+          homeImageBg: '#e5c8a0'
         }
       }
     },

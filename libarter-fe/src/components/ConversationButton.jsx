@@ -7,7 +7,7 @@ const ConversationButton = ({ image, bookName, clientName, id, lastMessage }) =>
 
 
     return (
-        <button className="flex flex-row border-y w-full border-customColors-primary bg-customColors-primary shadow-md shadow-customColors-primary"
+        <button className="flex flex-row border-y w-full border-customColors-primary bg-customColors-primary shadow-md shadow-customColors-primary border-b-customColors-accent hover:bg-customColors-secondary"
             onClick={() => {
                 navigate(`${routes.messages}/${id}`);
             }}

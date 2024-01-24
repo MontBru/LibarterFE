@@ -46,6 +46,7 @@ const UpdateOffer = (  ) => {
 
 
         const updateDB = async () => {
+          console.log(book);
           const successfulUpdate = updateBookById(state.id, book);
           if(successfulUpdate)
             navigate(routes.myOffers);
@@ -58,6 +59,7 @@ const UpdateOffer = (  ) => {
     return ( 
       <>
         <ChangeBook
+          type={"Update"}
           handleSubmit={handleSubmit}
           error={error}
           setError={setError}

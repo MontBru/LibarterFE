@@ -13,7 +13,6 @@ const MessagesPage = () => {
     const { convId } = useParams();
 
     const [messages, setMessages] = useState([]);
-    const [totalPageCount, setTotalPageCount] = useState(0);
     const [newMessage, setNewMessage] = useState("");
     const [pageNum, setPageNum] = useState(0);
     const [prevPageNum, setPrevPageNum] = useState(0);
@@ -61,7 +60,6 @@ const MessagesPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await getMessagesByConversation({ conversationId: convId, pageNum });
-            setTotalPageCount(data.totalPageCount);
             let tmpMessages = [...messages, ...data.messages];
             const uniqueMessageIds = new Set();
             tmpMessages = tmpMessages.filter((message) => {
@@ -74,7 +72,8 @@ const MessagesPage = () => {
             setMessages(tmpMessages);
             setButtonLoading(false);
             setIsLoading(false);
-            if(pageNum >= totalPageCount-1)
+
+            if(pageNum >= data.totalPageCount-1)
                 setShowLoadButton(false);
         }
 
@@ -111,7 +110,6 @@ const MessagesPage = () => {
 
     return (
         <>
-
             <BackgroundWithoutFooter>
                 {
                     isLoading ? <div>Loading...</div> :
@@ -120,14 +118,10 @@ const MessagesPage = () => {
                                 ShowLoadButton &&
                                 <LoadMoreButton />
                             }
-                            
 
                             <DisplayAllMessages messages={messages} />
                             <div ref={lastMessageRef} />
-
-
                         </>
-
                 }
 
             </BackgroundWithoutFooter>
@@ -139,7 +133,6 @@ const MessagesPage = () => {
                 <button className="bg-customColors-accent hover:bg-customColors-complementary p-2 px-3 rounded-full ml-3 mb-2">
                     <FontAwesomeIcon icon={faArrowRight} className="text-customColors-primary" />
                 </button>
-
             </form>
 
         </>

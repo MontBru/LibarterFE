@@ -3,22 +3,33 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
-const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
+const PhotoInput = ({photos, setPhotos}) => {
 
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    function handleResize() {
-      setScreenWidth(window.innerWidth);
-      }
-
-    // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const InputButton = () => {
+    return ( 
+      <div className='w-full flex justify-center'>
+          <div
+            className="bg-customColors-secondary text-white 
+            font-bold h-64 w-64 shadow-md shadow-customColors-primary flex justify-center
+            rounded-md items-center text-3xl 
+            relative m-2" 
+          >
+            <label htmlFor={`photo-input`} className='cursor-pointer'>
+              +
+              <input
+                type="file"
+                id={`photo-input`}
+                accept="image/*"
+                onChange={(e) => {
+                  handleFileInputChange(e);
+                }}
+                className="opacity-0 absolute inset-0 w-64 h-64"
+              />
+            </label>
+          </div>
+        </div>
+     );
+  }
 
   const handleFileInputChange = ( event) => {
     const selectedFile = event.target.files[0];
@@ -51,7 +62,7 @@ const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
           <img
             src={photos[ind]}
             alt={`Uploaded ${ind}`}
-            className=" w-64 h-64 shadow-md shadow-customColors-primary rounded-md cursor-pointer"
+            className=" w-64 h-64 object-cover shadow-md shadow-customColors-primary rounded-md cursor-pointer"
             onClick={() => handleImageClick(ind)}
           />
           <button
@@ -68,42 +79,18 @@ const PhotoInput = ({photos, setPhotos, maxCols=5}) => {
   if(photos!== null)
   {
   return (
-  <div className='grid gap-3 py-4' style={{gridTemplateColumns:`repeat(${parseInt(screenWidth/280)>maxCols?maxCols:parseInt(screenWidth/280)}, minmax(256px, 1fr))`}}>
+  <div >
 
-    {photos.length!==0?
-    <ul className='flex justify-center'>
-      {renderPhotoInputs()}
-    </ul>:null
-  }
+      <ul className='flex flex-wrap justify-center overflow-clip'>
+        {renderPhotoInputs()}
+
+        {
+          photos.length < 5 &&
+          <InputButton/>
+        }
+      </ul>
     
     
-    {photos.length < 5?
-      (
-
-        <div className='w-full flex justify-center'>
-          <div
-            className="bg-customColors-secondary text-white 
-            font-bold h-64 w-64 shadow-md shadow-customColors-primary flex justify-center
-            rounded-md items-center text-3xl 
-            relative m-2" 
-          >
-            <label htmlFor={`photo-input`} className='cursor-pointer'>
-              +
-              <input
-                type="file"
-                id={`photo-input`}
-                accept="image/*"
-                onChange={(e) => {
-                  handleFileInputChange(e);
-                }}
-                className="opacity-0 absolute inset-0 w-64 h-64"
-              />
-            </label>
-          </div>
-        </div>
-        
-      ):null
-    }
   </div>
     );
   }else{

@@ -46,7 +46,6 @@ const timeToReadableTime = ({time}) => {
         return "Yesterday " + displayDate;
     }
 
-    console.log(options)
     return date.toLocaleDateString("en-UK", options);
 }
  
