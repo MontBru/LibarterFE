@@ -5,6 +5,8 @@ import DisplayAllOffers from "../components/DisplayAllOffers";
 import RequestOfferSelector from "../components/RequestOfferSelector";
 import getAllBooksOfLoggedUser from "../service/getAllBooksOfLoggedUser";
 import Background from "../components/Background";
+import myOffersWideImg from '../assets/myOffersWide.png';
+import myOffersImg from '../assets/myOffers.png';
 
 const MyOffers = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -22,15 +24,14 @@ const MyOffers = () => {
   }, [isRequest]);
 
   return (
-    // <main className='flex flex-col h-full w-full bg-customColors-complementary overflow-y-scroll z-0'>
       <Background> 
 
-        <img src="myOffersWide.png" alt="" 
+        <img src={myOffersWideImg} alt="" 
         className="w-full object-cover border-b-4 border-white hidden md:block shadow-lg shadow-customColors-primary"
         style={{height:"40vh"}}
         />
 
-        <img src="myOffers.png" alt="" 
+        <img src={myOffersImg} alt="" 
           className="h-2/5 w-full object-cover border-b-4 border-white md:hidden shadow-lg shadow-customColors-primary"
         />
       
@@ -50,7 +51,7 @@ const MyOffers = () => {
             }}
             canDelete = {true}
           />
-        )}{/* </main> */}
+        )}
         </Background>
         
     

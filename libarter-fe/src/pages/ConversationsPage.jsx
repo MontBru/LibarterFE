@@ -4,6 +4,7 @@ import getConversations from "../service/getConversations";
 import Background from "../components/Background";
 import ConversationButton from "../components/ConversationButton";
 import DisplayAllConversations from "../components/DisplayAllConversations";
+import chatImg from '../assets/Chat.png'
 
 const ConversationsPage = () => {
     const [conversations, setConversations] = useState([]);
@@ -23,7 +24,7 @@ const ConversationsPage = () => {
         <Background>
 
             <div className="md:flex md:flex-row md:justify-between shadow-lg shadow-customColors-primary">
-                <img src="Chat.png" alt="" 
+                <img src={chatImg} alt="" 
                     className="w-full h-2/5 object-contain bg-customColors-chatImageBg"
                 />
                 <div className=" bg-customColors-chatImageBg flex justify-center w-full">

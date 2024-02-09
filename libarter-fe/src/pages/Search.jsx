@@ -10,6 +10,7 @@ import RequestOfferSelector from '../components/RequestOfferSelector';
 import getBooksBySearch from '../service/public/getBooksBySearch';
 import Background from '../components/Background';
 import Footer from '../components/Footer';
+import homepageImg from '../assets/WelcomeToLibarter.png';
 
 const Search = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -60,7 +61,7 @@ const Search = () => {
         <div className="lg:w-1/2 lg:static">
           <div className=" lg:h-full w-full bg-customColors-homeImageBg shadow-lg shadow-customColors-primary lg:shadow-none border-b-4 border-white lg:border-none">
             <img
-              src="WelcomeToLibarter.png"
+              src={homepageImg}
               alt=""
               className=' w-full object-contain'
               style={{maxHeight: '50vh'}}

@@ -4,6 +4,7 @@ import getLoggedUser from "../service/getLoggedUser";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import Background from "../components/Background";
+import userImg from '../assets/user.png'
 
 const ProfilePage = () => {
     const [user, setUser] = useState(1);
@@ -38,13 +39,13 @@ const ProfilePage = () => {
                 <div>
                     <div className="flex justify-center p-6">
                         <img 
-                        src="/user.png" 
+                        src={userImg} 
                         alt="user default image" 
                         className=" w-5/6 max-w-xl"
                         />
                     </div>
                     
-                    <h1 className="flex justify-center font-extrabold text-white text-xl overflow-scroll">
+                    <h1 className="flex justify-center font-extrabold text-white text-xl">
                         Hello, {user.username}
                     </h1>
 

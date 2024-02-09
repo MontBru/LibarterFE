@@ -36,7 +36,6 @@ const ForgotPassword = () => {
                         <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                         
                         <div className="mb-4">
-                            {/* doesn't work with form because the form doesn't wait for axios to fetch */}
                             <button
                             type='button'
                             onClick={handleSubmit}
@@ -45,7 +44,6 @@ const ForgotPassword = () => {
                                 Send Email
                                 
                             </button>
-                            {/* <SubmitButton value="Send Email" /> */}
                         </div>
                         {isError && (
                             <div className="text-red-500">

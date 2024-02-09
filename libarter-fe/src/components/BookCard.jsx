@@ -2,6 +2,7 @@ import React from 'react';
 import TagList from './TagList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
+import noImgForThisBook from '../assets/NoImgForThisBook.jpeg'
 
 const BookCard = ({ book, handleClick, handleDelete = null }) => {
 
@@ -10,7 +11,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             <button className="w-64 m-4 bg-customColors-secondary shadow-md shadow-customColors-primary rounded-b-md"
                 onClick={() => handleClick()}>
                 <div className='relative'>
-                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?book.photos[0]:"NoImgForThisBook.jpeg"}/>
+                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?book.photos[0]:noImgForThisBook}/>
                     {
                         book.new === true ?
                             <h3 className="absolute bottom-0 right-4 bg-customColors-primary py-1 px-3 rounded-xl shadow-md font-bold text-white mb-3">
