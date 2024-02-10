@@ -7,10 +7,11 @@ import noImgForThisBook from '../assets/NoImgForThisBook.jpeg'
 const BookCard = ({ book, handleClick, handleDelete = null }) => {
 
     return (
-        <div className={handleDelete!==null?'relative':''}>
-            <button className="w-64 m-4 bg-customColors-secondary shadow-md shadow-customColors-primary rounded-b-md"
-                onClick={() => handleClick()}>
-                <div className='relative'>
+        <div className={handleDelete!==null ? 'relative':''}>
+            <button style={{height:"27.5rem"}} 
+            className="py-0 w-64 m-4 bg-customColors-secondary shadow-md shadow-customColors-primary rounded-b-md"
+            onClick={() => handleClick()}>
+                <div className='relative top-0'>
                     <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?book.photos[0]:noImgForThisBook}/>
                     {
                         book.new === true ?
@@ -29,20 +30,25 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                 </div>
 
                 <div className='px-4'>
-                    {
-                        book.tags &&
-                        <TagList tags={book.tags} setTags={null} />
-                    }
+                    
+                    <div className='line-clamp-1 text-customColors-accent'>
+                        {
+                            book.tags && book.tags.length ?
+                            <TagList tags={book.tags} setTags={null}/>:
+                            <div className='h-12'></div>
+                        }
+                    </div>
+                    
 
-                    <p className='line-clamp-2 text-left font-light text-customColors-accent'>
+                    <p className='h-11 line-clamp-2 text-left font-light text-customColors-accent'>
                         {book.description}
                     </p>
 
                     <div className='flex flex-row justify-between pt-4'>
-                        <h3 className="line-clamp-1 font-bold text-customColors-accent">
+                        <h3 className="h-6 line-clamp-1 w-fit font-bold text-customColors-accent">
                             {book.author}
                         </h3> 
-                        <h3 className="rounded-sm font-bold px-1 text-white mb-3 border border-white w-fit">
+                        <h3 className="line-clamp-1 flex-shrink-0 rounded-sm font-bold px-1 text-white mb-3 border border-white w-fit">
                             {book.price} BGN
                             {
                                 book.acceptsTrade &&
@@ -59,15 +65,14 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
 
             </button>
             {
-                handleDelete!==null?
+                handleDelete!==null &&
                 <button
                     type="button"
                     className="absolute top-0 right-0 p-2 text-red-500 text-2xl bg-customColors-accent rounded-md shadow-md bg-opacity-60"
                     onClick={() => handleDelete()}
                 >
                     <FontAwesomeIcon icon={faTrash} />
-                </button>:
-                null
+                </button>
             }
             
         </div>
