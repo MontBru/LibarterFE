@@ -1,4 +1,6 @@
 import ConversationButton from "./ConversationButton";
+import NoImgForThisBook from "../assets/NoImgForThisBook.jpeg"
+
 
 const DisplayAllConversations = ({conversations}) => {
     if(conversations == null)
@@ -10,7 +12,7 @@ const DisplayAllConversations = ({conversations}) => {
                 conversations.map(conversation => {
                     return (
                     <li key={conversation.id}>
-                        <ConversationButton image={conversation.base64image?conversation.base64image:"NoImgForThisBook.jpeg"} bookName={conversation.bookName} clientName={conversation.clientName} id={conversation.id} lastMessage={conversation.lastMessage}/>
+                        <ConversationButton image={conversation.base64image?conversation.base64image:NoImgForThisBook} bookName={conversation.bookName} clientName={conversation.clientName} id={conversation.id} lastMessage={conversation.lastMessage}/>
                     </li>
                     );
                     

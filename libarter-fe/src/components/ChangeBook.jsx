@@ -116,7 +116,7 @@ const ChangeBook = ({
                         <FormInputComponent field={"Description"} type={"description"} value={book.description} setValue={(newDescr)=>{setVal("description", newDescr)}} isError={error} setIsError={setError}/>
 
                         <div className="flex flex-row items-center gap-4">
-                            <div>{book.isRequest?"Search for people with similar offers:":"Search for people with similar requests:"}</div>
+                            <div>{book.isRequest?"Search for people with offers that may satisfy you:":"Search for people with similar requests:"}</div>
                             <button 
                             type="button"
                             className=" text-customColors-accent bg-customColors-secondary p-3 rounded-md"
@@ -128,6 +128,7 @@ const ChangeBook = ({
                                     else
                                         setSuggestedOffers(data);                                
                                 }
+                                getSuggestions();
                             }}>
                                 <FontAwesomeIcon icon={faSearch}/>
                             </button>
