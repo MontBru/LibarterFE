@@ -1,11 +1,11 @@
 import React from 'react';
 
 export const routes = {
-    register: '/',
+    register: '/register',
     login:'/login',
     forgotPassword: '/forgot-password',
     addBook: '/add-book',
-    search: '/search',
+    search: '/',
     myOffers: '/my-offers',
     updateOffer: '/update-offer',
     offerPage: '/offer-page',
@@ -16,7 +16,10 @@ export const routes = {
     messages: '/messages'
 };
 
-//export const dbAdress="https://libarterbe.azurewebsites.net/";
 export const dbAdress="https://libarterbe.azurewebsites.net/";
 
 export const feAdress = "https://libarter-fe.vercel.app";
+
+// export const dbAdress="http://localhost:8080";
+
+// export const feAdress = "http://localhost:3000";
