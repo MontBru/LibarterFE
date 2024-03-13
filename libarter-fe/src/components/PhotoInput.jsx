@@ -85,7 +85,7 @@ const PhotoInput = ({photos, setPhotos}) => {
         {renderPhotoInputs()}
 
         {
-          photos.length < 5 &&
+          photos.length < 4 &&
           <InputButton/>
         }
       </ul>

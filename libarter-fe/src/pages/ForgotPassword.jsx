@@ -6,56 +6,12 @@ import SubmitButton from '../components/SubmitButton';
 import forgotPassword from '../service/public/forgotPassword';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
+import SendEmail from '../components/SendEmail';
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
-    const [isError, setIsError] = useState(false);
-    const navigate = useNavigate();
-
-    const handleSubmit = () => {
-        
-        const sendRequest = async () => {
-            const res = await forgotPassword(email);
-            if(res === true)
-                navigate(routes.checkEmail);
-            else 
-                setIsError(true);
-        }
-        
-        sendRequest();
-    }
-
-    return ( 
-        <main className=' bg-customColors-accent w-screen h-full overflow-y-scroll'>
-            <CenteredBox>
-                <div>
-                    <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
-                        Forgot Password
-                    </h1>
-                    <form onSubmit={handleSubmit}>
-                        <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
-                        
-                        <div className="mb-4">
-                            <button
-                            type='button'
-                            onClick={handleSubmit}
-                            className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
-                            >
-                                Send Email
-                                
-                            </button>
-                        </div>
-                        {isError && (
-                            <div className="text-red-500">
-                                Invalid credentials. Please try again.
-                            </div>
-                        )}
-                    </form>
-                </div>
-                
-            </CenteredBox>
-        </main>
-     );
+    return (
+        <SendEmail service={forgotPassword} title=""/>
+    );
 }
  
 export default ForgotPassword;

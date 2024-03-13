@@ -14,11 +14,13 @@ import CheckEmail from './pages/CheckEmail';
 import ProfilePage from './pages/ProfilePage';
 import ConversationsPage from './pages/ConversationsPage';
 import MessagesPage from './pages/MessagesPage';
+import RegisterWtihToken from './pages/RegisterWithToken';
 
 const AppRoutes = () => {
     return ( 
         <Routes>
-            <Route path={routes.register} element={<Register/>}/>
+            <Route path={routes.register} element={<RegisterWtihToken/>}/>
+            <Route path={`${routes.registerWithToken}/:token`} element={<Register/>}/>
             <Route path={routes.login} element={<Login/>}/>
             <Route path={routes.forgotPassword} element={<ForgotPassword/>}/>
             <Route path={routes.addBook} element={<AddBook/>}/>

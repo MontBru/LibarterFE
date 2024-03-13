@@ -6,10 +6,12 @@ import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import register from '../service/public/register';
+import { useParams } from 'react-router-dom';
 
 const Register = () => {
+    const {token} = useParams();
+
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNum] = useState('');
     const [isError, setIsError] = useState(false);
@@ -20,7 +22,7 @@ const Register = () => {
         sessionStorage.removeItem("JWT");
 
         const handleRegister = async () => {
-            const user={username,email,password, phoneNumber};
+            const user={username,password, phoneNumber, token};
             const registeredSuccesfully = await register(user);
                 if(registeredSuccesfully)
                     navigate(routes.search);
@@ -42,7 +44,6 @@ const Register = () => {
                     </h1>
                     <form onSubmit={handleSubmit}>
                         <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                        <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                         <FormInputComponent field="Phone Number" type="tel" value={phoneNumber} setValue={setPhoneNum} isError={isError} setIsError={setIsError}/>
                         <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                         <div className="mb-4">

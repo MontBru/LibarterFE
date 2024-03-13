@@ -10,11 +10,13 @@ const Topbar = ({onMenuClick}) => {
     const navigate = useNavigate();
 
     const resetPasswordPattern = /^\/reset-password\/[^\/]*$/;
+    const requestRegisterPattern = /^\/register-token\/[^\/]*$/;
 
     if(location.pathname === routes.register || 
        location.pathname === routes.forgotPassword ||
        location.pathname === routes.login ||
        location.pathname === routes.checkEmail ||
+       requestRegisterPattern.test(location.pathname) ||
        resetPasswordPattern.test(location.pathname))
     {
         return null;

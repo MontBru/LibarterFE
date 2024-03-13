@@ -40,11 +40,14 @@ const Search = () => {
     const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
 
     const fetchData = async () => {
-      let data = await getBooksBySearch(endpoint, loadDTO);
-      if (data === null)
-        data = { books: [], totalPageCount: 1 };
-      setMyOffersList(data.books);
-      setTotalPages(data.totalPageCount);
+      const data = await getBooksBySearch(endpoint, loadDTO);
+      if (data === null) {
+        setMyOffersList([]);
+        setTotalPages(1);
+      } else {
+        setMyOffersList(data.books);
+        setTotalPages(data.totalPageCount);
+      }
     }
 
     fetchData();
