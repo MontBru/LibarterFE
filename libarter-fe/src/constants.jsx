@@ -18,10 +18,10 @@ export const routes = {
     aboutus: '/about-us'
 };
 
-// export const dbAdress="https://libarterbe.azurewebsites.net/";
+export const dbAdress="https://libarterbe.azurewebsites.net/";
 
-// export const feAdress = "https://libarter-fe.vercel.app";
+export const feAdress = "https://libarter-fe.vercel.app";
 
-export const dbAdress="http://localhost:8080";
+// export const dbAdress="http://localhost:8080";
 
-export const feAdress = "http://localhost:3000";
+// export const feAdress = "http://localhost:3000";
