@@ -14,7 +14,8 @@ export const routes = {
     checkEmail: '/check-email',
     profilePage: '/profile-page',
     conversations: '/conversations',
-    messages: '/messages'
+    messages: '/messages',
+    aboutus: '/about-us'
 };
 
 // export const dbAdress="https://libarterbe.azurewebsites.net/";

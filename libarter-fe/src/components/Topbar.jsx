@@ -25,7 +25,12 @@ const Topbar = ({onMenuClick}) => {
     return ( 
         <header className='sticky top-0 z-50 h-16 bg-customColors-primary text-white p-4 flex justify-between items-center shadow-md'>
             <HomeButton onMenuClick={onMenuClick}/>
-            <img src={libarterLogo} alt="" className='h-16'/>
+            <button
+            onClick={()=>{navigate(routes.search)}}
+            >
+                <img src={libarterLogo} alt="" className='h-16'/>
+            </button>
+            
             <ProfilePageButton/>
         </header>
     );

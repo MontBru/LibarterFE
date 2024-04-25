@@ -63,6 +63,7 @@ const Navbar = ({show, onMenuClick}) => {
                         <li><NavButton route={routes.addBook} text={"Add Offer"} icon={faPlus}/></li>
                         <li><NavButton route={routes.myOffers} text={"My offers"} icon={faBook}/></li>
                         <li><NavButton route={routes.conversations} text={"Chat"} icon={faMessage}/></li>
+                        <li><NavButton route={routes.aboutus} text={"About Us"} icon={faInfoCircle}/></li>
                     </ul>
                     
                 </div>

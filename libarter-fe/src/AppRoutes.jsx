@@ -15,6 +15,7 @@ import ProfilePage from './pages/ProfilePage';
 import ConversationsPage from './pages/ConversationsPage';
 import MessagesPage from './pages/MessagesPage';
 import RegisterWtihToken from './pages/RegisterWithToken';
+import AboutUs from './pages/AboutUs';
 
 const AppRoutes = () => {
     return ( 
@@ -33,6 +34,7 @@ const AppRoutes = () => {
             <Route path={routes.profilePage} element={<ProfilePage/>}/>
             <Route path={routes.conversations} element={<ConversationsPage/>}/>
             <Route path={`${routes.messages}/:convId`} element={<MessagesPage/>}/>
+            <Route path={`${routes.aboutus}`} element={<AboutUs />} />
         </Routes>
     );
 }
