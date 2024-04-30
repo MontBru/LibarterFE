@@ -6,6 +6,7 @@ import SubmitButton from '../components/SubmitButton';
 import forgotPassword from '../service/public/forgotPassword';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const SendEmail = ({service, title}) => {
     const [email, setEmail] = useState("");
@@ -36,6 +37,8 @@ const SendEmail = ({service, title}) => {
                     <form onSubmit={handleSubmit}>
                         <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                         
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+
                         <div className="mb-4">
                             <button
                             type='button'
