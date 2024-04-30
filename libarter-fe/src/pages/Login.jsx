@@ -6,6 +6,7 @@ import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import login from '../service/public/login';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -48,6 +49,9 @@ const Login = () => {
                         <div className="mb-4">
                             <SubmitButton value="Log in" />
                         </div>
+
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+
                         {isError && (
                             <div className="text-red-500">
                                 Invalid credentials. Please try again.

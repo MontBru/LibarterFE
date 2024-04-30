@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import register from '../service/public/register';
 import { useParams } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const Register = () => {
     const {token} = useParams();
@@ -49,6 +50,9 @@ const Register = () => {
                         <div className="mb-4">
                             <SubmitButton value="Register" />
                         </div>
+                        
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+
                         {isError && (
                             <div className="text-red-500">
                                 Invalid credentials. Please try again.
