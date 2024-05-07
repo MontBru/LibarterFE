@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import CenteredBox from '../components/CenteredBox';
 import FormInputComponent from "../components/FormInputComponent";
 import { useState } from 'react';
@@ -12,19 +12,26 @@ const SendEmail = ({service, title}) => {
     const [email, setEmail] = useState("");
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
+    const recaptcha = useRef();
 
     const handleSubmit = () => {
         
-        const sendRequest = async () => {
-            const res = await service(email);
-            console.log(res)
-            if(res === true)
-                navigate(routes.checkEmail);
-            else 
-                setIsError(true);
+        if(!recaptcha.current.getValue())
+            alert('Please verify that you are not a robot!');
+        else{
+            const sendRequest = async () => {
+                const res = await service(email);
+                console.log(res)
+                if(res === true)
+                    navigate(routes.checkEmail);
+                else 
+                    setIsError(true);
+            }
+            
+            sendRequest();
         }
+
         
-        sendRequest();
     }
 
     return ( 
@@ -37,9 +44,9 @@ const SendEmail = ({service, title}) => {
                     <form onSubmit={handleSubmit}>
                         <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                         
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                        <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
 
-                        <div className="mb-4">
+                        <div className="my-4">
                             <button
                             type='button'
                             onClick={handleSubmit}

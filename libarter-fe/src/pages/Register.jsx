@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CenteredBox from "../components/CenteredBox";
 import { useState } from "react";
 import { routes } from "../constants";
@@ -18,20 +18,30 @@ const Register = () => {
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
 
+    const recaptcha = useRef();
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        sessionStorage.removeItem("JWT");
 
-        const handleRegister = async () => {
-            const user={username,password, phoneNumber, token};
-            const registeredSuccesfully = await register(user);
-                if(registeredSuccesfully)
-                    navigate(routes.search);
-                else
-                    setIsError(true);
+        if(!recaptcha.current.getValue())
+            alert('Please verify that you are not a robot!');
+        else
+        {
+            sessionStorage.removeItem("JWT");
+
+            const handleRegister = async () => {
+                const user={username,password, phoneNumber, token};
+                const registeredSuccesfully = await register(user);
+                    if(registeredSuccesfully)
+                        navigate(routes.search);
+                    else
+                        setIsError(true);
+            }
+
+            handleRegister();
         }
 
-        handleRegister();
+        
     };
 
     
@@ -47,11 +57,12 @@ const Register = () => {
                         <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
                         <FormInputComponent field="Phone Number" type="tel" value={phoneNumber} setValue={setPhoneNum} isError={isError} setIsError={setIsError}/>
                         <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
-                        <div className="mb-4">
+                        <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
+                        <div className="my-4">
                             <SubmitButton value="Register" />
                         </div>
                         
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                        
 
                         {isError && (
                             <div className="text-red-500">

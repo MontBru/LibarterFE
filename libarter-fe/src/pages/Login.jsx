@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CenteredBox from "../components/CenteredBox";
 import { useState } from "react";
 import { routes } from "../constants";
@@ -13,20 +13,29 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
+    const recaptcha = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        sessionStorage.removeItem("JWT");
-        const loginDTO = {username, password}
-        const handleLogin = async () => {
-            const result = await login(loginDTO);
-            if(result)
-                navigate(routes.search);
-            else
-                setIsError(true);
+
+        if(!recaptcha.current.getValue())
+            alert('Please verify that you are not a robot!')
+        else
+        {
+            sessionStorage.removeItem("JWT");
+            const loginDTO = {username, password}
+            const handleLogin = async () => {
+                const result = await login(loginDTO);
+                if(result)
+                    navigate(routes.search);
+                else
+                    setIsError(true);
+            }
+
+            handleLogin();
         }
 
-        handleLogin();
+        
     };
 
     
@@ -48,9 +57,9 @@ const Login = () => {
                         </div>
 
 
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+                        <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
 
-                        <div className="mb-4">
+                        <div className="my-4">
                             <SubmitButton value="Log in" />
                         </div>
 
