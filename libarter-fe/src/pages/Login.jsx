@@ -46,11 +46,13 @@ const Login = () => {
                                 Forgot password?
                             </Link>
                         </div>
+
+
+                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
+
                         <div className="mb-4">
                             <SubmitButton value="Log in" />
                         </div>
-
-                        <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY}/>
 
                         {isError && (
                             <div className="text-red-500">
