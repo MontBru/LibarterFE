@@ -60,7 +60,7 @@ const Search = () => {
 
       
 
-      <div className="lg:flex relative mb-10 border-b-4 border-white shadow-lg shadow-customColors-primary">
+      <div className="lg:flex relative mb-10 border-b-4 border-customColors-primary shadow-lg shadow-customColors-primary">
         <div className="lg:w-1/2 lg:static">
           <div className=" lg:h-full w-full bg-customColors-homeImageBg shadow-lg shadow-customColors-primary lg:shadow-none border-b-4 border-white lg:border-none">
             <img

@@ -27,7 +27,7 @@ const DropdownButton = ({setSearchType}) => {
       <button
         onClick={toggleDropdown}
         type="button"
-        className="inline-flex items-center justify-center w-full px-4 h-full text-lg text-customColors-secondary rounded-full hover:bg-customColors-complementary hover:text-customColors-accent"
+        className="inline-flex items-center justify-center w-full px-4 h-full text-lg text-customColors-accent rounded-full hover:bg-customColors-form_bg hover:text-customColors-complementary"
       >
         <FontAwesomeIcon icon = {faMagnifyingGlassPlus}/>
       </button>
