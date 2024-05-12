@@ -56,7 +56,7 @@ const Search = () => {
 
   return (
     <Background>
-      <div className=' bg-gradient-to-b from-customColors-primary to-customColors-complementary'>
+      <div className=' bg-gradient-to-b from-customColors-secondary to-customColors-complementary'>
 
       
 

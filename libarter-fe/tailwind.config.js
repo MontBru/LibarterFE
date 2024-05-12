@@ -13,9 +13,10 @@ module.exports = {
           primary: '#AD8B73',
           accent: '#FFFBE9',
           secondary: '#CEAB93',
-          complementary: '#E3CAA5',
+          complementary: '#FFFFFF',
+          form_bg: '#E3CAA5',
           chatImageBg: '#5b332b',
-          homeImageBg: '#e5c8a0'
+          homeImageBg: '#FFFFFF'
         }
       }
     },

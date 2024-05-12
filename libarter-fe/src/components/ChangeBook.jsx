@@ -66,7 +66,7 @@ const ChangeBook = ({
     } 
 
     return ( 
-        <Background >
+        <Background color={'form_bg'}>
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary flex justify-center">
@@ -116,7 +116,7 @@ const ChangeBook = ({
                         <FormInputComponent field={"Description"} type={"description"} value={book.description} setValue={(newDescr)=>{setVal("description", newDescr)}} isError={error} setIsError={setError}/>
 
                         <div className="flex flex-row items-center gap-4">
-                            <div>{book.isRequest?"Search for people with offers that may satisfy you:":"Search for people with similar requests:"}</div>
+                            <div className='text-customColors-primary'>{book.isRequest?"Search for people with offers that may satisfy you:":"Search for people with similar requests:"}</div>
                             <button 
                             type="button"
                             className=" text-customColors-accent bg-customColors-secondary p-3 rounded-md"
