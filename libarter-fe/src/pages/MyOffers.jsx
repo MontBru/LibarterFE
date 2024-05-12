@@ -32,10 +32,10 @@ const MyOffers = () => {
         />
 
         <img src={myOffersImg} alt="" 
-          className="h-2/5 w-full object-cover border-b-4 border-white md:hidden shadow-lg shadow-customColors-primary"
+          className="h-2/5 w-full object-cover border-b-4 border-customColors-secondary md:hidden shadow-lg shadow-customColors-primary"
         />
       
-        <h1 className="text-2xl z-40 sticky p-3 top-0 bg-white rounded-b-md shadow-lg shadow-customColors-primary font-bold text-customColors-secondary m-4 mt-0 flex justify-center">
+        <h1 className="text-2xl z-40 sticky p-3 top-0 bg-customColors-secondary rounded-b-md shadow-lg shadow-customColors-primary font-bold text-customColors-accent m-4 mt-0 flex justify-center">
           {isRequest?"My Requests":"My Offers"}
         </h1>
 
