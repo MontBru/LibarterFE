@@ -22,6 +22,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             reader.onloadend = () => {
             const base64Data = reader.result;
             setImageSrc(base64Data);
+            console.log(base64Data);
             };
         }
     
