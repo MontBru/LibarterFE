@@ -2,7 +2,7 @@ import axiosInstance from "../axios/axiosInstance";
 
 const addBook = async (book) => {
     try{
-        const response = await axiosInstance.post("user/book/add", book);
+        const response = await axiosInstance.post("user/books", book);
         return true;
     }
     catch{

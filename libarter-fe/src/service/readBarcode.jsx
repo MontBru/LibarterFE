@@ -2,7 +2,7 @@ import axiosInstance from "../axios/axiosInstance";
 
 const readBarcode = async (image) => {
     try{
-        const response = await axiosInstance.post(`user/barcode/readBarcode`, {
+        const response = await axiosInstance.post(`user/barcode`, {
             image
         });
         return await response.data;
