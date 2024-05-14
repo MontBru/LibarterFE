@@ -10,7 +10,7 @@ const DropdownButton = ({setSearchType}) => {
     return (
         <button
             onClick={() => handleClick()}
-            className="block w-full px-4 py-2 text-sm text-customColors-primary hover:bg-customColors-complementary hover:text-customColors-accent"
+            className="block w-full px-4 py-2 text-sm text-customColors-primary hover:bg-customColors-accent hover:text-customColors-secondary"
             role="menuitem"
         >
             {name}
