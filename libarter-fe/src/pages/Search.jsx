@@ -25,22 +25,11 @@ const Search = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let endpoint = "";
-    if (searchType == 1) {
-      endpoint = "public/book/getBooksBySearch"
-    }
-    else if (searchType == 2) {
-      endpoint = "public/book/getBooksByAuthorSearch"
-    }
-    else {
-      endpoint = "public/book/getBooksByTagSearch"
-    }
 
-
-    const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1] };
+    const loadDTO = { isRequest, searchTerm: searchTerm, pageNum: pageNum - 1, minPrice: priceRange[0], maxPrice: priceRange[1], searchType: searchType };
 
     const fetchData = async () => {
-      const data = await getBooksBySearch(endpoint, loadDTO);
+      const data = await getBooksBySearch(loadDTO);
       if (data === null) {
         setMyOffersList([]);
         setTotalPages(1);
