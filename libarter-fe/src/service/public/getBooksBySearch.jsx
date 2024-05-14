@@ -1,6 +1,6 @@
 import { publicAxiosInstance } from "../../axios/axiosInstance";
 
-const getBooksBySearch = async (endpoint, loadDTO) => {
+const getBooksBySearch = async (loadDTO) => {
     try{
         const response = await publicAxiosInstance.post('public/book/getBooksBySearch', loadDTO);
         return await response.data;
