@@ -2,7 +2,9 @@ import React from 'react';
 import TagList from './TagList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import noImgForThisBook from '../assets/NoImgForThisBook.jpeg'
+import noImgForThisBook from '../assets/NoImgForThisBook.jpeg';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const BookCard = ({ book, handleClick, handleDelete = null }) => {
 
