@@ -12,7 +12,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             className="py-0 w-64 m-4 bg-customColors-secondary shadow-md shadow-customColors-primary rounded-b-md"
             onClick={() => handleClick()}>
                 <div className='relative top-0'>
-                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?book.photos[0]:noImgForThisBook}/>
+                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`:noImgForThisBook}/>
                     {
                         book.new === true ?
                             <h3 className="absolute bottom-0 right-4 bg-customColors-primary py-1 px-3 rounded-xl shadow-md font-bold text-white mb-3">
