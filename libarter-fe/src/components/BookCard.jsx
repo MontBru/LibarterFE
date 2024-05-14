@@ -19,7 +19,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             
             const blobUrl = URL.createObjectURL(blobData);
             setImageSrc(blobUrl);
-            console.log(base64Data);
+            console.log(blobUrl);
             };
         
     
