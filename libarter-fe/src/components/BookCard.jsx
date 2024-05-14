@@ -16,12 +16,19 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                 return;
             const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
             const blobData = await response.blob();
-            
-            const blobUrl = URL.createObjectURL(blobData);
-            setImageSrc(blobUrl);
-            console.log(blobUrl);
+
+            // Read the blob data as a base64 string
+            const reader = new FileReader();
+            reader.readAsDataURL(blobData);
+            reader.onloadend = () => {
+            const base64Data = reader.result;
+            // Get the MIME type from the blob data
+            const mimeType = blobData.type;
+            // Prepend the base64 string with the appropriate data URL prefix
+            setImageSrc(`data:${mimeType};base64,${base64Data.split(',')[1]}`);
+            console.log(base64Data);
             };
-        
+        }
     
         fetchImage();
       }, []);
