@@ -16,15 +16,12 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                 return;
             const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
             const blobData = await response.blob();
-
-            const reader = new FileReader();
-            reader.readAsDataURL(blobData);
-            reader.onloadend = () => {
-            const base64Data = reader.result;
-            setImageSrc(base64Data);
+            
+            const blobUrl = URL.createObjectURL(blobData);
+            setImageSrc(blobUrl);
             console.log(base64Data);
             };
-        }
+        
     
         fetchImage();
       }, []);
