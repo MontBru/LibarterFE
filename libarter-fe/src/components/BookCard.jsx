@@ -17,7 +17,6 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
             const blobData = await response.text();
             setImageSrc(blobData);
-            console.log(blobData);
             };
     
         fetchImage();
