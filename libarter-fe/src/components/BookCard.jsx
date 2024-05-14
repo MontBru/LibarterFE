@@ -6,13 +6,33 @@ import noImgForThisBook from '../assets/NoImgForThisBook.jpeg'
 
 const BookCard = ({ book, handleClick, handleDelete = null }) => {
 
+    const [imageSrc, setImageSrc] = useState(null);
+
+    useEffect(() => {
+        async function fetchImage() {
+            if(!book.photos.length)
+                return;
+            const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
+            const blobData = await response.blob();
+
+            const reader = new FileReader();
+            reader.readAsDataURL(blobData);
+            reader.onloadend = () => {
+            const base64Data = reader.result;
+            setImageSrc(base64Data);
+            };
+        }
+    
+        fetchImage();
+      }, []);
+
     return (
         <div className={handleDelete!==null ? 'relative':''}>
             <button style={{height:"27.5rem"}} 
             className="py-0 w-64 m-4 bg-customColors-secondary shadow-md shadow-customColors-primary rounded-b-md"
             onClick={() => handleClick()}>
                 <div className='relative top-0'>
-                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={book.photos.length?`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`:noImgForThisBook}/>
+                    <img className="top-0 object-cover h-64 w-64" alt="Couldn't load image" src={imageSrc?imageSrc:noImgForThisBook}/>
                     {
                         book.new === true ?
                             <h3 className="absolute bottom-0 right-4 bg-customColors-primary py-1 px-3 rounded-xl shadow-md font-bold text-white mb-3">
