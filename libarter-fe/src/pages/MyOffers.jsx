@@ -27,7 +27,7 @@ const MyOffers = () => {
       <Background> 
 
         <img src={myOffersWideImg} alt="" 
-        className="w-full object-cover border-b-4 border-white hidden md:block shadow-lg shadow-customColors-primary"
+        className="w-full object-cover border-b-4 border-customColors-secondary hidden md:block shadow-lg shadow-customColors-primary"
         style={{height:"40vh"}}
         />
 

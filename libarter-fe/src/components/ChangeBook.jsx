@@ -26,6 +26,7 @@ const ChangeBook = ({
     error, setError,
 }) => {
 
+    const [cantgetbookbyisbn, setCantgetbookbyisbn] = useState(false);
     const [pressed, setPressed] = useState(false)
     const [suggestedOffers, setSuggestedOffers] = useState([])
 
@@ -51,7 +52,7 @@ const ChangeBook = ({
                     setBook(bookCopy);
                 }
                 else{
-                    setError(true);
+                    setCantgetbookbyisbn(true);
                 }   
             }
             getData();
@@ -94,8 +95,8 @@ const ChangeBook = ({
                             setIsbn={(newIsbn)=>{
                                 setVal("isbn", newIsbn);
                             }} 
-                            error={error} 
-                            setError={setError}
+                            error={cantgetbookbyisbn} 
+                            setError={setCantgetbookbyisbn}
                         />
 
                         <FormInputComponent field={"Title"} type={"text"} value={book.name} setValue={(newName)=>{setVal("name", newName)}} isError={error} setIsError={setError}/>
