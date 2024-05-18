@@ -14,6 +14,22 @@ const ConversationsPage = () => {
         const fetchData = async () =>{
             const data = await getConversations(!isBuyerChat);
             setConversations(data);
+
+
+            async function fetchImage() {
+                const convPromises = data.map(async (conv) => {
+                const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${conv.base64image}`);
+                const blobData = await response.text();
+                let tmpConv = conv;
+                tmpConv.base64image = blobData;
+                return tmpConv;
+                });
+
+                setConversations(await Promise.all(convPromises));
+            };
+
+            if(data !== null)
+                fetchImage();
         }
 
         fetchData();
