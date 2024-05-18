@@ -32,6 +32,18 @@ const OfferPage = () => {
                     const userData = await getUserById(data.userId);
                     setSeller(userData);
                 }
+            
+                async function fetchImage() {
+                    const photoPromises = data.photos.map(async (photo) => {
+                    const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${photo}`);
+                    const blobData = await response.text();
+                    return blobData;
+                    });
+
+                    setPhotos(await Promise.all(photoPromises));
+                };
+    
+                fetchImage();
             }
 
             fetchData();
@@ -40,21 +52,6 @@ const OfferPage = () => {
             
         },[offerId]
     )
-
-    useEffect(() => {
-        async function fetchImage() {
-            const photoPromises = book.photos.map(async (photo) => {
-                const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${photo}`);
-                const blobData = await response.text();
-                return blobData;
-            });
-
-            setPhotos(await Promise.all(photoPromises));
-            
-            };
-    
-        fetchImage();
-      }, []);
 
     const DisplayBookNameAndAuthor = ()=>
     {
