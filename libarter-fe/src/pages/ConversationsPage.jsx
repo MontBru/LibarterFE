@@ -18,10 +18,13 @@ const ConversationsPage = () => {
 
             async function fetchImage() {
                 const convPromises = data.map(async (conv) => {
+                console.log("                      ");
+                console.log(conv);
                 const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${conv.base64image}`);
                 const blobData = await response.text();
                 let tmpConv = conv;
                 tmpConv.base64image = blobData;
+                console.log(tmpConv);
                 return tmpConv;
                 });
 
