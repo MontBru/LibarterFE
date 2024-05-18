@@ -17,6 +17,8 @@ const OfferPage = () => {
     const [book, setBook] = useState(null);
     const [seller, setSeller] = useState(null);
 
+    const [photos, setPhotos] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(
@@ -33,9 +35,25 @@ const OfferPage = () => {
             }
 
             fetchData();
+
+
             
         },[offerId]
     )
+
+    useEffect(() => {
+        async function fetchImage() {
+            book.photos.forEach(async (photo) => {
+                const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${photo}`);
+                const blobData = await response.text();
+                setPhotos(...photos,blobData);
+            });
+
+            
+            };
+    
+        fetchImage();
+      }, []);
 
     const DisplayBookNameAndAuthor = ()=>
     {
@@ -89,12 +107,12 @@ const OfferPage = () => {
                     <div className='relative w-full flex justify-center mb-4'>
                         <ul className='flex flex-wrap overflow-clip gap-3 mb-4'>
                             {
-                                book.photos.map((photo, i)=>{
+                                photos.map((photo, i)=>{
                                     return (
                                         <li key={i}>
                                             <img
                                             className='w-64 h-64 shadow-md shadow-customColors-primary'
-                                            src={`https://bryanlibarter.blob.core.windows.net/test/${photo}`}
+                                            src={photo}
                                             alt="Couldn't load image"
                                             />
                                         </li>    
