@@ -43,7 +43,7 @@ const OfferPage = () => {
 
     useEffect(() => {
         async function fetchImage() {
-            book.photos.forEach(async (photo) => {
+            book.photos.map(async (photo) => {
                 const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${photo}`);
                 const blobData = await response.text();
                 setPhotos(...photos,blobData);
