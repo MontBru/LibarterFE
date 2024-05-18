@@ -8,27 +8,6 @@ import { useEffect } from "react";
 const ConversationButton = ({ image, bookName, clientName, id, lastMessage }) => {
     const navigate = useNavigate()
 
-
-    const [imageSrc, setImageSrc] = useState(null);
-
-    useEffect(() => {
-        async function fetchImage() {
-            if(!image)
-                return;
-            const response = await fetch(image);
-            const blobData = await response.blob();
-
-            const reader = new FileReader();
-            reader.readAsDataURL(blobData);
-            reader.onloadend = () => {
-            const base64Data = reader.result;
-            setImageSrc(base64Data);
-            };
-        }
-    
-        fetchImage();
-      }, []);
-
     return (
         <button className="flex flex-row border-y w-full border-customColors-primary bg-customColors-primary shadow-md shadow-customColors-primary border-b-customColors-accent hover:bg-customColors-secondary"
             onClick={() => {
@@ -37,7 +16,7 @@ const ConversationButton = ({ image, bookName, clientName, id, lastMessage }) =>
         >
             <img
                 className="h-24 w-24 border border-r-customColors-primary shadow-md shadow-customColors-primary"
-                src={imageSrc?imageSrc:noImgForThisBook}
+                src={image?image:noImgForThisBook}
                 alt="image not loading"
             />
 
