@@ -12,7 +12,7 @@ const DisplayAllConversations = ({conversations}) => {
                 conversations.map(conversation => {
                     return (
                     <li key={conversation.id}>
-                        <ConversationButton image={conversation.base64image?`https://bryanlibarter.blob.core.windows.net/test/${conversation.base64image}`:null} bookName={conversation.bookName} clientName={conversation.clientName} id={conversation.id} lastMessage={conversation.lastMessage}/>
+                        <ConversationButton image={conversation.base64image?conversation.base64image:null} bookName={conversation.bookName} clientName={conversation.clientName} id={conversation.id} lastMessage={conversation.lastMessage}/>
                     </li>
                     );
                     
