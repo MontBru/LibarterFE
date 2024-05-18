@@ -94,7 +94,7 @@ const OfferPage = () => {
                                         <li key={i}>
                                             <img
                                             className='w-64 h-64 shadow-md shadow-customColors-primary'
-                                            src={photo}
+                                            src={`https://bryanlibarter.blob.core.windows.net/test/${photo}`}
                                             alt="Couldn't load image"
                                             />
                                         </li>    
