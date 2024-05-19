@@ -21,7 +21,6 @@ const SendEmail = ({service, title}) => {
         else{
             const sendRequest = async () => {
                 const res = await service(email);
-                console.log(res)
                 if(res === true)
                     navigate(routes.checkEmail);
                 else 

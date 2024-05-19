@@ -9,7 +9,7 @@ import Background from '../components/Background';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import addConversation from '../service/addConversation';
-import { image, routes } from '../constants';
+import { blobStorage, image, routes } from '../constants';
 
 const OfferPage = () => {
     const {offerId} = useParams();
@@ -35,7 +35,7 @@ const OfferPage = () => {
             
                 async function fetchImage() {
                     const photoPromises = data.photos.map(async (photo) => {
-                    const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${photo}`);
+                    const response = await fetch(`${blobStorage}${photo}`);
                     const blobData = await response.text();
                     return blobData;
                     });

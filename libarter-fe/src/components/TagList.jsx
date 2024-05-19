@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tag from './Tag'; // Import the Tag component
+import Tag from './Tag';
 
 const TagList = ({tags, setTags, removable}) => {
   

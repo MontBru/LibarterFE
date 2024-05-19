@@ -47,8 +47,7 @@ const PhotoInput = ({photos, setPhotos}) => {
   };
 
   const handleImageClick = (index) => {
-    // Implement zoom-in functionality here (you can use a modal or lightbox component)
-    // Example: set a state to open a modal with the enlarged image
+    
   };
 
   const handleRemoveImage = (index) => {

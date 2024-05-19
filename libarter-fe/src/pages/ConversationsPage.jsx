@@ -5,6 +5,7 @@ import Background from "../components/Background";
 import ConversationButton from "../components/ConversationButton";
 import DisplayAllConversations from "../components/DisplayAllConversations";
 import chatImg from '../assets/Chat.png'
+import { blobStorage } from "../constants";
 
 const ConversationsPage = () => {
     const [conversations, setConversations] = useState([]);
@@ -18,7 +19,7 @@ const ConversationsPage = () => {
 
             async function fetchImage() {
                 const convPromises = data.map(async (conv) => {
-                const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${conv.base64image}`);
+                const response = await fetch(`${blobStorage}${conv.base64image}`);
                 const blobData = await response.text();
                 let tmpConv = conv;
                 tmpConv.base64image = blobData;

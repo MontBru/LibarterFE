@@ -46,7 +46,6 @@ const UpdateOffer = (  ) => {
 
 
         const updateDB = async () => {
-          console.log(book);
           const successfulUpdate = updateBookById(state.id, book);
           if(successfulUpdate)
             navigate(routes.myOffers);
