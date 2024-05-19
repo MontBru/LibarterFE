@@ -32,9 +32,9 @@ const ProfilePage = () => {
         <Background>
             <div className="min-h-screen">
             {user === 1 ? (
-                <div className="p-12 text-white text-xl overflow-scroll">Loading...</div>
+                <div className="p-12 text-customColors-primary text-xl overflow-scroll">Loading...</div>
             ) : user === null ? (
-                <div className="p-12 text-white text-xl overflow-scroll">Couldn't load your account</div>
+                <div className="p-12 text-customColors-primary text-xl overflow-scroll">Couldn't load your account</div>
             ) : (
                 <div>
                     <div className="flex justify-center p-6">
@@ -45,7 +45,7 @@ const ProfilePage = () => {
                         />
                     </div>
                     
-                    <h1 className="flex justify-center font-extrabold text-white text-xl">
+                    <h1 className="flex justify-center font-extrabold text-customColors-primary text-xl">
                         Hello, {user.username}
                     </h1>
 

@@ -64,7 +64,13 @@ const Search = () => {
 
         <div className="lg:w-1/2 lg:mt-0">
           <div className="h-full pt-10 pb-6 flex justify-center bg-customColors-homeImageBg">
-            <RequestOfferSelector isRequest={isRequest} setIsRequest={setIsRequest} />
+            <RequestOfferSelector isRequest={isRequest} setIsRequest={
+              (val)=>{
+                setIsRequest(val);
+                setPageNum(1);
+              }
+              
+            } />
           </div>
         </div>
 
