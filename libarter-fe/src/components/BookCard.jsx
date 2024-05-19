@@ -13,7 +13,11 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
     useEffect(() => {
         async function fetchImage() {
             if(!book.photos.length)
+            {
+                setImageSrc(null);
                 return;
+            }
+                
             const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
             const blobData = await response.text();
             setImageSrc(blobData);
