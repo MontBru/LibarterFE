@@ -20,7 +20,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
             };
     
         fetchImage();
-      }, []);
+      }, [book]);
 
     return (
         <div className={handleDelete!==null ? 'relative':''}>
