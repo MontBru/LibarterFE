@@ -6,6 +6,8 @@ import SubmitButton from '../components/SubmitButton';
 import resetPassword from '../service/public/resetPassword';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '../constants';
+import languageStore from '../zustand/languageStore';
+
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState("");
@@ -13,6 +15,9 @@ const ResetPassword = () => {
     const [isError, setIsError] = useState(false);
     const {token} = useParams();
     const navigate = useNavigate();
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["Reset Password", "New Password", "Confirm New Password", "Session expired try getting another email"]:["Смени Парола", "Нова Парола", "Потвърди Нова Парола", "Сесията е изтекла, получете нов имейл"];
 
     const handleSubmit = () => {
         if(newPassword !== confirmPassword)
@@ -37,11 +42,11 @@ const ResetPassword = () => {
             <CenteredBox>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
-                        Reset Password
+                        {text[0]}
                     </h1>
                     <form onSubmit={handleSubmit}>
-                        <FormInputComponent field="New Password" type="password" value={newPassword} setValue={setNewPassword} isError={isError} setIsError={setIsError}/>
-                        <FormInputComponent field="Confirm New Password" type="password" value={confirmPassword} setValue={setConfirmPassword} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[1]} type="password" value={newPassword} setValue={setNewPassword} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[2]} type="password" value={confirmPassword} setValue={setConfirmPassword} isError={isError} setIsError={setIsError}/>
 
                         <div className="mb-4">
                             <button
@@ -49,13 +54,13 @@ const ResetPassword = () => {
                                 onClick={handleSubmit}
                                 className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
                                 >
-                                    Reset Password
+                                    {text[0]}
                                     
                             </button>    
                         </div>
                         {isError && (
                             <div className="text-red-500">
-                                Session expired try getting another email
+                                {text[3]}
                             </div>
                         )}
                     </form>

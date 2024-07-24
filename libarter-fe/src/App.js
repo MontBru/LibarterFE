@@ -6,11 +6,14 @@ import Navbar from "./components/Navbar";
 import Popup from "./components/Popup";
 import showLoginPopupStore from "./zustand/showLoginPopupStore";
 import { routes } from "./constants";
+import languageStore from './zustand/languageStore';
 
 function App() {
 
   const [show, setShow] = useState(false);
   const { showLoginPopup, setShowLoginPopup } = showLoginPopupStore();
+  const {language, setLanguage} = languageStore();
+  let text = language === "EN"?["You should log in to use this feature", "Login"]:["Трябва да влезете в профила си, за да използвате тази страница", "Логин"];
 
   const onMenuClick = () => {
     setShow(!show);
@@ -21,7 +24,7 @@ function App() {
       <Popup
         onClose={() => { setShowLoginPopup(false) }}>
         <div>
-          You should log in to use this feature
+          {text[0]}
         </div>
         <button
           className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
@@ -29,7 +32,7 @@ function App() {
             window.location.href = routes.login;
           }}
         >
-          Log in
+          {text[1]}
         </button>
       </Popup>
     );

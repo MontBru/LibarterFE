@@ -6,10 +6,14 @@ import ConversationButton from "../components/ConversationButton";
 import DisplayAllConversations from "../components/DisplayAllConversations";
 import chatImg from '../assets/Chat.png'
 import { blobStorage } from "../constants";
+import languageStore from '../zustand/languageStore';
 
 const ConversationsPage = () => {
     const [conversations, setConversations] = useState([]);
     const [isBuyerChat, setIsBuyerChat] = useState(false);
+
+    const {language, setLanguage} = languageStore();
+let text = language === "EN"?["You are client", "You own the offer"]:["Вие сте клиент", "Вашите обяви"];
 
     useEffect(()=>{
         const fetchData = async () =>{
@@ -45,7 +49,7 @@ const ConversationsPage = () => {
                     className="w-full h-2/5 object-contain bg-customColors-chatImageBg"
                 />
                 <div className=" bg-customColors-chatImageBg flex justify-center w-full">
-                    <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={"You are client"} notThingText={"You own the offer"}/>
+                    <TwoThingSelector isThing={isBuyerChat} setIsThing={setIsBuyerChat} thingText={text[0]} notThingText={text[1]}/>
                 </div>
                 
             </div>

@@ -17,6 +17,8 @@ import CheckAuthorization from "../service/checkAuthorization";
 import redirectToLoginIfUnauth from "../functions/redirectToLoginIfUnauth";
 import Background from "./Background";
 import RequestOfferSelector from "./RequestOfferSelector";
+import languageStore from '../zustand/languageStore';
+
 
 const ChangeBook = ({
     type,
@@ -29,6 +31,9 @@ const ChangeBook = ({
     const [cantgetbookbyisbn, setCantgetbookbyisbn] = useState(false);
     const [pressed, setPressed] = useState(false)
     const [suggestedOffers, setSuggestedOffers] = useState([])
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["a Request", "a Book","Title","Author", "Price", "Publisher", "Language", "Year Published", "Is the book new", "Do you accept barters", "Description", "Search for people with offers that may satisfy you:", "Search for people with similar requests:", "Offer"]:["на Търсене", "на Книга","Заглавие","Автор", "Цена", "Издателство", "Език", "Година на издаване", "Книгата нова ли е", "Приемате ли бартери", "Описание", "Потърси хора, продаващи тази книга:", "Потърси хора, които търсят тази книга:", "на Обява"];
 
     useEffect(()=>{
         redirectToLoginIfUnauth();
@@ -71,7 +76,7 @@ const ChangeBook = ({
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary flex justify-center">
-                        {book.isRequest?`${type} a Request`:`${type} a Book`}
+                        {book.isRequest?`${type} ${text[0]}`:`${type} ${text[1]}`}
                     </h1>
                     <form onSubmit={handleSubmit}>
                         <PhotoInput 
@@ -99,25 +104,25 @@ const ChangeBook = ({
                             setError={setCantgetbookbyisbn}
                         />
 
-                        <FormInputComponent field={"Title"} type={"text"} value={book.name} setValue={(newName)=>{setVal("name", newName)}} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Author"} type={"text"} value={book.author} setValue={(newAuthor)=>{setVal("author", newAuthor)}} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Price"} type={"text"} value={book.price} setValue={(newPrice)=>{setVal("price", newPrice)}} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Publisher"} type={"text"} value={book.publisher} setValue={(newPublisher)=>{setVal("publisher", newPublisher)}} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Language"} type={"text"} value={book.language} setValue={(newLanguage)=>{setVal("language", newLanguage)}} isError={error} setIsError={setError}/>
-                        <FormInputComponent field={"Year Published"} type={"text"} value={book.yearPublished} setValue={(newYearPublished)=>{setVal("yearPublished", newYearPublished)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[2]} type={"text"} value={book.name} setValue={(newName)=>{setVal("name", newName)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[3]} type={"text"} value={book.author} setValue={(newAuthor)=>{setVal("author", newAuthor)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[4]} type={"text"} value={book.price} setValue={(newPrice)=>{setVal("price", newPrice)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[5]} type={"text"} value={book.publisher} setValue={(newPublisher)=>{setVal("publisher", newPublisher)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[6]} type={"text"} value={book.language} setValue={(newLanguage)=>{setVal("language", newLanguage)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[7]} type={"text"} value={book.yearPublished} setValue={(newYearPublished)=>{setVal("yearPublished", newYearPublished)}} isError={error} setIsError={setError}/>
 
-                        <Switch isChecked={book.isNew} setIsChecked={(isNew)=>{setVal("isNew", isNew)}} label={"Is the book new"}/>
+                        <Switch isChecked={book.isNew} setIsChecked={(isNew)=>{setVal("isNew", isNew)}} label={text[8]}/>
 
-                        <Switch isChecked={book.acceptsTrade} setIsChecked={(newAccTrade)=>{setVal("acceptsTrade", newAccTrade)}} label={"Do you accept barters"}/>
+                        <Switch isChecked={book.acceptsTrade} setIsChecked={(newAccTrade)=>{setVal("acceptsTrade", newAccTrade)}} label={text[9]}/>
 
                         <TagAdd tags={book.tags} setTags={(newTags)=>{setVal("tags", newTags)}}/>
 
                         <TagList tags={book.tags} setTags={(newTags)=>{setVal("tags", newTags)}} removable={true}/>
 
-                        <FormInputComponent field={"Description"} type={"description"} value={book.description} setValue={(newDescr)=>{setVal("description", newDescr)}} isError={error} setIsError={setError}/>
+                        <FormInputComponent field={text[10]} type={"description"} value={book.description} setValue={(newDescr)=>{setVal("description", newDescr)}} isError={error} setIsError={setError}/>
 
                         <div className="flex flex-row items-center gap-4">
-                            <div className='text-customColors-primary'>{book.isRequest?"Search for people with offers that may satisfy you:":"Search for people with similar requests:"}</div>
+                            <div className='text-customColors-primary'>{book.isRequest?text[11]:text[12]}</div>
                             <button 
                             type="button"
                             className=" text-customColors-accent bg-customColors-secondary p-3 rounded-md"
@@ -143,7 +148,7 @@ const ChangeBook = ({
                             navigate(routes.offerPage, {state: myOffersList[index]})
                         }}   />
                         <div className="h-3"/>
-                        <SubmitButton value={"Create offer"}/>
+                        <SubmitButton value={`${type} ${text[13]}`}/>
                         <div className="h-3"/>
                     </form>
                 </div>

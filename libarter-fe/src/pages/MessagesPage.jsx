@@ -9,6 +9,9 @@ import getMessagesByConversation from "../service/getMessagesByConversation";
 import { useParams } from "react-router-dom";
 import addMessage from "../service/addMessage";
 
+import languageStore from '../zustand/languageStore';
+
+
 const MessagesPage = () => {
     const { convId } = useParams();
 
@@ -25,6 +28,9 @@ const MessagesPage = () => {
 
     const [ShowLoadButton, setShowLoadButton] = useState(true);
 
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["Error while sending message!", "Loading...", "Load More"]:["Грешка при изпращане на съобщението!", "Зарежда...", "Зареди още"];
+
     const sendMessage = (e) => {
         e.preventDefault();
 
@@ -37,7 +43,7 @@ const MessagesPage = () => {
             }
             else {
 
-                alert("Error while sending message!")
+                alert(text[0])
                 setNewMessage(tmpMessage);
             }
 
@@ -103,7 +109,7 @@ const MessagesPage = () => {
                         }
                     }
                 >
-                    {buttonLoading?"Loading...":"Load More"}
+                    {buttonLoading?text[1]:text[2]}
                 </button>
             </div>);
     }
@@ -112,7 +118,7 @@ const MessagesPage = () => {
         <>
             <BackgroundWithoutFooter>
                 {
-                    isLoading ? <div>Loading...</div> :
+                    isLoading ? <div>{text[1]}</div> :
                         <>
                             {
                                 ShowLoadButton &&

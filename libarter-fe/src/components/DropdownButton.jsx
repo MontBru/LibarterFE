@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
+import languageStore from '../zustand/languageStore';
 
 const DropdownButton = ({setSearchType}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const {language, setLanguage} = languageStore();
 
   const SearchOptionButton = ({name, handleClick}) =>
   {
@@ -22,6 +24,8 @@ const DropdownButton = ({setSearchType}) => {
     setIsOpen(!isOpen);
   };
 
+  let text = language === "EN"? ["Search by Title","Search by Author","Search by Tags"]:["Търси по Заглавие", "Търси по Автор", "Търси по Таг"];
+
   return (
     <div className="relative inline-block text-left">
       <button
@@ -39,9 +43,9 @@ const DropdownButton = ({setSearchType}) => {
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            <SearchOptionButton name={"Search by Title"} handleClick={()=>{setSearchType(1); setIsOpen(false)}}/>
-            <SearchOptionButton name={"Search by Author"} handleClick={()=>{setSearchType(2); setIsOpen(false)}}/>
-            <SearchOptionButton name={"Search by Tags"} handleClick={()=>{setSearchType(3); setIsOpen(false)}}/>
+            <SearchOptionButton name={text[0]} handleClick={()=>{setSearchType(1); setIsOpen(false)}}/>
+            <SearchOptionButton name={text[1]} handleClick={()=>{setSearchType(2); setIsOpen(false)}}/>
+            <SearchOptionButton name={text[2]} handleClick={()=>{setSearchType(3); setIsOpen(false)}}/>
           </div>
         </div>
       )}

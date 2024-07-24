@@ -5,8 +5,13 @@ import { faRightLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import noImgForThisBook from '../assets/NoImgForThisBook.jpeg';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { blobStorage } from '../constants';
+import languageStore from '../zustand/languageStore';
 
 const BookCard = ({ book, handleClick, handleDelete = null }) => {
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["NEW", "BGN"]:["НОВО", "ЛВ"];
 
     const [imageSrc, setImageSrc] = useState(null);
 
@@ -18,7 +23,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                 return;
             }
                 
-            const response = await fetch(`https://bryanlibarter.blob.core.windows.net/test/${book.photos[0]}`);
+            const response = await fetch(`${blobStorage}${book.photos[0]}`);
             const blobData = await response.text();
             setImageSrc(blobData);
             };
@@ -36,7 +41,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                     {
                         book.new === true ?
                             <h3 className="absolute bottom-0 right-4 bg-customColors-primary py-1 px-3 rounded-xl shadow-md font-bold text-white mb-3">
-                                NEW
+                                {text[0]}
                             </h3> :
                             null
                     }
@@ -69,7 +74,7 @@ const BookCard = ({ book, handleClick, handleDelete = null }) => {
                             {book.author}
                         </h3> 
                         <h3 className="line-clamp-1 flex-shrink-0 rounded-sm font-bold px-1 text-white mb-3 border border-white w-fit">
-                            {book.price} BGN
+                            {`${book.price} ${text[1]}`}
                             {
                                 book.acceptsTrade &&
                                 <>

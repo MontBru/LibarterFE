@@ -6,7 +6,7 @@ import { routes } from "../constants";
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
 import addBook from '../service/addBook';
-
+import languageStore from '../zustand/languageStore';
 
 const AddBook = () => {
     const [error, setError] = useState(false);
@@ -14,6 +14,9 @@ const AddBook = () => {
     const [book, setBook] = useState({isRequest:false, photos: [], name:"", author:"", description:"", price: 0, isNew: false, acceptsTrade: false, tags:[], isbn: "", publisher: "", language: "", yearPublished: ""});
 
     const navigate = useNavigate();
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["Add"]:["Добавяне"];
 
     const handleSubmit = (e) => {
         if(isNaN(parseFloat(book.price)))
@@ -39,7 +42,7 @@ const AddBook = () => {
         
         <>            
             <ChangeBook
-            type={"Add"}
+            type={text[0]}
             handleSubmit={handleSubmit}
             error={error}
             setError={setError}

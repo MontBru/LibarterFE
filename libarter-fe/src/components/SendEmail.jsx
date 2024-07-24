@@ -7,17 +7,21 @@ import forgotPassword from '../service/public/forgotPassword';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../constants';
 import ReCAPTCHA from 'react-google-recaptcha';
+import languageStore from '../zustand/languageStore';
+
 
 const SendEmail = ({service, title}) => {
     const [email, setEmail] = useState("");
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
     const recaptcha = useRef();
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?['Please verify that you are not a robot!', "Email", "Send Email", "Invalid credentials. Please try again."]:["Потвърдете, че не сте робот!", "Имейл", "Изпрати имейл", "Невалидни данни, опитай отново"];
 
     const handleSubmit = () => {
         
         if(!recaptcha.current.getValue())
-            alert('Please verify that you are not a robot!');
+            alert(text[0]);
         else{
             const sendRequest = async () => {
                 const res = await service(email);
@@ -41,7 +45,7 @@ const SendEmail = ({service, title}) => {
                         {title}
                     </h1>
                     <form onSubmit={handleSubmit}>
-                        <FormInputComponent field="Email" type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[1]} type="text" value={email} setValue={setEmail} isError={isError} setIsError={setIsError}/>
                         
                         <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
 
@@ -51,13 +55,13 @@ const SendEmail = ({service, title}) => {
                             onClick={handleSubmit}
                             className="w-full bg-customColors-secondary text-white py-2 px-4 rounded-md cursor-pointer"
                             >
-                                Send Email
+                                {text[2]}
                                 
                             </button>
                         </div>
                         {isError && (
                             <div className="text-red-500">
-                                Invalid credentials. Please try again.
+                                {text[3]}
                             </div>
                         )}
                     </form>

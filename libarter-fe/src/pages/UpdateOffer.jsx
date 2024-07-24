@@ -5,11 +5,15 @@ import { routes } from "../constants.jsx";
 import ChangeBook from '../components/ChangeBook';
 import RequestOfferSelector from '../components/RequestOfferSelector';
 import updateBookById from '../service/updateBookById';
+import languageStore from '../zustand/languageStore';
 
 const UpdateOffer = (  ) => {
     const {state} = useLocation();
 
     const [error, setError] = useState(false)
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["Update"]:["Промяна"];
 
     const [book, setBook] = useState(
       {
@@ -58,7 +62,7 @@ const UpdateOffer = (  ) => {
     return ( 
       <>
         <ChangeBook
-          type={"Update"}
+          type={text[0]}
           handleSubmit={handleSubmit}
           error={error}
           setError={setError}

@@ -2,11 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import readBarcode from '../service/readBarcode';
+import languageStore from '../zustand/languageStore';
 
 const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
     const [isbnTmp, setIsbnTmp] = useState(isbn);
     const [imageData, setImageData] = useState(null);
     const [cantextract, setCantextract] = useState(false);
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["Capture ISBN or type it in (ISBN is the barcode behind the book):", "Capture ISBN", "Enter ISBN", "(Couldn't extract barcode)", "Couldn't get book by ISBN"]:["Сканирай ISBN или го напиши на ръка (ISBN е баркодът на гърба на книгата):", "Сканирай ISBN", "Напиши ISBN", "(Не може да се извлече баркода)", "Не може да попълни данни за книгата с този ISBN"];
 
     const handleImageCapture = async (e) => {
         const file = e.target.files[0];
@@ -37,7 +41,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
         <div className="flex flex-col items-center space-x-4 w-full">
 
                 <div className='text-customColors-primary'> 
-                    Capture ISBN or type it in (ISBN is the barcode behind the book):
+                    {text[0]}
                 </div>
                 {/* Image Capture */}
                 <div className='flex flex-col custom-2:flex-row  my-3'>
@@ -54,7 +58,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
                                 <img src={imageData} alt="Captured ISBN" className="w-20 h-20" />
                             ) : (
                                 <div className=" w-20 h-20 bg-customColors-secondary rounded-full text-center flex items-center justify-center">
-                                    <div className="flex text-customColors-accent">Capture ISBN</div>
+                                    <div className="flex text-customColors-accent">{text[1]}</div>
                                 </div>
                             )}
                         </label>
@@ -64,7 +68,7 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
                         <div className=' h-20 ml-2 flex items-center justify-center'>
                             <input
                                 type="text"
-                                placeholder="Enter ISBN"
+                                placeholder={text[2]}
                                 value={isbnTmp}
                                 onChange={handleIsbnChange}
                                 className={`w-48 h-10 px-2 py-1 border-2 border-gray-300 text-customColors-secondary focus:border-customColors-primary focus:outline-none rounded-md ${error ? 'border-red-500' : ''}`}
@@ -87,14 +91,14 @@ const ISBNInput = ({setPressed, isbn, setIsbn, error, setError}) => {
                 {
                     cantextract &&
                     <div className=' text-orange-600 text-center mb-4'>
-                        (Couldn't extract barcode)
+                        {text[3]}
                     </div>
                 }
 
                 {
                     error &&
                     <div className=' text-red-600 text-center mb-4'>
-                        Couldn't get book by ISBN
+                        {text[4]}
                     </div>
                 }
 

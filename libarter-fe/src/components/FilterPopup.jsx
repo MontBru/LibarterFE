@@ -2,10 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import RangeSlider from './RangeSlider';
 import Popup from './Popup';
+import languageStore from '../zustand/languageStore';
 
-function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
+function FilterPopup({ onClose, priceRange, setPriceRange }) {
   const [maxPrice, setMaxPrice] = useState(10000000);
-  if (!isOpen) return null;
+
+  const {language, setLanguage} = languageStore();
+  let text = language === "EN"?["Select price range"]:["Ценови диапазон:"];
 
   const handleRangeChange = (values) => {
     setPriceRange(values);
@@ -14,10 +17,8 @@ function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
   return (
     <Popup children={
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-customColors-secondary">Apply filters</h2>
-
         <h3 className='mb-2 text-customColors-secondary'>
-          Select price range
+          {text[0]}
         </h3>
         <ul className='flex flex-row mb-2'>
           <li>
@@ -28,7 +29,7 @@ function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
                 setPriceRange([0, 999])
               }}
             >
-              low
+              {"0-999"}
             </button >
           </li>
           <li>
@@ -39,7 +40,7 @@ function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
                 setPriceRange([0, 999000])
               }}
             >
-              K
+              {"1K-999K"}
             </button>
           </li>
           <li>
@@ -50,7 +51,7 @@ function FilterPopup({ isOpen, onClose, priceRange, setPriceRange }) {
                 setPriceRange([0, 10000000])
               }}
             >
-              M
+              {"1M-10M"}
             </button>
           </li>
         </ul>

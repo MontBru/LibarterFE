@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import login from '../service/public/login';
 import ReCAPTCHA from 'react-google-recaptcha';
+import languageStore from '../zustand/languageStore';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -14,12 +15,14 @@ const Login = () => {
     const [isError, setIsError] = useState(false);
     const navigate = useNavigate();
     const recaptcha = useRef();
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?['Please verify that you are not a robot!', "Login", "Username", "Password", "Forgot password?", "Don't have an account?", "Invalid credentials. Please try again."]:["Моля потвърдете, че не сте робот!", "Логин","Потребител", "Парола", "Забравена парола?", "Нямате профил?", "Невалидни данни, опитайте отново"];
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         if(!recaptcha.current.getValue())
-            alert('Please verify that you are not a robot!')
+            alert(text[0])
         else
         {
             sessionStorage.removeItem("JWT");
@@ -45,14 +48,14 @@ const Login = () => {
             <CenteredBox>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
-                        Log In
+                        {text[1]}
                     </h1>
                     <form onSubmit={handleSubmit}>
-                        <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                        <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[2]} type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[3]} type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                         <div className="container flex justify-end mb-4">
                             <Link to={routes.forgotPassword} className="text-customColors-primary">
-                                Forgot password?
+                                {text[4]}
                             </Link>
                         </div>
 
@@ -60,17 +63,17 @@ const Login = () => {
                         <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
 
                         <div className="my-4">
-                            <SubmitButton value="Log in" />
+                            <SubmitButton value={text[1]} />
                         </div>
 
                         {isError && (
                             <div className="text-red-500">
-                                Invalid credentials. Please try again.
+                                {text[6]}
                             </div>
                         )}
                         <div className="container flex justify-center">
                             <Link to = {routes.register} className="text-customColors-primary">
-                                Don't have an account?
+                                {text[5]}
                             </Link>
                         </div>
                     </form>

@@ -2,6 +2,7 @@ import React from 'react';
 import BookCard from "./BookCard";
 import { useState } from 'react';
 import { useEffect } from 'react';import deleteBookById from '../service/deleteBookById';
+import languageStore from '../zustand/languageStore';
 
 const DisplayAllOffers = ({ offers, handleClick, maxCols = 10, center = true, canDelete = false }) => {
 
@@ -32,17 +33,22 @@ const DisplayAllOffers = ({ offers, handleClick, maxCols = 10, center = true, ca
     };
   }, []);
 
+  const {language, setLanguage} = languageStore();
+  let text = language === "EN"?["No offers"]:["Няма обяви"];
+
   if(rerender === true){
     setOffers([...offers]);
     setRerender(false);    
   }
+
+
 
   return (
 
     <span className='-z-10'>
       {offerState.length === 0 ? (
         <div className={`flex h-full justify-center items-center`}>
-          Nothing here :/
+          {text[0]}
         </div>
       ) : (
         <div className={`flex ${center ? "justify-center" : ""} overflow-x-hidden`}>

@@ -1,15 +1,17 @@
 import React from 'react';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
 import DropdownButton from './DropdownButton';
 import SortButton from './SortButton';
+import languageStore from '../zustand/languageStore';
 
 const SearchBar = ({searchTerm, setSearchTerm, setSearchType, priceRange, setPriceRange}) => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  const {language, setLanguage} = languageStore();
+  let text = language === "EN"?["Search book..."]:["Търси книга..."];
+
 
   return (
     <div className='absolute -bottom-5 w-full flex justify-center'>
@@ -19,7 +21,7 @@ const SearchBar = ({searchTerm, setSearchTerm, setSearchType, priceRange, setPri
                 <input
                     className=' bg-customColors-primary placeholder:text-customColors-accent text-customColors-complementary border-none outline-none font-bold w-40 custom-1:w-52'
                     type="text"
-                    placeholder="Search book..."
+                    placeholder={text[0]}
                     value={searchTerm}
                     onChange={handleInputChange}
                 />

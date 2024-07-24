@@ -11,6 +11,7 @@ import getBooksBySearch from '../service/public/getBooksBySearch';
 import Background from '../components/Background';
 import Footer from '../components/Footer';
 import homepageImg from '../assets/WelcomeToLibarter.png';
+import languageStore from '../zustand/languageStore'
 
 const Search = () => {
   const [isRequest, setIsRequest] = useState(false);
@@ -23,6 +24,8 @@ const Search = () => {
   const [priceRange, setPriceRange] = useState([0, 10000000]);
 
   const navigate = useNavigate();
+
+  const {language, setLanguage} = languageStore();
 
   useEffect(() => {
 
@@ -70,7 +73,7 @@ const Search = () => {
                 setPageNum(1);
               }
               
-            } />
+            }/>
           </div>
         </div>
 

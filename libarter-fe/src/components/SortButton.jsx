@@ -13,15 +13,18 @@ const SortButton = ({priceRange, setPriceRange}) => {
             className='inline-flex items-center justify-center w-full px-4 h-full text-lg rounded-full text-customColors-accent hover:text-customColors-complementary hover:bg-customColors-form_bg'>
                 <FontAwesomeIcon icon = {faFilter} className='flex justify-center '/>
             </button>
-            <FilterPopup 
-            isOpen={isOpen} 
-            onClose={()=>{
-                setIsOpen(false)
-                setPriceRange(priceRangeTmp)
-            }}
-            priceRange={priceRangeTmp}
-            setPriceRange={setPriceRangeTmp}
-            />
+
+            {
+                isOpen &&
+                <FilterPopup
+                onClose={()=>{
+                    setIsOpen(false)
+                    setPriceRange(priceRangeTmp)
+                }}
+                priceRange={priceRangeTmp}
+                setPriceRange={setPriceRangeTmp}
+                />
+            }
         </div>
      );
 }

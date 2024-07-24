@@ -1,4 +1,5 @@
 import React from 'react';
+import languageStore from '../zustand/languageStore';
 
 const PageSelector = ({ currentPage, totalPages, onPageChange }) => {
   const handlePageChange = (newPage) => {
@@ -6,6 +7,9 @@ const PageSelector = ({ currentPage, totalPages, onPageChange }) => {
       onPageChange(newPage);
     }
   };
+
+  const {language, setLanguage} = languageStore();
+  let text = language === "EN"?["Page", "of"]:["Страница", "от"];
 
   return (
     <div className="flex justify-center items-center space-x-2 my-4">
@@ -16,7 +20,7 @@ const PageSelector = ({ currentPage, totalPages, onPageChange }) => {
       >
         {"<"}
       </button>
-      <span className="text-customColors-primary">Page {currentPage} of {totalPages}</span>
+      <span className="text-customColors-primary">{text[0]} {currentPage} {text[1]} {totalPages}</span>
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

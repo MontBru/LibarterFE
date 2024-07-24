@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import addConversation from '../service/addConversation';
 import { blobStorage, image, routes } from '../constants';
+import languageStore from '../zustand/languageStore';
 
 const OfferPage = () => {
     const {offerId} = useParams();
@@ -20,6 +21,9 @@ const OfferPage = () => {
     const [photos, setPhotos] = useState([]);
 
     const navigate = useNavigate();
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?["NEW", "by", "Loading...", "BGN", "ACCEPTS TRADES", "Publisher", "Year Published", "Language", "Description", "Contact Info", "Username", "Email", "Phone Number"]:["НОВО", "от", "Зарежда...", "лв", "ПРИЕМА БАРТЕР", "Издател", "Година на издаване","Език", "Описание", "Контакти", "Потребител", "Имейл", "Телефон"];
 
     useEffect(
         ()=>{
@@ -60,7 +64,7 @@ const OfferPage = () => {
                 {
                     book.new === true?
                     <h3 className="font-bold text-customColors-primary mr-3">
-                        NEW
+                        {text[0]}
                     </h3>:
                     null
                 }
@@ -68,7 +72,7 @@ const OfferPage = () => {
                     {book.name}
                 </h3>
                 <h4 className="mr-3 font-thin text-customColors-primary">
-                    by
+                    {text[1]}
                 </h4>
                 <h3 className="font-bold text-customColors-primary">
                     {book.author}
@@ -80,7 +84,7 @@ const OfferPage = () => {
     
     if(book === null)
     {
-        return <div>Loading</div>
+        return <div>{text[2]}</div>
     }
 
     const handleMessage = async () => {
@@ -133,12 +137,12 @@ const OfferPage = () => {
                         
                         <div className='flex flex-row'>
                             <h3 className='border border-customColors-primary rounded-sm px-2 text-customColors-primary font-bold text-xl mr-2'>
-                                {book.price} BGN
+                                {book.price} {text[3]}
                             </h3>
                             {
                                 book.acceptsTrade === true?
                                 <h3 className="text-customColors-primary mb-3 text-xl">
-                                    / ACCEPTS TRADES
+                                    / {text[4]}
                                 </h3>:
                                 null
                             }
@@ -151,15 +155,15 @@ const OfferPage = () => {
                         <div className="border-t border-gray-300 mb-4 mt-8"/>
 
                         <h4 className={`${textColor} mt-3`}>
-                            Publisher: {book?.publisher}
+                            {text[5]}: {book?.publisher}
                         </h4>
 
                         <h4 className={`${textColor} mt-3`}>
-                            Year Published: {book?.yearPublished}
+                            {text[6]}: {book?.yearPublished}
                         </h4>
 
                         <h4 className={`${textColor} mt-3`}>
-                            Language: {book?.language}
+                            {text[7]}: {book?.language}
                         </h4>
 
                         <TagList tags={book.tags}/>
@@ -167,22 +171,22 @@ const OfferPage = () => {
                         <div className="border-t border-gray-300 mb-4 mt-8"/>
 
                         <p className={`${textColor} mt-1`}>
-                            Description: {book.description}
+                            {text[8]}: {book.description}
                         </p>
 
                         <section>
                             <div className="border-t border-gray-300 mb-4 mt-8"/>
 
                             <h2 className={`${textColor} text-2xl mb-4`}>
-                                Contact Info
+                                {text[9]}
                             </h2>
 
                             {
                                 seller !== null?
                                 <ul>
-                                    <li className={`${textColor} mb-2`}>Username: {seller.username}</li>
-                                    <li className={`${textColor} mb-2`}>Email: {seller.email}</li>
-                                    <li className={`${textColor} mb-2`}>Phone Number: {seller.phoneNumber}</li>
+                                    <li className={`${textColor} mb-2`}>{text[10]}: {seller.username}</li>
+                                    <li className={`${textColor} mb-2`}>{text[11]}: {seller.email}</li>
+                                    <li className={`${textColor} mb-2`}>{text[12]}: {seller.phoneNumber}</li>
                                 </ul>:
                                 null
                             }

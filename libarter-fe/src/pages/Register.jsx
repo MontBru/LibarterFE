@@ -7,10 +7,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInputComponent from "../components/FormInputComponent";
 import register from '../service/public/register';
 import { useParams } from 'react-router-dom';
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA from 'react-google-recaptcha';
+import languageStore from '../zustand/languageStore';
 
 const Register = () => {
     const {token} = useParams();
+
+    const {language, setLanguage} = languageStore();
+    let text = language === "EN"?['Please verify that you are not a robot!', "Register", "Username", "Phone Number", "Password", "Invalid credentials. Please try again.", "Log in instead"]:["Потвърдете, че не сте робот!", "Регистрация", "Потребител", "Телефон", "Парола", "Невалидни данни, пробвайте отново", "Към Логин"];
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -24,7 +28,7 @@ const Register = () => {
         e.preventDefault()
 
         if(!recaptcha.current.getValue())
-            alert('Please verify that you are not a robot!');
+            alert(text[0]);
         else
         {
             sessionStorage.removeItem("JWT");
@@ -51,28 +55,28 @@ const Register = () => {
             <CenteredBox>
                 <div className='flex flex-col'>
                     <h1 className="text-2xl font-bold mb-4 text-customColors-secondary">
-                        Register
+                        {text[1]}
                     </h1>
                     <form onSubmit={handleSubmit}>
-                        <FormInputComponent field="Username" type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
-                        <FormInputComponent field="Phone Number" type="tel" value={phoneNumber} setValue={setPhoneNum} isError={isError} setIsError={setIsError}/>
-                        <FormInputComponent field="Password" type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[2]} type="text" value={username} setValue={setUsername} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[3]} type="tel" value={phoneNumber} setValue={setPhoneNum} isError={isError} setIsError={setIsError}/>
+                        <FormInputComponent field={text[4]} type="password" value={password} setValue={setPassword} isError={isError} setIsError={setIsError}/>
                         <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY}/>
                         <div className="my-4">
-                            <SubmitButton value="Register" />
+                            <SubmitButton value={text[1]} />
                         </div>
                         
                         
 
                         {isError && (
                             <div className="text-red-500">
-                                Invalid credentials. Please try again.
+                                {text[5]}
                             </div>
                         )}
                         
                         <div className="container flex justify-center">
                             <Link to={routes.login} className="text-customColors-primary">
-                                Log in instead
+                                {text[6]}
                             </Link>
                         </div>
                     </form>
